@@ -1,0 +1,192 @@
+A:link
+{
+    CURSOR: hand;
+    COLOR: #3399ff
+}
+A:visited
+{
+    COLOR: #3366cc
+}
+A:active
+{
+    COLOR: #ff9900
+}
+EM
+{
+    COLOR: #ff0000;
+    FONT-STYLE: normal
+}
+BODY
+{
+    COLOR: #000000;
+    BACKGROUND-COLOR: #ffffff;
+    TEXT-ALIGN: center
+}
+TABLE.regForm
+{
+    BACKGROUND-COLOR: #008000
+}
+TABLE.regForm TD
+{
+    PADDING-RIGHT: 3px;
+    PADDING-LEFT: 3px;
+    FONT-SIZE: 13px;
+    PADDING-BOTTOM: 3px;
+    PADDING-TOP: 3px;
+    BACKGROUND-COLOR: #ffcc66
+}
+BODY.book
+{
+    FONT-SIZE: 12px;
+    COLOR: #000000;
+    FONT-FAMILY: Arial;
+    BACKGROUND-COLOR: #ffffff;
+    TEXT-ALIGN: left
+}
+.bookFrame
+{
+    WIDTH: 720px;
+    COLOR: #000000;
+    POSITION: relative;
+    BACKGROUND-COLOR: #ffffff;
+    TEXT-ALIGN: center
+}
+.manageForm
+{
+    FONT-SIZE: 12px;
+    Z-INDEX: 10;
+    LEFT: 240px;
+    VISIBILITY: hidden;
+    FONT-FAMILY: Arial;
+    POSITION: absolute;
+    TOP: 40px
+}
+TABLE.msgForm
+{
+    MARGIN-TOP: 5px;
+    MARGIN-BOTTOM: 0px;
+    WIDTH: 80%;
+    BACKGROUND-COLOR: #0066cc
+}
+TABLE.msgForm A:link
+{
+    CURSOR: hand;
+    COLOR: #ffffff
+}
+TABLE.msgForm A:visited
+{
+    COLOR: #ffffff
+}
+TABLE.msgForm A:active
+{
+    COLOR: #ffffff
+}
+TABLE.msgFormCaption
+{
+    PADDING-RIGHT: 3px;
+    PADDING-LEFT: 3px;
+    FONT-SIZE: 12px;
+    PADDING-BOTTOM: 1px;
+    COLOR: #ffffff;
+    PADDING-TOP: 1px;
+    FONT-FAMILY: Arial;
+    BACKGROUND-COLOR: #3399ff
+}
+TABLE.msgFormBody
+{
+    PADDING-RIGHT: 3px;
+    PADDING-LEFT: 3px;
+    FONT-SIZE: 12px;
+    PADDING-BOTTOM: 3px;
+    COLOR: #000000;
+    PADDING-TOP: 3px;
+    FONT-FAMILY: Arial;
+    BACKGROUND-COLOR: #eeeeee
+}
+TABLE.msgFormBody A:link
+{
+    CURSOR: hand;
+    COLOR: #000000
+}
+TABLE.msgFormBody A:visited
+{
+    COLOR: #000000
+}
+TABLE.msgFormBody A:active
+{
+    COLOR: #000000
+}
+TABLE.msg
+{
+    MARGIN-TOP: 0px;
+    MARGIN-BOTTOM: 5px;
+    WIDTH: 80%;
+    BACKGROUND-COLOR: #0066cc
+}
+TABLE.msgCaption
+{
+    PADDING-RIGHT: 3px;
+    PADDING-LEFT: 3px;
+    FONT-SIZE: 12px;
+    PADDING-BOTTOM: 1px;
+    COLOR: #ffffff;
+    PADDING-TOP: 1px;
+    FONT-FAMILY: Arial;
+    BACKGROUND-COLOR: #66ccff
+}
+TABLE.msgBody
+{
+    WORD-WRAP: break-word;
+    TABLE-LAYOUT: fixed;
+    PADDING-RIGHT: 5px;
+    PADDING-LEFT: 5px;
+    FONT-SIZE: 12px;
+    PADDING-BOTTOM: 5px;
+    PADDING-TOP: 5px;
+    FONT-FAMILY: Arial;
+    BACKGROUND-COLOR: #eeeeee
+}
+TABLE.bookNavigator
+{
+    PADDING-RIGHT: 5px;
+    PADDING-LEFT: 5px;
+    FONT-SIZE: 12px;
+    PADDING-BOTTOM: 5px;
+    WIDTH: 80%;
+    COLOR: #000000;
+    PADDING-TOP: 5px;
+    FONT-FAMILY: Arial
+}
+.plainInput
+{
+    BORDER-RIGHT: 1px solid;
+    BORDER-TOP: 1px solid;
+    FONT-SIZE: 12px;
+    BORDER-LEFT: 1px solid;
+    BORDER-BOTTOM: 1px solid;
+    FONT-FAMILY: Arial
+}
+.plainButton
+{
+    BORDER-RIGHT: #000000 1px solid;
+    BORDER-TOP: #000000 1px solid;
+    FONT-SIZE: 12px;
+    BORDER-LEFT: #000000 1px solid;
+    BORDER-BOTTOM: #000000 1px solid;
+    FONT-FAMILY: Arial;
+    HEIGHT: 16px
+}
+.msgText
+{
+    BORDER-RIGHT: black 0px solid;
+    PADDING-RIGHT: 8px;
+    BORDER-TOP: black 0px solid;
+    PADDING-LEFT: 8px;
+    FONT-SIZE: 12px;
+    PADDING-BOTTOM: 8px;
+    BORDER-LEFT: #0066cc 1px solid;
+    PADDING-TOP: 8px;
+    BORDER-BOTTOM: black 0px solid;
+    FONT-FAMILY: Arial;
+    BACKGROUND-COLOR: #eeeeee
+}

@@ -1,0 +1,32 @@
+{xingTemplate gbs_header}
+{xingTemplate gbs_frame_begin}
+
+<script language="JavaScript">
+function chksend(){
+var send=false;
+if(document.reg.f_user.value){
+if(document.reg.f_pass.value){
+send=true;
+}
+}
+if (send==false){
+alert('站长管理用，请勿进入，谢谢！');
+}
+return send;
+}
+</script>
+<form name="reg" action="?op=admin" method=POST onsubmit="return chksend();">
+<table class='form' border=0 width=400 align=center>
+<tr><td class='form-caption' colspan=2 align=center>超级用户管理</td></tr>
+<tr><td class='form-item1' width="40%" align=center>超级用户名字：</td>
+<td class='form-item1' width="60%"><input name="f_user" type="text" size=30 maxlength=10></td></tr>
+<tr><td class='form-item1' width="40%" align=center>超级用户密码：</td>
+<td class='form-item1' width="60%"><input name="f_pass" type="password" size=30 maxlength=12></td></tr>
+<tr><td class='form-item1' colspan=2 align="center">
+<input type="reset" value="重   填" name="B2">
+<input type="submit" value="提   交" name="B1"></td></tr>
+</table></form>
+
+
+{xingTemplate gbs_frame_end}
+{xingTemplate gbs_footer}

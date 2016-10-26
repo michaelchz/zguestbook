@@ -1,0 +1,62 @@
+{xingTemplate gbs_header}
+{xingTemplate gbs_frame_begin}
+
+<form method="post" action="?op=reg">
+<input type="hidden" name="action" value="regcommit">
+<table width='100%' cellpadding='0' cellspacing='1' class='form'>
+<tr><TD class='form-caption' colspan=2><center><b>免费{$cginame}系统申请表</b></TD></tr>
+<tr><TD class='form-item1' colspan=2>●申请完成后，您即可获得自己的{$cginame}({$prgurl}/{$gburl}?id=管理员名称)<BR>
+●带 <EM>*</EM> 为必填</TD></tr>
+
+<TR><TD class='form-item1' align=right><EM>*</EM>{$cginame}名称：</TD>
+<TD class='form-item1'><INPUT maxLength=80 name=f_title size=55></TD></TR>
+<TR><TD class='form-item1' align=right><EM>*</EM>管理员名称：</TD>
+<TD class='form-item1'><INPUT maxLength=20 name=f_name><EM>（请使用英文字母与数字）</EM></TD></TR>
+<TR><TD class='form-item1' align=right><EM>*</EM>管理员密码：</TD>
+<TD class='form-item1'><INPUT maxLength=20 name=f_pass size=20></TD></TR>
+<TR><TD class='form-item1' align=right><EM>*</EM>管理员Email：</TD>
+<TD class='form-item1'><INPUT maxLength=80 name=f_email size=55></TD></TR>
+<TR><TD class='form-item1' align=right>主页名称：</TD>
+<TD class='form-item1'><INPUT maxLength=20 name=f_urlname></TD></TR>
+<TR><TD class='form-item1' align=right><EM>*</EM>主页URL：</TD>
+<TD class='form-item1'><INPUT maxLength=80 name=f_url size=55 value='http://'></TD></TR>
+<TR><TD class='form-item1' align=right>主页风格选项：</TD>
+<TD class='form-item1'>
+
+<TABLE board=0 cellspacing=0 cellpadding=0>
+<TR>
+
+<TD class='form-item1'>配色：</TD>
+<TD><SELECT name=f_css>
+{loop $csslist as $name=>$val}
+	<OPTION value='{$val}'>{$name}</OPTIONS>
+{/loop}
+</SELECT></TD>
+
+<TD class='form-item1'>&nbsp;&nbsp;按钮：</TD>
+<TD><SELECT name=f_btn>
+{loop $btnlist as $name=>$val}
+	<OPTION value='{$val}'>{$name}</OPTIONS>
+{/loop}
+</SELECT></TD>
+
+</TR>
+</TABLE>
+
+</TD></TR>
+<TR><TD class='form-item1' align=right>{$cginame}简介：</TD>
+<TD class='form-item1'><textarea cols=45 name=f_desc rows=3></textarea></TD></TR>
+<TR><TD class='form-item1' align=right>{$cginame}头部信息：<br><EM>（支持 html）</EM></TD>
+<TD class='form-item1'><textarea cols=45 name=f_htmlt rows=3></textarea></TD></TR>
+<TR><TD class='form-item1' align=right>{$cginame}尾部信息：<br><EM>（支持 html）</EM></TD>
+<TD class='form-item1'><textarea cols=45 name=f_htmlb rows=3></textarea></TD></TR>
+
+<TR><TD class='form-item1' colspan=2><input type="submit" value="填好了，继续！"><BR>
+<P>注意事项：<BR>
+1、不得使用本{$cginame}系统建立任何包含色情、非法、以及危害国家安全的内容的{$cginame};<BR>
+2、不得在本系统用户所拥有的{$cginame}内发布任何色情、非法、或者危害国家安全的{$cginame};<BR>
+3、以上规则违者责任自负，本站有权删除该类用户或者内容，并追究其法律责任。</P></TD></tr>
+</table></form>
+
+{xingTemplate gbs_frame_end}
+{xingTemplate gbs_footer}

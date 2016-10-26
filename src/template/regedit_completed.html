@@ -1,0 +1,28 @@
+{xingTemplate gbs_header}
+{xingTemplate gbs_frame_begin}
+
+<p align=center><b>祝 贺 您 ！ 您 已 经 成 功  更 改 ！</b></p>
+<p align=center><b>{$cginame}域名：<br>{$prgurl}/{$gburl}?id={$bookInfo['name']}</b></p>
+<p align=center><b><a href={$gburl}?id={$bookInfo['name']} target=_blank>请在此行上点击您鼠标的右键，<br>把这个域名加入您的书签或者收藏夹中</a></b></p>
+<table class='form' align=center cellspacing=1 cellpadding=3>
+<tr>
+<td class='form-item1' align=right><b>显示标题：</b></td>
+<td class='form-item1' align=left><font color=#FF0000>{$bookInfo['title']}</font></td>
+<td class='form-item1' align=right><b>您的主页：</b></td>
+<td class='form-item1' align=left><font color=#FF0000>{$bookInfo['url']}</font></td>
+</tr>
+<tr>
+<td class='form-item1' align=right><b>注册姓名：</b></td>
+<td class='form-item1' align=left><font color=#FF0000>{$bookInfo['name']}</font></td>
+<td class='form-item1' align=right><b>您的密码：</b></td>
+<td class='form-item1' align=left><font color=#FF0000>{$bookInfo['pass']}</font></td>
+</tr>
+<tr>
+<td class='form-item1' align=right><b>您的信箱：</b></td>
+<td class='form-item1' align=left><font color=#FF0000>{$bookInfo['email']}</font></td>
+<td class='form-item1' align=right><b>注册时间：</b></td>
+<td class='form-item1' align=left><font color=#FF0000>{$bookInfo['regdate']}</font></td></tr>
+</table>
+
+{xingTemplate gbs_frame_end}
+{xingTemplate gbs_footer}

@@ -1,0 +1,120 @@
+{xingTemplate gbs_header}
+{xingTemplate gbs_frame_begin}
+
+<script>
+// java script to break word in Fire Fox
+//
+function breakWord(dEl){
+	if(!dEl || dEl.nodeType !== 1){
+		return false;
+	} else if(dEl.currentStyle && typeof dEl.currentStyle.wordBreak === 'string'){
+		//Lazy Function Definition Pattern, Peter's Blog
+		//From http://peter.michaux.ca/article/3556
+		breakWord = function(dEl){
+			//For Internet Explorer
+			dEl.runtimeStyle.wordBreak = 'break-all';
+			return true;
+		}
+
+		return breakWord(dEl);
+	}else if(document.createTreeWalker){
+		//Faster Trim in Javascript, Flagrant Badassery
+		//http://blog.stevenlevithan.com/archives/faster-trim-javascript
+		var trim = function(str) {
+			var	str = str.replace(/^\s\s*/, ''),
+				ws = /\s/,
+				i = str.length;
+			while (ws.test(str.charAt(--i)));
+			return str.slice(0, i + 1);
+		}
+          
+		//Lazy Function Definition Pattern, Peter's Blog
+		//From http://peter.michaux.ca/article/3556
+		breakWord = function(dEl){
+
+			//For Opera, Safari, and Firefox
+			var dWalker = document.createTreeWalker(dEl, NodeFilter.SHOW_TEXT, null, false);
+			var c = String.fromCharCode('8203');
+	
+			while (dWalker.nextNode())
+			{
+				var node = dWalker.currentNode;
+				//we need to trim String otherwise Firefox will display 
+				//incorect text-indent with space characters
+				var s = trim( node.nodeValue ).split('').join(c);
+				node.nodeValue = s;
+			}
+	
+			return true;
+		}
+
+		return breakWord(dEl);
+
+	}else{
+		return false;
+	}
+}
+</script>
+
+<table class='form' width='100%' cellspacing='1' cellpadding='0'>
+<tr>
+<td class='form-caption' colspan=5 align=center>超级用户管理</td>
+</tr>
+<tr>
+<td class='form-item1' colspan=5 align=center>
+居民数:<font color=#FF0000>{$size}</font>
+</td>
+</tr>
+<tr>
+<td class='form-item1' width="45%" align="center">留言本名称</td>
+<td class='form-item1' width="10%" align="center">留言数</td>
+<td class='form-item1' width="10%" align="center">版主</td>
+<td class='form-item1' width="20%" align="center">申请/更新时间</td>
+<td class='form-item1' width="15%" align="center">操作功能</td>
+</tr>
+{loop $bookInfos as $bookInfo}
+<tr>
+<td class='form-item1 break-word'>
+	<a href={$gburl}?id={$bookInfo['id']} target=_blank>{$bookInfo['title']}</a>
+	<br>&nbsp;&nbsp;{$bookInfo['desc']}
+</td>
+<td class='form-item1' align='center'><font color=#FF0000>{$bookInfo['lys']}</font></td>
+<td class='form-item1 break-word' align='center'><a href='mailto:{$bookInfo['email']}'>{$bookInfo['name']}</a></td>
+<td class='form-item1' align='center'>{$bookInfo['regtime']}<br>/<br>{$bookInfo['uptime']}</td>
+<td class='form-item1' align="center">
+	<a href="?op=admin&action=review&f_bookname={$bookInfo['id']}">查看</a>
+	<a href="?op=admin&action=killBook&f_bookname={$bookInfo['id']}">删除</a>
+</td>
+</tr>
+{/loop}
+<tr>
+<td align='center' width='100%' colspan=5 bgcolor=#FFF5E1>
+{for $i=$pages; $i>=1; $i--}
+	{if $page == $i}
+		[{$i}]
+	{else}
+		<a href=?op=admin&page={$i}>[{$i}]</a>
+	{/if}
+{/for}
+</td>
+</tr>
+</table>
+
+<script>
+// call word breaker functions to break all TD elements with "break-word" in class name
+//
+void function(){
+	var aEl = document.getElementsByTagName('td');
+	var dEl,i;
+	var sName = "break-word";
+	for(i=0;dEl = aEl[i];i++){
+		if(dEl.className.match(new RegExp('(\\s|^)' + sName + '(\\s|$)'))){
+			breakWord(dEl);
+		}
+	}
+}();
+</script>
+
+{xingTemplate gbs_frame_end}
+{xingTemplate gbs_footer}
+

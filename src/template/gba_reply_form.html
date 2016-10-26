@@ -1,0 +1,108 @@
+<HTML>
+<HEAD>
+<TITLE>【版主回复】</TITLE>
+<META http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link rel="stylesheet" type="text/css" href="style/{$OPTS[css]}">
+</HEAD>
+<BODY class="book">
+<DIV class="bookFrame">
+
+<!-- Reply form -->
+<FORM action={$gburl} method=post>
+
+<INPUT type=hidden name=action value=replycommit>
+<INPUT type=hidden name=id value={$bookInfo[id]}>
+<INPUT type=hidden name=mid value={$msg[mid]}>
+
+<TABLE ID="fullForm" cellPadding=0 cellSpacing=1 width=100% class="msgForm">
+
+<TR><TD>
+ <TABLE border=0 width="100%" class="msgFormCaption">
+ <TR><TD>&gt;&gt;&gt; <a href="{$bookInfo[url]}">{$bookInfo[urlname]}</a>
+ &gt;&gt; <a href="{$gburl}?id={$bookInfo[id]}">{$bookInfo[title]}</a>
+ &gt;&gt; 版主回复</TD></TR></TABLE>
+</TD></TR>
+
+<TR><TD>
+ <TABLE border=0 width=100% class="msgFormBody">
+ <TR><TD>版主密码：</TD>
+ <TD><INPUT class=plainInput tabindex=1 name=f_pass size=20 type=password value={$ck_pass}></TD>
+ </TR>
+ <TR><TD>回复内容：<BR>
+{if $msg[replysecret]}
+ <input type="checkbox"  tabindex=3 name="f_secret" value="1" checked>保密
+{else}
+ <input type="checkbox"  tabindex=3 name="f_secret" value="1">保密
+{/if}
+ </TD>
+ <TD><TEXTAREA class=plainInput cols=70 name=f_comment rows=5 200 tabIndex=2>{$content}</TEXTAREA></TD>
+ </TR>
+ </TABLE>
+</TD></TR>
+
+<TR><TD>
+ <TABLE border=0 width="100%" class="msgFormCaption">
+ <TR><TD align=center>
+ <input class=plainButton tabindex=4 type=submit value=提交回复 name=B1>
+ <input class=plainButton tabindex=5 type=reset value=清除回复 name=B2></TD>
+ </TR>
+ </TABLE>
+</TD></TR>
+
+</TABLE>
+</FORM>
+
+<!-- Content of message to reply -->
+
+<table border="0" cellpadding="0" cellspacing="1" width="100%" class="msg">
+<tr><td>
+ <table border="0" cellpadding="0" cellspacing="0" width="100%" class="msgCaption">
+ <tr><td width="100" align="center" valign="middle">待回复留言</td>
+ <td valign="middle">发表于 {$msg[time]}</td>
+ <td align="right" valign="middle">
+{if $msg[email] != ''}
+  <a href=mailto:{$msg[email]}><img src={$bookInfo[btnurl]}/email2.gif style='border: 0px' alt="{$msg[user]}的email：{$msg[email]}"></a>
+{/if}
+{if $msg[url] != ''}
+  <a href={$msg[url]} target=_blank><img src={$bookInfo[btnurl]}/home2.gif style='border: 0px' alt=主页></a>
+{/if}
+ <img src={$bookInfo[btnurl]}/ip.gif alt='{$bookInfo[user]}的IP地址：{$bookInfo[ip]}'>
+
+ </td></tr>
+ </table>
+</td></tr>
+<tr><td>
+ <table width=100% class=msgBody>
+  <tr><td width=100 align=center valign=top>
+  {$msg[user]}
+{if $OPTS[useicon]==1}
+  <br><img border=0 src='{$imgurl}/icon{$msg[icon]}.gif'>
+{/if}
+  </td>
+  <td align=left valign=top class=msgText>
+{if $msg[secret] == 1}
+  <font color=red>&lt;悄悄话留言&gt;</font><BR>
+{/if}
+  {$msg[comment]}
+{if $msg[reply] != ''}
+  <br><br>
+{/if}
+{if $msg[replysecret] == 1}
+  <font color=red>&lt;悄悄话回复&gt;</font><BR>
+{/if}
+{if $msg[reply] != ''}
+  <font color=#ab00ac>版主回复</font> - <i><FONT color=#777777>{$msg[replytime]}</font></i><br>
+  {$msg[reply]}
+{/if}
+  </td></tr>
+ </table></td></tr>
+</table>
+
+<!-- Footer -->
+<TABLE border=0 cellpadding=0 cellspacing=0 width=100% class=bookNavigator>
+<TR><TD align=center>{$copyright}</TD></TR>
+</TABLE>
+
+</DIV>
+</BODY>
+</HTML>

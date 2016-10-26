@@ -1,0 +1,126 @@
+{xingTemplate gbs_header}
+{xingTemplate gbs_frame_begin}
+
+<form method="post" action="?op=regedit">
+<input type="hidden" name="action" value="editcommit">
+<table width=100% cellpadding=0 cellspacing=1 class='form'>
+<tr><TD class='form-caption' align=center colspan=2>版主资料修改</TD></tr>
+<tr><TD class='form-item1' colspan=2>●带 <EM>*</EM> 为必填</TD></tr>
+
+<TR><TD class='form-item1' align=right><EM>*</EM>{$cginame}名称：</TD>
+<TD class='form-item1'><INPUT maxLength=80 name=f_title size=55  value="{$bookInfo->title}"></TD></TR>
+<TR><TD class='form-item1' align=right><EM>*</EM>管理员名称：</TD>
+<TD class='form-item1'><INPUT maxLength=20 name=f_name value="{$bookInfo->name}" readonly="readonly"></TD></TR>
+<TR><TD class='form-item1' align=right><EM>*</EM>管理员密码：</TD>
+<TD class='form-item1'><INPUT name=f_pass type=password value="{$bookInfo->pass}" readonly="readonly"></TD></TR>
+<TR><TD class='form-item1' align=right>管理员的新密码：</TD>
+<TD class='form-item1'><input size=20 maxlength=12 name=f_newpass value=>
+<EM>（如果不更改密码，此处请留空！）</EM></TD></TR>
+<TR><TD class='form-item1' align=right><EM>*</EM>您的Email地址：</TD>
+<TD class='form-item1'><INPUT maxLength=80 name=f_email size=50 value="{$bookInfo->email}"></TD></TR>
+<TR><TD class='form-item1' align=right>您的主页名称：</TD>
+<TD class='form-item1'><INPUT name=f_urlname value="{$bookInfo->urlname}"></TD></TR>
+<TR><TD class='form-item1' align=right>您的主页的URL：</TD>
+<TD class='form-item1'><INPUT maxLength=80 name=f_url size=55 value="{$bookInfo->url}"></TD></TR>
+<TR><TD class='form-item1' align=right>主页风格选项：</TD>
+<TD class='form-item1'>
+
+<TABLE board=0 cellspacing=0 cellpadding=0>
+<TR>
+
+<TD class='form-item1'>配色：</TD>
+<TD><SELECT name=f_css>
+{loop $csslist as $name=>$val}
+{if $val == $OPTS['css']}
+	<OPTION value='{$val}' selected>{$name}</OPTIONS>
+{else}
+	<OPTION value='{$val}'>{$name}</OPTIONS>
+{/if}
+{/loop}
+</SELECT></TD>
+
+<TD class='form-item1'>&nbsp;&nbsp;按钮：</TD>
+<TD><SELECT name=f_btn>
+{loop $btnlist as $name=>$val}
+{if $val == $OPTS['btn']}
+	<OPTION value='{$val}' selected>{$name}</OPTIONS>
+{else}
+	<OPTION value='{$val}'>{$name}</OPTIONS>
+{/if}
+{/loop}
+</SELECT></TD>
+
+<TD class='form-item1'>每页留言：</TD>
+<TD class='form-item1'><INPUT maxLength=2 name=f_perpage size=3 value={$OPTS[perpage]}></TD>
+
+</TR>
+<TR>
+
+<TD class='form-item1'>头像：</TD>
+<TD class='form-item1'>
+<SELECT name=f_useicon>
+{if $OPTS['useicon'] == 1}
+	<OPTION value='0' >禁止</OPTIONS>
+	<OPTION value='1' selected>启用</OPTIONS>
+{else}
+	<OPTION value='0' selected>禁止</OPTIONS>
+	<OPTION value='1' >启用</OPTIONS>
+{/if}
+</SELECT></TD>
+
+<TD class='form-item1'>留言表格：</TD>
+<TD class='form-item1'>
+<SELECT name=f_showdlg>
+{if $OPTS['showdlg'] == 1}
+	<OPTION value='0'>禁止</OPTIONS>
+	<OPTION value='1' selected>启用</OPTIONS>
+{else}
+	<OPTION value='0' selected>禁止</OPTIONS>
+	<OPTION value='1' >启用</OPTIONS>
+{/if}
+</SELECT></TD>
+
+<TD class='form-item1'>留言通知：</TD>
+<TD class='form-item1'>
+<SELECT name=f_notify>
+{if $OPTS['notify'] == 1}
+	<OPTION value='0'>禁止</OPTIONS>
+	<OPTION value='1' selected>启用</OPTIONS>
+{else}
+	<OPTION value='0' selected>禁止</OPTIONS>
+	<OPTION value='1' >启用</OPTIONS>
+{/if}
+</SELECT></TD>
+
+</TR>
+<TR>
+<TD class='form-item1'>时区调整：</TD>
+<TD class='form-item1' colspan=5>
+<SELECT name=f_timesft>
+{loop $zonelist as $name=>$val}
+{if $val == $OPTS['timesft']}
+	<OPTION value='{$val}' selected>{$name}</OPTIONS>
+{else}
+	<OPTION value='{$val}'>{$name}</OPTIONS>
+{/if}
+{/loop}
+</SELECT>（当前GMT时间：{gmdate("Y-m-d H:i:s")}）</TD>
+
+</TR>
+</TABLE>
+
+</TD></TR>
+<TR><TD class='form-item1' align=right>{$cginame}简介：</TD>
+<TD class='form-item1'><textarea cols=45 name=f_desc rows=3>{$bookInfo->desc}</textarea></TD></TR>
+<TR><TD class='form-item1' align=right>{$cginame}头部信息：<br><EM>（支持 html）</EM></TD>
+<TD class='form-item1'><textarea cols=45 name=f_htmlt rows=3>{$bookInfo->htmlt}</textarea></TD></TR>
+<TR><TD class='form-item1' align=right>{$cginame}尾部信息：<br><EM>（支持 html）</EM></TD>
+<TD class='form-item1'><textarea cols=45 name=f_htmlb rows=3>{$bookInfo->htmlb}</textarea></TD></TR>
+
+<TR><TD class='form-item1' align=center colspan=2>
+<input type="submit" value="确认修改">
+</table>
+</form>
+
+{xingTemplate gbs_frame_end}
+{xingTemplate gbs_footer}
