@@ -1,5 +1,5 @@
 <HTML><HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="style/{$OPTS[css]}">
 <script language="javascript" src="bin/gb.js"></script>
 <title>{$bookInfo[title]}</title>
@@ -12,9 +12,9 @@
 <form method=post action="{$gburl}?action=login&id={$bookInfo[id]}">
 <table cellspacing=1 bgcolor=#000000 cellpadding=3>
 <tr><td width=100% bgcolor=#F0F0F0 align=center>
-ÊäÈë¹ÜÀíÃÜÂë£º<input type=password class="plainInput" name=f_pass size=15><br><br>
-<input type=submit value="È·ÈÏ" class="plainButton">
-<input type="button" onclick="hideDlg();" value="¹Ø±Õ" class="plainButton">
+è¾“å…¥ç®¡ç†å¯†ç ï¼š<input type=password class="plainInput" name=f_pass size=15><br><br>
+<input type=submit value="ç¡®è®¤" class="plainButton">
+<input type="button" onclick="hideDlg();" value="å…³é—­" class="plainButton">
 </td></tr></table></form>
 </DIV>
 
@@ -26,10 +26,10 @@
  <TR><TD>&gt;&gt;&gt; <a href="{$bookInfo[url]}">{$bookInfo[urlname]}</a>
  &gt;&gt; <a href="$gburl?id=$id">{$bookInfo[title]}</a></TD>
  <TD align=right>
-  <a onclick='showDlg(); return false;' href='#'>[¹ÜÀí]</a>
-  <a target="_blank" href="/?op=regedit">[ĞŞ¸Ä]</a>
-  <a target=_blank href="/?op=reg">[ÉêÇë]</a>
-  <a href="#" onclick="showForm(1);return false;">&darr;[ÁôÑÔ]</a>
+  <a onclick='showDlg(); return false;' href='#'>[ç®¡ç†]</a>
+  <a target="_blank" href="/?op=regedit">[ä¿®æ”¹]</a>
+  <a target=_blank href="/?op=reg">[ç”³è¯·]</a>
+  <a href="#" onclick="showForm(1);return false;">&darr;[ç•™è¨€]</a>
  </TD></TR></TABLE>
 </TD></TR>
 </TABLE>
@@ -42,27 +42,27 @@
  <TR><TD align=left vAlign=center>&gt;&gt;&gt; <a href="{$bookInfo[url]}">{$bookInfo[urlname]}</a>
  &gt;&gt; <a href="{$gburl}?id={$bookInfo[id]}">{$bookInfo[title]}</a></TD>
  <TD align=right class=fgfont vAlign=center>
-  <a onclick='showDlg(); return false;' href='#'>[¹ÜÀí]</a>
-  <a target="_blank" href="/?op=regedit">[ĞŞ¸Ä]</a>
-  <a target=_blank href="/?op=reg">[ÉêÇë]</a>
-  <a href="#" onclick="showForm(0);return false;">&uarr;[ÁôÑÔ]</a>
+  <a onclick='showDlg(); return false;' href='#'>[ç®¡ç†]</a>
+  <a target="_blank" href="/?op=regedit">[ä¿®æ”¹]</a>
+  <a target=_blank href="/?op=reg">[ç”³è¯·]</a>
+  <a href="#" onclick="showForm(0);return false;">&uarr;[ç•™è¨€]</a>
 </TD></TR></TABLE></TD></TR>
 <TR><TD vAlign=top width="50%">
  <TABLE width="100%" class="msgFormBody">
  <TR><TD vAlign=top>
   <TABLE class="msgFormBody">
   <TR><TD><IMG src="{$btnurl}/name.gif" width=16 height=16></TD>
-  <TD>ĞÕÃû</TD>
+  <TD>å§“å</TD>
   <TD colspan="2"><INPUT class=plainInput maxLength=20 name=f_user value="{$formVal[user]}" onmouseover="set_at_end(this);"> *</TD></TR>
   <TR><TD><IMG border=0 src="{$btnurl}/email.gif" width=16 height=16></TD>
   <TD>Email</TD>
   <TD colspan="2"><INPUT class=plainInput maxLength=40 name=f_email value="{$formVal[email]}"  size=28 onmouseover="set_at_end(this);"></TD></TR>
   <TR><TD><IMG border=0 src="{$btnurl}/home.gif" width=16 height=16></TD>
-  <TD>Ö÷Ò³</TD>
+  <TD>ä¸»é¡µ</TD>
   <TD colspan="2"><INPUT class=plainInput maxLength=40 name=f_url value="{$formVal[url]}" value="http://" size=28 onmouseover="set_at_end(this);"></TD></TR>
   <TR><TD><IMG border=0 src="{$btnurl}/private.gif" width=16 height=16></TD>
-  <TD>ÇÄÇÄ»°</TD>
-  <TD><INPUT name=f_secret type=radio value=1>ÊÇ <INPUT CHECKED name=f_secret type=radio value=0>·ñ</TD>
+  <TD>æ‚„æ‚„è¯</TD>
+  <TD><INPUT name=f_secret type=radio value=1>æ˜¯ <INPUT CHECKED name=f_secret type=radio value=0>å¦</TD>
 
 <!-- icon list part -->
 {if $OPTS['useicon']}
@@ -71,17 +71,17 @@
   {else}
     <TD rowspan=2> <IMG id=idface src='{$imgurl}/icon1.gif' height=48 width=48>
   {/if}
-  <A target=_blank href='?action=iconlist&id=$id'>Í·ÏñÁĞ±í</A></TD>
+  <A target=_blank href='?action=iconlist&id=$id'>å¤´åƒåˆ—è¡¨</A></TD>
   </TR>
 
   <TR><TD align=left><IMG src='{$btnurl}/face.gif' height=16 width=16></TD>
-  <TD>Ñ¡Í·Ïñ</TD><TD><SELECT class=plainInput name=f_icon size=1
+  <TD>é€‰å¤´åƒ</TD><TD><SELECT class=plainInput name=f_icon size=1
    onChange="document.images['idface'].src='{$imgurl}/icon'+options[selectedIndex].value+'.gif';">
   {for $i=1;$i<=$OPTS['numicon'];$i++}
     {if $formVal[icon] == $i}
-      <OPTION value={$i} selected>Í·Ïñ{$i}</OPTION>
+      <OPTION value={$i} selected>å¤´åƒ{$i}</OPTION>
     {else}
-      <OPTION value={$i}>Í·Ïñ{$i}</OPTION>
+      <OPTION value={$i}>å¤´åƒ{$i}</OPTION>
     {/if}
   {/for}
   </SELECT></TD></TR>
@@ -92,14 +92,14 @@
 
   </TABLE></TD>
   <TD align=left valign=top>
-   <IMG height=15 width=15 src="{$btnurl}/pen.gif"> ÁôÑÔ * &nbsp;&nbsp;£¨×î´ó£º2000£»ÒÑÓÃ£º
-   <input class=plainInput type=text name=used size=3 maxlength=4 value="0" disabled>£©
+   <IMG height=15 width=15 src="{$btnurl}/pen.gif"> ç•™è¨€ * &nbsp;&nbsp;ï¼ˆæœ€å¤§ï¼š2000ï¼›å·²ç”¨ï¼š
+   <input class=plainInput type=text name=used size=3 maxlength=4 value="0" disabled>ï¼‰
    <BR>
-   <TEXTAREA class=plainInput cols=50 name=f_comment rows=5 title=×î´óÁôÑÔ×ÖÊı2000
+   <TEXTAREA class=plainInput cols=50 name=f_comment rows=5 title=æœ€å¤§ç•™è¨€å­—æ•°2000
     onKeyDown="count_char(this,this.form.used);"
     onKeyUp="count_char(this,this.form.used);"></TEXTAREA>
    <BR>
-ÇëÊäÈëÓÒÍ¼ÖĞµÄÑéÖ¤Âë£º<INPUT class=plainInput size=10 name=f_authcode>
+è¯·è¾“å…¥å³å›¾ä¸­çš„éªŒè¯ç ï¼š<INPUT class=plainInput size=10 name=f_authcode>
 <img src=authimg.php?authcode={$authcode} align=absbottom>
 <input type=hidden name=f_authmd5 value={$authmd5}>
   </TD></TR></TABLE>
@@ -108,13 +108,13 @@
   <TABLE align=center border=0 cellPadding=0 cellSpacing=0 width="100%" class="msgFormCaption">
   <TR><TD align=center>
 {if $formVal[save]}
-  <INPUT name=f_save type=checkbox value=1 CHECKED>±£´æÎÒµÄĞÅÏ¢
+  <INPUT name=f_save type=checkbox value=1 CHECKED>ä¿å­˜æˆ‘çš„ä¿¡æ¯
 {else}
-  <INPUT name=f_save type=checkbox value=1>±£´æÎÒµÄĞÅÏ¢
+  <INPUT name=f_save type=checkbox value=1>ä¿å­˜æˆ‘çš„ä¿¡æ¯
 {/if}
   &nbsp;&nbsp;&nbsp;&nbsp;
-   <INPUT class=plainButton name=Submit type=submit value="·¢ËÍÁôÑÔ">
-   &nbsp;&nbsp;&nbsp; <INPUT class=plainButton name=Submit2 type=reset value="Çå³ıÁôÑÔ">
+   <INPUT class=plainButton name=Submit type=submit value="å‘é€ç•™è¨€">
+   &nbsp;&nbsp;&nbsp; <INPUT class=plainButton name=Submit2 type=reset value="æ¸…é™¤ç•™è¨€">
   </TD></TR></TABLE>
 </TD></TR></TABLE></FORM>
 <script language=JavaScript>

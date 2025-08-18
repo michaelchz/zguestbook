@@ -8,7 +8,7 @@ require_once "setup.php";
 require_once "bin/class_basic_record_file.php";
 require_once "bin/class_book_list.php";
 
-// ÒıÈëÄ£°å´¦ÀíÒıÇæ
+// å¼•å…¥æ¨¡æ¿å¤„ç†å¼•æ“
 include(BASEDIR.'/lib/xingTemplate/xingTemplate.php');
 
 // --- Main Begin ---
@@ -28,13 +28,13 @@ function editForm() {
 
 	$oBooks=new CBookList;
 	$oBooks->open();
-	if (!$oBooks->find($f_name)){errorview("¶Ô²»Æğ£¬´ËÃû×ÖÃ»ÓĞÔÚ±¾{$cginame}×¢²á¹ı!");}
-	if (!validpass($f_pass,$oBooks->pass)){errorview("ÃÜÂë´íÎó!");}
+	if (!$oBooks->find($f_name)){errorview("å¯¹ä¸èµ·ï¼Œæ­¤åå­—æ²¡æœ‰åœ¨æœ¬{$cginame}æ³¨å†Œè¿‡!");}
+	if (!validpass($f_pass,$oBooks->pass)){errorview("å¯†ç é”™è¯¯!");}
 	
-	// »ñÈ¡ÁôÑÔ±¾ÅäÖÃĞÅÏ¢ÖÁ$OPTSÖĞ
+	// è·å–ç•™è¨€æœ¬é…ç½®ä¿¡æ¯è‡³$OPTSä¸­
 	$oBooks->getOptions($OPTS);
 
-	// ¼ÆËãÅäÉ«Ñ¡ÔñÁĞ±í
+	// è®¡ç®—é…è‰²é€‰æ‹©åˆ—è¡¨
 	$csslist = array();
 	
 	if ($dh = opendir(CSSDIR)) {
@@ -49,7 +49,7 @@ function editForm() {
 		closedir($dh);
 	}
 	
-	// ¼ÆËã°´Å¥Ñ¡ÔñÁĞ±í
+	// è®¡ç®—æŒ‰é’®é€‰æ‹©åˆ—è¡¨
 	$btnlist = array();
 	
 	if ($dh = opendir(BTNDIR)) {
@@ -64,7 +64,7 @@ function editForm() {
 		closedir($dh);
 	}
 
-	// Éú³ÉÊ±ÇøÁĞ±í
+	// ç”Ÿæˆæ—¶åŒºåˆ—è¡¨
 	$zonelist = array();
 	
 	for ($i=-13; $i<=13; $i++) {
@@ -72,7 +72,7 @@ function editForm() {
 		$zonelist[$name]=$i;
 	}
 	
-	// Êä³öÄ£°åregedit_login
+	// è¾“å‡ºæ¨¡æ¿regedit_login
 	global $xingTemplate;
 	$xingTemplate->assign('bookInfo', $oBooks);
 	$xingTemplate->assign('OPTS',$OPTS);
@@ -92,15 +92,15 @@ function editCommit()
 	global $f_css,$f_btn,$f_timesft,$f_perpage,$f_notify,$f_showdlg,$f_useicon;
 
 	if(($f_pass == "")||($f_name == "")||($f_email == "")||($f_title == "")){
-		errorview("ÏÔÊ¾±êÌâ¡¡Ãû×Ö¡¡ÃÜÂë¡¡ĞÅÏä¡¡±ØË³ÒªÌîĞ´µÄ£¬ÇëÖØĞÂÊäÈë£¡");
+		errorview("æ˜¾ç¤ºæ ‡é¢˜ã€€åå­—ã€€å¯†ç ã€€ä¿¡ç®±ã€€å¿…é¡ºè¦å¡«å†™çš„ï¼Œè¯·é‡æ–°è¾“å…¥ï¼");
 	}
-	if(!eregi(".*\@.*\..*",$f_email)){errorview("ÄúµÄEmailÊäÈë´íÎó£¡");}
-	if(strlen($f_desc) > 400 ){errorview("ÄúµÄ{$cginame}¼ò½é²»ÄÜ´óÓÚ200¸öºº×Ö£¡");}
+	if(!eregi(".*\@.*\..*",$f_email)){errorview("æ‚¨çš„Emailè¾“å…¥é”™è¯¯ï¼");}
+	if(strlen($f_desc) > 400 ){errorview("æ‚¨çš„{$cginame}ç®€ä»‹ä¸èƒ½å¤§äº200ä¸ªæ±‰å­—ï¼");}
 
 	$oBooks=new CBookList;
 	$oBooks->open();
-	if (!$oBooks->find($f_name)){errorview("¶Ô²»Æğ£¬´ËÃû×ÖÃ»ÓĞÔÚ±¾{$cginame}×¢²á¹ı!");}
-	if ($f_pass != $oBooks->pass){errorview("ÃÜÂë´íÎó!");}
+	if (!$oBooks->find($f_name)){errorview("å¯¹ä¸èµ·ï¼Œæ­¤åå­—æ²¡æœ‰åœ¨æœ¬{$cginame}æ³¨å†Œè¿‡!");}
+	if ($f_pass != $oBooks->pass){errorview("å¯†ç é”™è¯¯!");}
 
 	$OPTS['timesft'] = $f_timesft;
 	$OPTS['perpage'] = $f_perpage;
@@ -119,7 +119,7 @@ function editCommit()
 	$oBooks->update();
 	$oBooks->close();
 
-	//×¼±¸Êä³öµÄÁôÑÔ±¾ĞÅÏ¢
+	//å‡†å¤‡è¾“å‡ºçš„ç•™è¨€æœ¬ä¿¡æ¯
 	$bookInfo = array(
 		'title'=>$f_title,
 		'name'=>$f_name,
@@ -129,7 +129,7 @@ function editCommit()
 		'regdate'=>$regdate
 	);
 	
-	// Êä³öÄ£°åreg_form
+	// è¾“å‡ºæ¨¡æ¿reg_form
 	global $xingTemplate;
 	$xingTemplate->assign('bookInfo',$bookInfo);
 	$xingTemplate->display('regedit_completed');
@@ -138,7 +138,7 @@ function editCommit()
 
 function editStart(){
 
-	// Êä³öÄ£°åregedit_login
+	// è¾“å‡ºæ¨¡æ¿regedit_login
 	global $xingTemplate;
 	$xingTemplate->display('regedit_login');
 

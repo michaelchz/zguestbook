@@ -10,7 +10,7 @@ require_once "bin/class_book_list.php";
 require_once "bin/class_book_list_admin.php";
 require_once "bin/class_message_list.php";
 
-// ÒıÈëÄ£°å´¦ÀíÒıÇæ
+// å¼•å…¥æ¨¡æ¿å¤„ç†å¼•æ“
 include(BASEDIR.'/lib/xingTemplate/xingTemplate.php');
 
 // --- Main Begin ---
@@ -31,7 +31,7 @@ else{ show_list($page); }
 
 function login_form(){
 
-	// Êä³öÄ£°åadmin_login
+	// è¾“å‡ºæ¨¡æ¿admin_login
 	global $xingTemplate;
 	$xingTemplate->display('admin_login');
 	
@@ -53,7 +53,7 @@ function show_list($page){
 	if($lastitem>$size){$lastitem=$size;}
 	$oList->moveTo($firstitem);
 
-	//»ñÈ¡ĞèÒªÏÔÊ¾µÄÁôÑÔ±¾ĞÅÏ¢
+	//è·å–éœ€è¦æ˜¾ç¤ºçš„ç•™è¨€æœ¬ä¿¡æ¯
 	$bookInfos = array();
 
 	for($i=$firstitem; $i<$lastitem; $i++) {
@@ -81,7 +81,7 @@ function show_list($page){
 
 	$oList->close();
 
-	// Êä³öÄ£°å
+	// è¾“å‡ºæ¨¡æ¿
 	global $xingTemplate;
 	$xingTemplate->assign('size',$size);
 	$xingTemplate->assign('pages',$pages);
@@ -103,7 +103,7 @@ function killBook($bookname){
 	$oBook=new CMessageList;
 	$oBook->destroy($bookname);
 
-	// Êä³öÄ£°å admin_kill
+	// è¾“å‡ºæ¨¡æ¿ admin_kill
 	global $xingTemplate;
 	$xingTemplate->assign('cgiurl',$cgiurl);
 	$xingTemplate->assign('bookname',$bookname);
@@ -116,11 +116,11 @@ function Review($bookname){
 
 	$oBooks=new CBookList;
 	$oBooks->open();
-	if (!$oBooks->find($bookname)){errorview("¶Ô²»Æğ£¬´Ë°æÖ÷Ã»ÓĞ×¢²á£¡");}
+	if (!$oBooks->find($bookname)){errorview("å¯¹ä¸èµ·ï¼Œæ­¤ç‰ˆä¸»æ²¡æœ‰æ³¨å†Œï¼");}
 	$priv_opts=array();
 	$oBooks->getOptions($priv_opts);
 
-	// Êä³öÄ£°å admin_review
+	// è¾“å‡ºæ¨¡æ¿ admin_review
 	global $xingTemplate;
 	$xingTemplate->assign('oBooks',$oBooks);
 	$xingTemplate->assign('priv_opts',$priv_opts);

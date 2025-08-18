@@ -19,7 +19,7 @@ if ($oBooks->open())
   $used = $oBooks->getRecordCount();
   $free = $reglimit - $used;
   $fp = fopen(TMPDIR."stat-reg.js", "wb");
-  fwrite($fp, "document.write('£¨ÁôÑÔ±¾×ÜÊý£º$reglimit ¿ÕÏÐ¿ÉÉêÇëÊý£º$free £©')");
+  fwrite($fp, "document.write('ï¼ˆç•™è¨€æœ¬æ€»æ•°ï¼š$reglimit ç©ºé—²å¯ç”³è¯·æ•°ï¼š$free ï¼‰')");
   fclose($fp);
 
   $oBooks->close();

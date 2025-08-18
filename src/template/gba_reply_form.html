@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
-<TITLE>¡¾°æÖ÷»Ø¸´¡¿</TITLE>
-<META http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>ã€ç‰ˆä¸»å›å¤ã€‘</TITLE>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="style/{$OPTS[css]}">
 </HEAD>
 <BODY class="book">
@@ -20,19 +20,19 @@
  <TABLE border=0 width="100%" class="msgFormCaption">
  <TR><TD>&gt;&gt;&gt; <a href="{$bookInfo[url]}">{$bookInfo[urlname]}</a>
  &gt;&gt; <a href="{$gburl}?id={$bookInfo[id]}">{$bookInfo[title]}</a>
- &gt;&gt; °æÖ÷»Ø¸´</TD></TR></TABLE>
+ &gt;&gt; ç‰ˆä¸»å›å¤</TD></TR></TABLE>
 </TD></TR>
 
 <TR><TD>
  <TABLE border=0 width=100% class="msgFormBody">
- <TR><TD>°æÖ÷ÃÜÂë£º</TD>
+ <TR><TD>ç‰ˆä¸»å¯†ç ï¼š</TD>
  <TD><INPUT class=plainInput tabindex=1 name=f_pass size=20 type=password value={$ck_pass}></TD>
  </TR>
- <TR><TD>»Ø¸´ÄÚÈİ£º<BR>
+ <TR><TD>å›å¤å†…å®¹ï¼š<BR>
 {if $msg[replysecret]}
- <input type="checkbox"  tabindex=3 name="f_secret" value="1" checked>±£ÃÜ
+ <input type="checkbox"  tabindex=3 name="f_secret" value="1" checked>ä¿å¯†
 {else}
- <input type="checkbox"  tabindex=3 name="f_secret" value="1">±£ÃÜ
+ <input type="checkbox"  tabindex=3 name="f_secret" value="1">ä¿å¯†
 {/if}
  </TD>
  <TD><TEXTAREA class=plainInput cols=70 name=f_comment rows=5 200 tabIndex=2>{$content}</TEXTAREA></TD>
@@ -43,8 +43,8 @@
 <TR><TD>
  <TABLE border=0 width="100%" class="msgFormCaption">
  <TR><TD align=center>
- <input class=plainButton tabindex=4 type=submit value=Ìá½»»Ø¸´ name=B1>
- <input class=plainButton tabindex=5 type=reset value=Çå³ı»Ø¸´ name=B2></TD>
+ <input class=plainButton tabindex=4 type=submit value=æäº¤å›å¤ name=B1>
+ <input class=plainButton tabindex=5 type=reset value=æ¸…é™¤å›å¤ name=B2></TD>
  </TR>
  </TABLE>
 </TD></TR>
@@ -57,16 +57,16 @@
 <table border="0" cellpadding="0" cellspacing="1" width="100%" class="msg">
 <tr><td>
  <table border="0" cellpadding="0" cellspacing="0" width="100%" class="msgCaption">
- <tr><td width="100" align="center" valign="middle">´ı»Ø¸´ÁôÑÔ</td>
- <td valign="middle">·¢±íÓÚ {$msg[time]}</td>
+ <tr><td width="100" align="center" valign="middle">å¾…å›å¤ç•™è¨€</td>
+ <td valign="middle">å‘è¡¨äº {$msg[time]}</td>
  <td align="right" valign="middle">
 {if $msg[email] != ''}
-  <a href=mailto:{$msg[email]}><img src={$bookInfo[btnurl]}/email2.gif style='border: 0px' alt="{$msg[user]}µÄemail£º{$msg[email]}"></a>
+  <a href=mailto:{$msg[email]}><img src={$bookInfo[btnurl]}/email2.gif style='border: 0px' alt="{$msg[user]}çš„emailï¼š{$msg[email]}"></a>
 {/if}
 {if $msg[url] != ''}
-  <a href={$msg[url]} target=_blank><img src={$bookInfo[btnurl]}/home2.gif style='border: 0px' alt=Ö÷Ò³></a>
+  <a href={$msg[url]} target=_blank><img src={$bookInfo[btnurl]}/home2.gif style='border: 0px' alt=ä¸»é¡µ></a>
 {/if}
- <img src={$bookInfo[btnurl]}/ip.gif alt='{$bookInfo[user]}µÄIPµØÖ·£º{$bookInfo[ip]}'>
+ <img src={$bookInfo[btnurl]}/ip.gif alt='{$bookInfo[user]}çš„IPåœ°å€ï¼š{$bookInfo[ip]}'>
 
  </td></tr>
  </table>
@@ -81,17 +81,17 @@
   </td>
   <td align=left valign=top class=msgText>
 {if $msg[secret] == 1}
-  <font color=red>&lt;ÇÄÇÄ»°ÁôÑÔ&gt;</font><BR>
+  <font color=red>&lt;æ‚„æ‚„è¯ç•™è¨€&gt;</font><BR>
 {/if}
   {$msg[comment]}
 {if $msg[reply] != ''}
   <br><br>
 {/if}
 {if $msg[replysecret] == 1}
-  <font color=red>&lt;ÇÄÇÄ»°»Ø¸´&gt;</font><BR>
+  <font color=red>&lt;æ‚„æ‚„è¯å›å¤&gt;</font><BR>
 {/if}
 {if $msg[reply] != ''}
-  <font color=#ab00ac>°æÖ÷»Ø¸´</font> - <i><FONT color=#777777>{$msg[replytime]}</font></i><br>
+  <font color=#ab00ac>ç‰ˆä¸»å›å¤</font> - <i><FONT color=#777777>{$msg[replytime]}</font></i><br>
   {$msg[reply]}
 {/if}
   </td></tr>

@@ -58,19 +58,19 @@ function breakWord(dEl){
 
 <table class='form' width='100%' cellspacing='1' cellpadding='0'>
 <tr>
-<td class='form-caption' colspan=5 align=center>³¬¼¶ÓÃ»§¹ÜÀí</td>
+<td class='form-caption' colspan=5 align=center>è¶…çº§ç”¨æˆ·ç®¡ç†</td>
 </tr>
 <tr>
 <td class='form-item1' colspan=5 align=center>
-¾ÓÃñÊý:<font color=#FF0000>{$size}</font>
+å±…æ°‘æ•°:<font color=#FF0000>{$size}</font>
 </td>
 </tr>
 <tr>
-<td class='form-item1' width="45%" align="center">ÁôÑÔ±¾Ãû³Æ</td>
-<td class='form-item1' width="10%" align="center">ÁôÑÔÊý</td>
-<td class='form-item1' width="10%" align="center">°æÖ÷</td>
-<td class='form-item1' width="20%" align="center">ÉêÇë/¸üÐÂÊ±¼ä</td>
-<td class='form-item1' width="15%" align="center">²Ù×÷¹¦ÄÜ</td>
+<td class='form-item1' width="45%" align="center">ç•™è¨€æœ¬åç§°</td>
+<td class='form-item1' width="10%" align="center">ç•™è¨€æ•°</td>
+<td class='form-item1' width="10%" align="center">ç‰ˆä¸»</td>
+<td class='form-item1' width="20%" align="center">ç”³è¯·/æ›´æ–°æ—¶é—´</td>
+<td class='form-item1' width="15%" align="center">æ“ä½œåŠŸèƒ½</td>
 </tr>
 {loop $bookInfos as $bookInfo}
 <tr>
@@ -82,8 +82,8 @@ function breakWord(dEl){
 <td class='form-item1 break-word' align='center'><a href='mailto:{$bookInfo['email']}'>{$bookInfo['name']}</a></td>
 <td class='form-item1' align='center'>{$bookInfo['regtime']}<br>/<br>{$bookInfo['uptime']}</td>
 <td class='form-item1' align="center">
-	<a href="?op=admin&action=review&f_bookname={$bookInfo['id']}">²é¿´</a>
-	<a href="?op=admin&action=killBook&f_bookname={$bookInfo['id']}">É¾³ý</a>
+	<a href="?op=admin&action=review&f_bookname={$bookInfo['id']}">æŸ¥çœ‹</a>
+	<a href="?op=admin&action=killBook&f_bookname={$bookInfo['id']}">åˆ é™¤</a>
 </td>
 </tr>
 {/loop}

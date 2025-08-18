@@ -6,8 +6,8 @@ print <<<EOT
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>zChain ÁôÑÔ±¾·þÎñ</title>
-<meta name="Keywords" content="ÁôÑÔ±¾ ÁôÑÔ²¾ Ãâ·Ñ ÊÕ·Ñ ·þÎñ" />
+<title>zChain ç•™è¨€æœ¬æœåŠ¡</title>
+<meta name="Keywords" content="ç•™è¨€æœ¬ ç•™è¨€ç°¿ å…è´¹ æ”¶è´¹ æœåŠ¡" />
 <link href="./etc/gbs.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -19,12 +19,12 @@ print <<<EOT
   <tr> 
     <td width="160" class="banner-name">zChain.com<br /> 
     </td>
-    <td class="banner-title">ÁôÑÔ±¾·þÎñ(GuestBook Service)</td>
+    <td class="banner-title">ç•™è¨€æœ¬æœåŠ¡(GuestBook Service)</td>
   </tr>
   <tr> 
-    <td align="center" class="banner-desc">----Áã¾àÀëÁ´½Ó</td>
-    <td align="right" class="banner-menu" ><a href="/">Ê×Ò³</a> <a href="/gb.php?id=support">¼¼ÊõÖ§³Ö</a> 
-      <a href="/">¹ØÓÚ±¾Õ¾</a> <a href="?lang=en">ENGLISH</a></td>
+    <td align="center" class="banner-desc">----é›¶è·ç¦»é“¾æŽ¥</td>
+    <td align="right" class="banner-menu" ><a href="/">é¦–é¡µ</a> <a href="/gb.php?id=support">æŠ€æœ¯æ”¯æŒ</a> 
+      <a href="/">å…³äºŽæœ¬ç«™</a> <a href="?lang=en">ENGLISH</a></td>
   </tr>
 </table>
 EOT;

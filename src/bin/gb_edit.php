@@ -3,14 +3,14 @@
 // global $oBooks,$oMsgs;
 
 if (!$oMsgs->setAbsolutePosition($_REQUEST['mid'])) {
-	errorview('ÁôÑÔ²»´æÔÚ»òÒÑ±»É¾³ı!');
+	errorview('ç•™è¨€ä¸å­˜åœ¨æˆ–å·²è¢«åˆ é™¤!');
 	exit;
 } elseif (!$ck_pass) {
 	if($oMsgs->ip != $userip){
-		errorview('ÎŞÈ¨ĞŞ¸Ä, IPµØÖ·²»Æ¥Åä!');
+		errorview('æ— æƒä¿®æ”¹, IPåœ°å€ä¸åŒ¹é…!');
 		exit;
 	}elseif(($timestamp-strtotime($oMsgs->time))>(3600*12)){
-		errorview('ÎŞÈ¨ĞŞ¸Ä, ¾àÀëÁôÑÔÊ±¼äÒÑ´óÓÚ12Ğ¡Ê±!');
+		errorview('æ— æƒä¿®æ”¹, è·ç¦»ç•™è¨€æ—¶é—´å·²å¤§äº12å°æ—¶!');
 		exit;
 	}
 }
@@ -27,7 +27,7 @@ function gb_edit_form($oBooks,$oMsgs,$id,$mid) {
 	global $OPTS,$copyright,$gburl,$imgurl;
 
 	if(!$oMsgs->setAbsolutePosition($mid)){
-		errorview("ÏûÏ¢²»´æÔÚ»òÒÑ±»É¾³ı!");
+		errorview("æ¶ˆæ¯ä¸å­˜åœ¨æˆ–å·²è¢«åˆ é™¤!");
 		exit;
 	}
 
@@ -40,8 +40,8 @@ function gb_edit_form($oBooks,$oMsgs,$id,$mid) {
 	print <<<EOT
 <HTML>
 <HEAD>
-<TITLE>$oBooks->title¡¾±à¼­ÁôÑÔ¡¿</TITLE>
-<META content=text/html; charset=gb2312 http-equiv=Content-Type>
+<TITLE>$oBooks->titleã€ç¼–è¾‘ç•™è¨€ã€‘</TITLE>
+<META content="text/html; charset=UTF-8" http-equiv=Content-Type>
 <link rel="stylesheet" type="text/css" href="style/$OPTS[css]">
 <script language="javascript" src="bin/gb.js"></script>
 </HEAD>
@@ -60,37 +60,37 @@ $oBooks->htmlt
  <TABLE border=0 width="100%" class="msgFormCaption">
  <TR><TD>&gt;&gt;&gt; <a href="$oBooks->url">$oBooks->urlname</a>
  &gt;&gt; <a href="$gburl?id=$id">$oBooks->title</a>
- &gt;&gt; ±à¼­ÁôÑÔ</TD></TR></TABLE>
+ &gt;&gt; ç¼–è¾‘ç•™è¨€</TD></TR></TABLE>
 </TD></TR>
 <TR><TD vAlign=top width="50%">
  <TABLE width="100%" class="msgFormBody">
  <TR><TD vAlign=top>
   <TABLE class="msgFormBody">
   <TR><TD><IMG src="$sturl/name.gif" width=16 height=16></TD>
-  <TD>ĞÕÃû</TD>
+  <TD>å§“å</TD>
   <TD colspan="2"><INPUT class=plainInput maxLength=20 name=f_user value="$oMsgs->user" onmouseover="set_at_end(this);"> *</TD></TR>
   <TR><TD><IMG border=0 src="$sturl/email.gif" width=16 height=16></TD>
   <TD>Email</TD>
   <TD colspan="2"><INPUT class=plainInput maxLength=40 name=f_email value="$oMsgs->email" size=28 onmouseover="set_at_end(this);"></TD></TR>
   <TR><TD><IMG border=0 src="$sturl/home.gif" width=16 height=16></TD>
-  <TD>Ö÷Ò³</TD>
+  <TD>ä¸»é¡µ</TD>
   <TD colspan="2"><INPUT class=plainInput maxLength=40 name=f_url value="$oMsgs->url" size=28 onmouseover="set_at_end(this);"></TD></TR>
   <TR><TD><IMG border=0 src="$sturl/private.gif" width=16 height=16></TD>
-  <TD>ÇÄÇÄ»°</TD>
-  <TD><INPUT $check_1 name=f_secret type=radio value=1>ÊÇ <INPUT $check_2 name=f_secret type=radio value=0>·ñ</TD>
+  <TD>æ‚„æ‚„è¯</TD>
+  <TD><INPUT $check_1 name=f_secret type=radio value=1>æ˜¯ <INPUT $check_2 name=f_secret type=radio value=0>å¦</TD>
 EOT;
 
 	if($OPTS['useicon']==1){
 		print "<TD rowspan=2> <IMG id=idface src='$imgurl/icon{$oMsgs->icon}.gif' height=48 width=48>
-			<A target=_blank href='bin/iconlist.php'>Í·ÏñÁĞ±í</A></TD>";
+			<A target=_blank href='bin/iconlist.php'>å¤´åƒåˆ—è¡¨</A></TD>";
 		print "</TR>";
 
 		print "<TR><TD align=left><IMG src='$sturl/face.gif' height=16 width=16></TD>";
-		print "<TD>Ñ¡Í·Ïñ</TD><TD><SELECT class=plainInput name=f_icon size=1
+		print "<TD>é€‰å¤´åƒ</TD><TD><SELECT class=plainInput name=f_icon size=1
 			onChange=\"document.images['idface'].src='$imgurl/icon'+options[selectedIndex].value+'.gif';\">";
 		for($i=1;$i<=$OPTS['numicon'];$i++){
 			$selected = ($oMsgs->icon == $i) ? 'selected' : '';
-			print "<OPTION value=$i $selected>Í·Ïñ{$i}</OPTION>";
+			print "<OPTION value=$i $selected>å¤´åƒ{$i}</OPTION>";
 		}
 		print "</SELECT></TD></TR>";
 	} else {
@@ -101,15 +101,15 @@ EOT;
 	print <<<EOT
   </TABLE></TD>
   <TD align=left valign=top>
-   <IMG height=15 width=15 src="$sturl/pen.gif"> ÁôÑÔ *<BR>
-   <TEXTAREA class=plainInput cols=50 name=f_comment rows=5 title=×î´óÁôÑÔ×ÖÊı1000>$comment</TEXTAREA>
+   <IMG height=15 width=15 src="$sturl/pen.gif"> ç•™è¨€ *<BR>
+   <TEXTAREA class=plainInput cols=50 name=f_comment rows=5 title=æœ€å¤§ç•™è¨€å­—æ•°1000>$comment</TEXTAREA>
   </TD></TR></TABLE>
  </TD></TR>
  <TR><TD>
   <TABLE align=center border=0 cellPadding=0 cellSpacing=0 width="100%" class="msgFormCaption">
   <TR><TD align=center>
-   <INPUT class=plainButton name=Submit type=submit value="È·ÈÏĞŞ¸Ä">
-   &nbsp;&nbsp;&nbsp; <INPUT class=plainButton name=Submit2 type=reset value="»Ö¸´ÁôÑÔ">
+   <INPUT class=plainButton name=Submit type=submit value="ç¡®è®¤ä¿®æ”¹">
+   &nbsp;&nbsp;&nbsp; <INPUT class=plainButton name=Submit2 type=reset value="æ¢å¤ç•™è¨€">
   </TD></TR></TABLE>
 </TD></TR></TABLE></FORM>
 </DIV>
@@ -128,13 +128,13 @@ EOT;
 function gb_edit_commit(&$oBooks, &$oMsgs){
 	global $thistime;
 
-	if($_POST['f_user'] == ""){errorview("ĞÕÃû²»ÄÜÎª¿Õ£¡");exit;}
+	if($_POST['f_user'] == ""){errorview("å§“åä¸èƒ½ä¸ºç©ºï¼");exit;}
 	$comment=$_POST['f_comment'];
-	if($comment == ""){errorview("ÁôÑÔÄÚÈİ²»ÄÜÎª¿Õ£¡");exit;}
-	if(strlen($comment) > 2000 ){errorview("ÁôÑÔÄÚÈİ²»ÄÜ´óÓÚ1000¸öºº×Ö£¡");exit;}
+	if($comment == ""){errorview("ç•™è¨€å†…å®¹ä¸èƒ½ä¸ºç©ºï¼");exit;}
+	if(strlen($comment) > 2000 ){errorview("ç•™è¨€å†…å®¹ä¸èƒ½å¤§äº1000ä¸ªæ±‰å­—ï¼");exit;}
 	$email=$_POST['f_email'];
 	if($email != ""){
-		if(!eregi(".*\@.*\..*",$email)){errorview("Email¸ñÊ½´íÎó£¡");exit;}
+		if(!eregi(".*\@.*\..*",$email)){errorview("Emailæ ¼å¼é”™è¯¯ï¼");exit;}
 	}
 
 	$comment=htmlspecialchars($comment);
@@ -142,7 +142,7 @@ function gb_edit_commit(&$oBooks, &$oMsgs){
 	$comment=str_replace("\r","",$comment);
 	$comment=str_replace("\t","--",$comment);
 	$comment=str_replace("\n","<br>",$comment);
-	$comment=$comment."<br><br>[ÁôÑÔĞŞ¸ÄÓÚ: $thistime]";
+	$comment=$comment."<br><br>[ç•™è¨€ä¿®æ”¹äº: $thistime]";
 
 	$user=stripslashes($_POST['f_user']);
 	$user=htmlspecialchars($user);

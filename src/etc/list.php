@@ -12,7 +12,7 @@ require "bin/class_basic_record_file.php";
 require "bin/class_book_list.php";
 require "bin/class_message_list.php";
 
-// ÒıÈëÄ£°å´¦ÀíÒıÇæ
+// å¼•å…¥æ¨¡æ¿å¤„ç†å¼•æ“
 include(BASEDIR.'/lib/xingTemplate/xingTemplate.php');
 
 ##########
@@ -29,7 +29,7 @@ $lastitem=$firstitem+$perpage;
 if($lastitem>$size){$lastitem=$size;}
 $oBooks->moveTo($firstitem);
 
-//»ñÈ¡ĞèÒªÏÔÊ¾µÄÁôÑÔ±¾ĞÅÏ¢
+//è·å–éœ€è¦æ˜¾ç¤ºçš„ç•™è¨€æœ¬ä¿¡æ¯
 $bookInfos = array();
 
 for($i=$firstitem; $i<$lastitem; $i++) {
@@ -56,7 +56,7 @@ for($i=$firstitem; $i<$lastitem; $i++) {
 
 $oBooks->close();
 
-// Êä³öÄ£°å
+// è¾“å‡ºæ¨¡æ¿
 $xingTemplate->display('gb_list');
 
 ?>

@@ -2,20 +2,20 @@
 // global $OPTS,$copyright,$gburl,$ck_pass;
 // global $oBooks,$oMsgs;
 
-// ÒıÈëÄ£°å´¦ÀíÒıÇæ
+// å¼•å…¥æ¨¡æ¿å¤„ç†å¼•æ“
 define('BASEDIR', './');
 include(BASEDIR.'/lib/xingTemplate/xingTemplate.php');
 
 if (!$oMsgs->setAbsolutePosition($_REQUEST['mid'])) {
-	errorview('ÁôÑÔ²»´æÔÚ»òÒÑ±»É¾³ı!');
+	errorview('ç•™è¨€ä¸å­˜åœ¨æˆ–å·²è¢«åˆ é™¤!');
 	exit;
 }
 
 if ($_SESSION['action'] == 'reply') {
-	if ($oMsgs->reply && !$ck_pass) { errorview('¶Ô²»Æğ,Äú²»ÊÇ°æÖ÷²»ÄÜĞŞ¸Ä»Ø¸´£¡'); exit; }
+	if ($oMsgs->reply && !$ck_pass) { errorview('å¯¹ä¸èµ·,æ‚¨ä¸æ˜¯ç‰ˆä¸»ä¸èƒ½ä¿®æ”¹å›å¤ï¼'); exit; }
 	gb_reply_form($oBooks,$oMsgs,$id,$mid);
 } elseif ($_SESSION['action'] == 'replycommit') {
-	if (!$ck_pass) { errorview('¶Ô²»Æğ,Äú²»ÊÇ°æÖ÷²»ÄÜ»Ø¸´ÁôÑÔ£¡'); exit; }
+	if (!$ck_pass) { errorview('å¯¹ä¸èµ·,æ‚¨ä¸æ˜¯ç‰ˆä¸»ä¸èƒ½å›å¤ç•™è¨€ï¼'); exit; }
 	gb_reply_commit($oBooks,$oMsgs,$id,$mid);
 } else {
 	exit('gb_reply: Wrong action code');
@@ -24,7 +24,7 @@ if ($_SESSION['action'] == 'reply') {
 function gb_reply_form($oBooks,$oMsgs,$id,$mid) {
 	global $OPTS,$copyright,$gburl,$ck_pass,$imgurl;
 
-	// ×¼±¸ÁôÑÔ±¾Ïà¹ØĞÅÏ¢
+	// å‡†å¤‡ç•™è¨€æœ¬ç›¸å…³ä¿¡æ¯
 	$bookInfo = array(
 		'url'=>$oBooks->url,
 		'urlname'=>$oBooks->urlname,
@@ -33,7 +33,7 @@ function gb_reply_form($oBooks,$oMsgs,$id,$mid) {
 		'btnurl'=>"$imgurl/$OPTS[btn]"
 	);
 	
-	// ×¼±¸´ı»Ø¸´ÁôÑÔĞÅÏ¢
+	// å‡†å¤‡å¾…å›å¤ç•™è¨€ä¿¡æ¯
 
 	// auto detect http link
 	$pattern = "(http|https|ftp):(\/\/|\\\\\\\\)[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*"
@@ -59,10 +59,10 @@ function gb_reply_form($oBooks,$oMsgs,$id,$mid) {
 		'replysecret'=>$oMsgs->replysecret	
 	);
 	
-	// ×¼±¸´ı±à¼­ÄÚÈİ
+	// å‡†å¤‡å¾…ç¼–è¾‘å†…å®¹
 	$content = str_replace("<br>","\n",$oMsgs->reply);
 	
-	// Êä³öÄ£°ågba_reply_form
+	// è¾“å‡ºæ¨¡æ¿gba_reply_form
 	global $xingTemplate;
 	$xingTemplate->assign('content',$content);
 	$xingTemplate->assign('bookInfo',$bookInfo);
@@ -76,7 +76,7 @@ function gb_reply_commit(&$oBooks, &$oMsgs, $id, $mid) {
 	global $thistime;
 
 	$comment=$_POST['f_comment'];
-	if($comment == ""){errorview('»Ø¸´ÄÚÈİ²»ÄÜÎª¿Õ£¡');exit;}
+	if($comment == ""){errorview('å›å¤å†…å®¹ä¸èƒ½ä¸ºç©ºï¼');exit;}
 
 	$rawcomment=stripslashes($comment);
 	$comment=htmlspecialchars($rawcomment);
@@ -84,7 +84,7 @@ function gb_reply_commit(&$oBooks, &$oMsgs, $id, $mid) {
 	$comment=str_replace("\t","--",$comment);
 	$comment=str_replace("\n","<br>",$comment);
 	if ($oMsgs->reply) {
-		$comment=$comment."<br><br>[»Ø¸´ĞŞ¸ÄÓÚ: $thistime]";
+		$comment=$comment."<br><br>[å›å¤ä¿®æ”¹äº: $thistime]";
 	}
 
 	if (!$oMsgs->replytime) {
@@ -99,13 +99,13 @@ function gb_reply_commit(&$oBooks, &$oMsgs, $id, $mid) {
 		$oldcomment = str_replace("<br>","\n",$oMsgs->comment);
 		$oldcomment = html_entity_decode($oldcomment);
 
-		$emsg = "°æÖ÷ ì¶ $thistime »Ø¸´ÁËÄúµÄÁôÑÔ\n\n";
-		$emsg .= "»Ø¸´ÄÚÈİ: \n$rawcomment\n\n";
-		$emsg .= "Ô­ÁôÑÔÄÚÈİ: \n$oldcomment\n\n";
+		$emsg = "ç‰ˆä¸» æ–¼ $thistime å›å¤äº†æ‚¨çš„ç•™è¨€\n\n";
+		$emsg .= "å›å¤å†…å®¹: \n$rawcomment\n\n";
+		$emsg .= "åŸç•™è¨€å†…å®¹: \n$oldcomment\n\n";
 		$emsg .= "$oBooks->title($prgurl/$gburl?id=$id)\n\n\n";
-		$emsg .= "³ÌĞòÖÆ×÷£ºzChain.net(http://www.zchain.net)\n";
-		$emsg .= "Ãâ·ÑÁôÑÔ²¾·şÎñÓÉ $hostname($hosturl) Ìá¹©\n\n";
-		@mail("$oMsgs->email","Subject: {$oBooks->title} »Ø¸´ÁôÑÔÍ¨Öª",$emsg,"From $oBooks->title");
+		$emsg .= "ç¨‹åºåˆ¶ä½œï¼šzChain.net(http://www.zchain.net)\n";
+		$emsg .= "å…è´¹ç•™è¨€ç°¿æœåŠ¡ç”± $hostname($hosturl) æä¾›\n\n";
+		@mail("$oMsgs->email","Subject: {$oBooks->title} å›å¤ç•™è¨€é€šçŸ¥",$emsg,"From $oBooks->title");
 	}
 }
 

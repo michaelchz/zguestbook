@@ -3,39 +3,39 @@
 
 <table class='form' width=90% align=center>
 
-<tr><td class='form-caption' colspan=2 align=center>��������</td></tr>
-<tr><td class='form-item1' align=right>���Ա�ID��</td>
+<tr><td class='form-caption' colspan=2 align=center>版主资料</td></tr>
+<tr><td class='form-item1' align=right>留言本ID：</td>
 <td class='form-item1' align=left>{$oBooks->name}</td></tr>
-<tr><td class='form-item1' align=right>���Ա����ƣ�</td>
+<tr><td class='form-item1' align=right>留言本名称：</td>
 <td class='form-item1' align=left><a href={$gburl}?id={$oBooks->name} target=_blank>{$oBooks->title}</a></tr>
-<tr><td class='form-item1' align=right>���룺</td>
+<tr><td class='form-item1' align=right>密码：</td>
 <td class='form-item1' align=left>{$oBooks->pass}</td></tr>
-<tr><td class='form-item1' align=right>���䣺</td>
+<tr><td class='form-item1' align=right>信箱：</td>
 <td class='form-item1' align=left><a href=mailto:{$oBooks->email}>{$oBooks->email}</a></td></tr>
-<tr><td class='form-item1' align=right>������ҳ��</td>
+<tr><td class='form-item1' align=right>个人主页：</td>
 <td class='form-item1' align=left><a href={$oBooks->url} target=_blank>{$oBooks->url}</a></td></tr>
-<tr><td class='form-item1' align=right>����ʱ�䣺</td>
+<tr><td class='form-item1' align=right>申请时间：</td>
 <td class='form-item1' align=left>{$oBooks->regtime}</td></tr>
 
-<tr><td class='form-caption' colspan=2 align=center>���Ա�ѡ��</td></tr>
-<tr><td class='form-item1' align=right>��ɫ���</td>
+<tr><td class='form-caption' colspan=2 align=center>留言本选项</td></tr>
+<tr><td class='form-item1' align=right>配色风格：</td>
 <td class='form-item1' align=left>{$priv_opts[css]}</td></tr>
-<tr><td class='form-item1' align=right>��ť���</td>
+<tr><td class='form-item1' align=right>按钮风格：</td>
 <td class='form-item1' align=left>{$priv_opts[btn]}</td></tr>
-<tr><td class='form-item1' align=right>ʱ��������</td>
+<tr><td class='form-item1' align=right>时区调整：</td>
 <td class='form-item1' align=left>{$priv_opts[timesft]}</td></tr>
-<tr><td class='form-item1' align=right>ÿҳ���ԣ�</td>
+<tr><td class='form-item1' align=right>每页留言：</td>
 <td class='form-item1' align=left>{$priv_opts[perpage]}</td></tr>
-<tr><td class='form-item1' align=right>email֪ͨ��</td>
+<tr><td class='form-item1' align=right>email通知：</td>
 <td class='form-item1' align=left>{$priv_opts[notify]}</td></tr>
-<tr><td class='form-item1' align=right>ǩд���ԣ�</td>
+<tr><td class='form-item1' align=right>签写留言：</td>
 <td class='form-item1' align=left>{$priv_opts[showdlg]}</td></tr>
-<tr><td class='form-item1' align=right>ͷ��</td>
+<tr><td class='form-item1' align=right>头像：</td>
 <td class='form-item1' align=left>{$priv_opts[useicon]}</td></tr>
-<tr><td class='form-item1' align=right>ͷ������</td>
+<tr><td class='form-item1' align=right>头像数：</td>
 <td class='form-item1' align=left>{$priv_opts[numicon]}</td></tr>
 
-<tr><td class='form-item1' colspan=2 align=center>[ <a href=javascript:history.back(-1)>������һҳ</a> ]</td></tr>
+<tr><td class='form-item1' colspan=2 align=center>[ <a href=javascript:history.back(-1)>返回上一页</a> ]</td></tr>
 </table>
 
 {xingTemplate gbs_frame_end}

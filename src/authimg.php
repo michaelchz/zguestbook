@@ -4,7 +4,7 @@
 * Filename: authimg.php
 
 */
-//Éú³ÉÑéÖ¤ÂëÍ¼Æ¬
+//ç”ŸæˆéªŒè¯ç å›¾ç‰‡
 Header("Content-type: image/PNG");
 
 srand((double)microtime()*1000000);
@@ -21,14 +21,14 @@ imagefill($im,10,10,$black);
 
 
 
-//½«ËÄÎ»ÕûÊıÑéÖ¤Âë»æÈëÍ¼Æ¬
+//å°†å››ä½æ•´æ•°éªŒè¯ç ç»˜å…¥å›¾ç‰‡
 
 imagestring($im, 5, 10, 2, $HTTP_GET_VARS['authcode'], $white);
 //imagestring($im, 5, 10, 8, $_SESSION['authcode'], $white);
 
 
 
-for($i=0;$i<50;$i++) //¼ÓÈë¸ÉÈÅÏóËØ
+for($i=0;$i<50;$i++) //åŠ å…¥å¹²æ‰°è±¡ç´ 
 
 {
 
@@ -42,4 +42,4 @@ ImagePNG($im);
 
 ImageDestroy($im);
 
-¡¡¡¡?> 
+ã€€ã€€?> 

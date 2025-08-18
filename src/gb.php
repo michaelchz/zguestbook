@@ -1,13 +1,13 @@
 <?php
 /*--------------------------------------------------------*\
- ÁãµãÁôÑÔ²¾¶àÓÃ»§°æ zChain GuestBook v4.00
+ é›¶ç‚¹ç•™è¨€ç°¿å¤šç”¨æˆ·ç‰ˆ zChain GuestBook v4.00
  
- ×÷Õß£ºzChain (http://www.zchain.net)
- °æÈ¨ËùÓĞ(c) 2001-2003
+ ä½œè€…ï¼šzChain (http://www.zchain.net)
+ ç‰ˆæƒæ‰€æœ‰(c) 2001-2003
 
- ±¾³ÌĞòÎª×ÔÓÉÈí¼ş£¬Äú¿ÉÒÔÔÚ GNUÍ¨ÓÃ¹«¹²ÊÚÈ¨Ìõ¿î¹æ¶¨ÏÂ×ÔÓÉ
- ĞŞ¸Ä¡¢Ê¹ÓÃÓëÉ¢²¥±¾³ÌĞò£¬µ«±ØĞë±£Áô×÷ÕßÓëÍøÕ¾µÄÁ´½Ó¡£ÏêÇé
- Çë²Î¼û readme.txt ¡£
+ æœ¬ç¨‹åºä¸ºè‡ªç”±è½¯ä»¶ï¼Œæ‚¨å¯ä»¥åœ¨ GNUé€šç”¨å…¬å…±æˆæƒæ¡æ¬¾è§„å®šä¸‹è‡ªç”±
+ ä¿®æ”¹ã€ä½¿ç”¨ä¸æ•£æ’­æœ¬ç¨‹åºï¼Œä½†å¿…é¡»ä¿ç•™ä½œè€…ä¸ç½‘ç«™çš„é“¾æ¥ã€‚è¯¦æƒ…
+ è¯·å‚è§ readme.txt ã€‚
 \*--------------------------------------------------------*/
 
 class CFormMessage {
@@ -59,11 +59,11 @@ $notice = '';
 
 $id = $_REQUEST['id'];
 $id = str_replace(".","",$id);
-if ($id == "") {errorview("Î´Ö¸¶¨id£¡");exit;}
+if ($id == "") {errorview("æœªæŒ‡å®šidï¼");exit;}
 
 $oBooks=new CBookList;
 if(!$oBooks->open()){errorview("book list file open error!");exit;}
-if(!$oBooks->find($id)){errorview("id(=$id)´íÎó£¡");exit;}
+if(!$oBooks->find($id)){errorview("id(=$id)é”™è¯¯ï¼");exit;}
 $oBooks->getOptions($OPTS);
 
 getlocaltime($OPTS['timesft']);
@@ -93,13 +93,13 @@ $f_comment=str_replace("\n","<br>",$f_comment);
 $f_comment=str_replace("\r","",$f_comment);
 
 //
-// ×¼±¸¸÷¹¦ÄÜĞèÒªµÄÈ«¾Ö»·¾³
+// å‡†å¤‡å„åŠŸèƒ½éœ€è¦çš„å…¨å±€ç¯å¢ƒ
 
-// ÒıÈëÄ£°å´¦ÀíÒıÇæ
+// å¼•å…¥æ¨¡æ¿å¤„ç†å¼•æ“
 define('BASEDIR', './');
 include(BASEDIR.'/lib/xingTemplate/xingTemplate.php');
 
-// ×é×°È«¾Ö»·¾³±äÁ¿
+// ç»„è£…å…¨å±€ç¯å¢ƒå˜é‡
 $context = array(
 	'xingTemplate'=>$xingTemplate,
 	'id'=>$id,
@@ -134,11 +134,11 @@ switch ($_SESSION['action']) {
 		break;
 	case 'login':
 		if (!$ck_pass) {
-			$msg = "µÇÂ¼Ê§°Ü£¡"; $delay = 2; 
+			$msg = "ç™»å½•å¤±è´¥ï¼"; $delay = 2; 
 		} elseif (!$_COOKIE['ck_supported']) {
-			$msg = 'µÇÂ¼Ê§°Ü£¡£¨ä¯ÀÀÆ÷²»Ö§³ÖCookie£¬¹ÜÀíÑ¡ÏîÎŞ·¨¼¤»î!£©'; $delay = 5;
+			$msg = 'ç™»å½•å¤±è´¥ï¼ï¼ˆæµè§ˆå™¨ä¸æ”¯æŒCookieï¼Œç®¡ç†é€‰é¡¹æ— æ³•æ¿€æ´»!ï¼‰'; $delay = 5;
 		} else {
-			$msg = "°æÖ÷µÇÂ¼³É¹¦£¬ËùÓĞ¹ÜÀíÑ¡ÏîÒÑ¼¤»î£¡"; $delay = 1;
+			$msg = "ç‰ˆä¸»ç™»å½•æˆåŠŸï¼Œæ‰€æœ‰ç®¡ç†é€‰é¡¹å·²æ¿€æ´»ï¼"; $delay = 1;
 		} 
 		JumpToEx("$gburl?id=$id", $msg, $delay);
 		break;
@@ -164,16 +164,16 @@ function AddMessage($id){
  global $prgurl,$gburl,$hostname,$hosturl,$thistime,$ftime;
  global $oBooks,$oMsgs; 
 
- if($f_user == ""){errorview("ÄúµÄÃû×Ö²»ÄÜÃ»ÓĞÌîĞ´Å¶£¡");exit;}
- if($f_comment == ""){errorview("ÄúµÄÁôÑÔÄÚÈİ²»ÄÜÃ»ÓĞÌîĞ´Å¶£¡");exit;}
- if(strlen($rawcomment) > 2000 ){errorview("ÄúµÄÁôÑÔÄÚÈİ²»ÄÜ´óÓÚ2000¸ö×Ö·û£¡");exit;}
+ if($f_user == ""){errorview("æ‚¨çš„åå­—ä¸èƒ½æ²¡æœ‰å¡«å†™å“¦ï¼");exit;}
+ if($f_comment == ""){errorview("æ‚¨çš„ç•™è¨€å†…å®¹ä¸èƒ½æ²¡æœ‰å¡«å†™å“¦ï¼");exit;}
+ if(strlen($rawcomment) > 2000 ){errorview("æ‚¨çš„ç•™è¨€å†…å®¹ä¸èƒ½å¤§äº2000ä¸ªå­—ç¬¦ï¼");exit;}
  if($f_email != ""){
-   if(!eregi(".*\@.*\..*",$f_email)){errorview("ÄúµÄEmailÊäÈë´íÎó£¡");exit;}
+   if(!eregi(".*\@.*\..*",$f_email)){errorview("æ‚¨çš„Emailè¾“å…¥é”™è¯¯ï¼");exit;}
  }
 
- if(($f_authcode == '') || (md5($f_authcode) != $f_authmd5)){errorview("ÑéÖ¤ÂëÊäÈë´íÎó£¬ÇëÖØÊÔ£¡");exit;}
- if(CheckRepeat($f_user.$f_comment)){errorview("Í¬Ò»ÔòÁôÑÔ¿É²»ÄÜ·¢2´ÎÒÔÉÏÅ¶£¡");exit;}
- if(CheckFlood($id, $userip, $f_comment)){errorview("Çë²»Òª·¢ËÍ¹àË®ÁôÑÔ£¡");exit;}
+ if(($f_authcode == '') || (md5($f_authcode) != $f_authmd5)){errorview("éªŒè¯ç è¾“å…¥é”™è¯¯ï¼Œè¯·é‡è¯•ï¼");exit;}
+ if(CheckRepeat($f_user.$f_comment)){errorview("åŒä¸€åˆ™ç•™è¨€å¯ä¸èƒ½å‘2æ¬¡ä»¥ä¸Šå“¦ï¼");exit;}
+ if(CheckFlood($id, $userip, $f_comment)){errorview("è¯·ä¸è¦å‘é€çŒæ°´ç•™è¨€ï¼");exit;}
 
  $f_user=stripslashes($f_user);
  $f_user=htmlspecialchars($f_user);
@@ -197,14 +197,14 @@ function AddMessage($id){
  SetFormCookie($oFormMsg);
   
  if (($oBooks->email != "") && ($OPTS['notify'] == 1)) {
-  $emsg = "ĞÕÃû: $f_user ì¶ $thistime\n";
-  if ($f_email != "") $emsg .= "ÓÊÏä: $f_email\n";
-  if ($oMsgs->url != "") $emsg .= "Ö÷Ò³: $f_url\n";
-  $emsg .= "ÁôÑÔÄÚÈİ: \n$rawcomment\n\n";
+  $emsg = "å§“å: $f_user æ–¼ $thistime\n";
+  if ($f_email != "") $emsg .= "é‚®ç®±: $f_email\n";
+  if ($oMsgs->url != "") $emsg .= "ä¸»é¡µ: $f_url\n";
+  $emsg .= "ç•™è¨€å†…å®¹: \n$rawcomment\n\n";
   $emsg .= "$oBooks->title($prgurl/$gburl?id=$id)\n\n\n";
-  $emsg .= "³ÌĞòÖÆ×÷£ºzChain.net(http://www.zchain.net)\n";
-  $emsg .= "Ãâ·ÑÁôÑÔ²¾·şÎñÓÉ $hostname($hosturl) Ìá¹©\n\n";
-  @mail($oBooks->email,"Subject: $oBooks->title ĞÂÁôÑÔÍ¨Öª",$emsg,"From: $f_email");
+  $emsg .= "ç¨‹åºåˆ¶ä½œï¼šzChain.net(http://www.zchain.net)\n";
+  $emsg .= "å…è´¹ç•™è¨€ç°¿æœåŠ¡ç”± $hostname($hosturl) æä¾›\n\n";
+  @mail($oBooks->email,"Subject: $oBooks->title æ–°ç•™è¨€é€šçŸ¥",$emsg,"From: $f_email");
  }
 }
 
@@ -236,7 +236,7 @@ function ShowBook($id,$keyword,$page) {
   }
  }
 
- $promptMsg=($keyword!="") ? "ËÑË÷½á¹û" : "ÁôÑÔ×ÜÊı";
+ $promptMsg=($keyword!="") ? "æœç´¢ç»“æœ" : "ç•™è¨€æ€»æ•°";
  $prompt=($keyword!="") ? "&action=find&search=".urlencode($keyword) : "";
  $prevPg=($page>1)?$page-1:0;
  $prevMsg=($prevPg>0)?"href=$gburl?id=$id&page=$prevPg{$prompt}":"";
@@ -245,14 +245,14 @@ function ShowBook($id,$keyword,$page) {
  print <<<EOT
 <table border="0" cellpadding="0" cellspacing="0" width="100%" class="bookNavigator">
 <tr><td><form method=post action=$gburl?action=find&id=$id>
-ËÑË÷¹Ø¼ü×Ö£º<input name="search" size="20" class="plainInput">
-<input class="plainButton" type="submit" value="ËÑË÷" name="submit"></form></td>
+æœç´¢å…³é”®å­—ï¼š<input name="search" size="20" class="plainInput">
+<input class="plainButton" type="submit" value="æœç´¢" name="submit"></form></td>
 <td align="right">
  <form action=$gburl?id=$id{$prompt} method=post>
  <a $prevMsg>&lt;&lt;</a>
- µÚ <input size="2" value="$page" name="page" class="plainInput"> / $pages Ò³
+ ç¬¬ <input size="2" value="$page" name="page" class="plainInput"> / $pages é¡µ
  <a $nextMsg>&gt;&gt;</a>
- [{$promptMsg}£º<em>$size</em>]</form></td></tr>
+ [{$promptMsg}ï¼š<em>$size</em>]</form></td></tr>
 </table>
 </div>
 $oBooks->htmlb
@@ -268,10 +268,10 @@ EOT;
 function DelMessage($id,$msgid) {
  global $ck_pass, $oMsgs;
 
- if(!$ck_pass){errorview("ÄúµÄÃÜÂë´íÎó£¡");exit;}
+ if(!$ck_pass){errorview("æ‚¨çš„å¯†ç é”™è¯¯ï¼");exit;}
 
- if(!$oMsgs->setAbsolutePosition($msgid)){errorview("Ö¸¶¨ÁôÑÔ´íÎó£¡");exit;}
- if(!$oMsgs->delete()){errorview("ÁôÑÔÉ¾³ı´íÎó£¡");exit;}
+ if(!$oMsgs->setAbsolutePosition($msgid)){errorview("æŒ‡å®šç•™è¨€é”™è¯¯ï¼");exit;}
+ if(!$oMsgs->delete()){errorview("ç•™è¨€åˆ é™¤é”™è¯¯ï¼");exit;}
 }
 
 function PrintHeader()
@@ -289,13 +289,13 @@ function PrintHeader()
  $oFormMsg = new CFormMessage();
  GetFormCookie($oFormMsg);
 
- $mgrPrompt=($ck_pass)?"<a href='$gburl?action=logout&id=$id'>[×¢Ïú]</a>":"<a onclick='showDlg(); return false;' href='#'>[¹ÜÀí]</a>";
+ $mgrPrompt=($ck_pass)?"<a href='$gburl?action=logout&id=$id'>[æ³¨é”€]</a>":"<a onclick='showDlg(); return false;' href='#'>[ç®¡ç†]</a>";
 
- $ctrl_save="<INPUT name=f_save type=checkbox value=1".($oFormMsg->save?' CHECKED':'').">±£´æÎÒµÄĞÅÏ¢";
+ $ctrl_save="<INPUT name=f_save type=checkbox value=1".($oFormMsg->save?' CHECKED':'').">ä¿å­˜æˆ‘çš„ä¿¡æ¯";
  
  print <<<EOT
 <HTML><HEAD>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="style/$OPTS[css]">
 <script language="javascript" src="bin/gb.js"></script>
 <title>$oBooks->title</title>
@@ -307,9 +307,9 @@ $oBooks->htmlt
 <form method=post action='$gburl?action=login&id=$id'>
 <table cellspacing=1 bgcolor=#000000 cellpadding=3>
 <tr><td width=100% bgcolor=#F0F0F0 align=center>
-ÊäÈë¹ÜÀíÃÜÂë£º<input type=password class="plainInput" name=f_pass size=15><br><br>
-<input type=submit value="È·ÈÏ" class="plainButton">
-<input type="button" onclick="hideDlg();" value="¹Ø±Õ" class="plainButton">
+è¾“å…¥ç®¡ç†å¯†ç ï¼š<input type=password class="plainInput" name=f_pass size=15><br><br>
+<input type=submit value="ç¡®è®¤" class="plainButton">
+<input type="button" onclick="hideDlg();" value="å…³é—­" class="plainButton">
 </td></tr></table></form>
 </DIV>
 
@@ -322,9 +322,9 @@ $oBooks->htmlt
  &gt;&gt; <a href="$gburl?id=$id">$oBooks->title</a></TD>
  <TD align=right>
   $mgrPrompt
-  <a target="_blank" href="/?op=regedit">[ĞŞ¸Ä]</a>
-  <a target=_blank href="/?op=reg">[ÉêÇë]</a>
-  <a href="#" onclick="showForm(1);return false;">&darr;[ÁôÑÔ]</a>
+  <a target="_blank" href="/?op=regedit">[ä¿®æ”¹]</a>
+  <a target=_blank href="/?op=reg">[ç”³è¯·]</a>
+  <a href="#" onclick="showForm(1);return false;">&darr;[ç•™è¨€]</a>
  </TD></TR></TABLE>
 </TD></TR>
 </TABLE>
@@ -338,40 +338,40 @@ $oBooks->htmlt
  &gt;&gt; <a href="$gburl?id=$id">$oBooks->title</a></TD>
  <TD align=right class=fgfont vAlign=center>
  $mgrPrompt
- <a target="_blank" href="/?op=regedit">[ĞŞ¸Ä]</a>
- <a target=_blank href="/?op=reg">[ÉêÇë]</a>
- <a href="#" onclick="showForm(0);return false;">&uarr;[ÁôÑÔ]</a>
+ <a target="_blank" href="/?op=regedit">[ä¿®æ”¹]</a>
+ <a target=_blank href="/?op=reg">[ç”³è¯·]</a>
+ <a href="#" onclick="showForm(0);return false;">&uarr;[ç•™è¨€]</a>
 </TD></TR></TABLE></TD></TR>
 <TR><TD vAlign=top width="50%">
  <TABLE width="100%" class="msgFormBody">
  <TR><TD vAlign=top>
   <TABLE class="msgFormBody">
   <TR><TD><IMG src="$sturl/name.gif" width=16 height=16></TD>
-  <TD>ĞÕÃû</TD>
+  <TD>å§“å</TD>
   <TD colspan="2"><INPUT class=plainInput maxLength=20 name=f_user value="$oFormMsg->user" onmouseover="set_at_end(this);"> *</TD></TR>
   <TR><TD><IMG border=0 src="$sturl/email.gif" width=16 height=16></TD>
   <TD>Email</TD>
   <TD colspan="2"><INPUT class=plainInput maxLength=40 name=f_email value="$oFormMsg->email"  size=28 onmouseover="set_at_end(this);"></TD></TR>
   <TR><TD><IMG border=0 src="$sturl/home.gif" width=16 height=16></TD>
-  <TD>Ö÷Ò³</TD>
+  <TD>ä¸»é¡µ</TD>
   <TD colspan="2"><INPUT class=plainInput maxLength=40 name=f_url value="$oFormMsg->url" value="http://" size=28 onmouseover="set_at_end(this);"></TD></TR>
   <TR><TD><IMG border=0 src="$sturl/private.gif" width=16 height=16></TD>
-  <TD>ÇÄÇÄ»°</TD>
-  <TD><INPUT name=f_secret type=radio value=1>ÊÇ <INPUT CHECKED name=f_secret type=radio value=0>·ñ</TD>
+  <TD>æ‚„æ‚„è¯</TD>
+  <TD><INPUT name=f_secret type=radio value=1>æ˜¯ <INPUT CHECKED name=f_secret type=radio value=0>å¦</TD>
 EOT;
 
  if($OPTS['useicon']==1){
   $deficon=($oFormMsg->icon) ? "icon{$oFormMsg->icon}.gif" : "icon1.gif";
   print "<TD rowspan=2> <IMG id=idface src='$imgurl/$deficon' height=48 width=48>
-   <A target=_blank href='?action=iconlist&id=$id'>Í·ÏñÁĞ±í</A></TD>";
+   <A target=_blank href='?action=iconlist&id=$id'>å¤´åƒåˆ—è¡¨</A></TD>";
   print "</TR>";
 
   print "<TR><TD align=left><IMG src='$sturl/face.gif' height=16 width=16></TD>";
-  print "<TD>Ñ¡Í·Ïñ</TD><TD><SELECT class=plainInput name=f_icon size=1
+  print "<TD>é€‰å¤´åƒ</TD><TD><SELECT class=plainInput name=f_icon size=1
    onChange=\"document.images['idface'].src='$imgurl/icon'+options[selectedIndex].value+'.gif';\">";
   for($i=1;$i<=$OPTS['numicon'];$i++){
    $selected = ($oFormMsg->icon == $i) ? 'selected' : '';
-   print "<OPTION value=$i $selected>Í·Ïñ{$i}</OPTION>";
+   print "<OPTION value=$i $selected>å¤´åƒ{$i}</OPTION>";
   }
   print "</SELECT></TD></TR>";
  } else {
@@ -382,14 +382,14 @@ EOT;
  print <<<EOT
   </TABLE></TD>
   <TD align=left valign=top>
-   <IMG height=15 width=15 src="$sturl/pen.gif"> ÁôÑÔ * &nbsp;&nbsp;£¨×î´ó£º2000£»ÒÑÓÃ£º
-   <input class=plainInput type=text name=used size=3 maxlength=4 value="0" disabled>£©
+   <IMG height=15 width=15 src="$sturl/pen.gif"> ç•™è¨€ * &nbsp;&nbsp;ï¼ˆæœ€å¤§ï¼š2000ï¼›å·²ç”¨ï¼š
+   <input class=plainInput type=text name=used size=3 maxlength=4 value="0" disabled>ï¼‰
    <BR>
-   <TEXTAREA class=plainInput cols=50 name=f_comment rows=5 title=×î´óÁôÑÔ×ÖÊı2000
+   <TEXTAREA class=plainInput cols=50 name=f_comment rows=5 title=æœ€å¤§ç•™è¨€å­—æ•°2000
     onKeyDown="count_char(this,this.form.used);"
     onKeyUp="count_char(this,this.form.used);"></TEXTAREA>
    <BR>
-ÇëÊäÈëÓÒÍ¼ÖĞµÄÑéÖ¤Âë£º<INPUT class=plainInput size=10 name=f_authcode>
+è¯·è¾“å…¥å³å›¾ä¸­çš„éªŒè¯ç ï¼š<INPUT class=plainInput size=10 name=f_authcode>
 <img src=authimg.php?authcode=$authcode align=absbottom>
 <input type=hidden name=f_authmd5 value=$authmd5>
   </TD></TR></TABLE>
@@ -398,8 +398,8 @@ EOT;
   <TABLE align=center border=0 cellPadding=0 cellSpacing=0 width="100%" class="msgFormCaption">
   <TR><TD align=center>
    $ctrl_save&nbsp;&nbsp;&nbsp;&nbsp;
-   <INPUT class=plainButton name=Submit type=submit value="·¢ËÍÁôÑÔ">
-   &nbsp;&nbsp;&nbsp; <INPUT class=plainButton name=Submit2 type=reset value="Çå³ıÁôÑÔ">
+   <INPUT class=plainButton name=Submit type=submit value="å‘é€ç•™è¨€">
+   &nbsp;&nbsp;&nbsp; <INPUT class=plainButton name=Submit2 type=reset value="æ¸…é™¤ç•™è¨€">
   </TD></TR></TABLE>
 </TD></TR></TABLE></FORM>
 <script language=JavaScript>
@@ -415,54 +415,54 @@ function PrintMessage($msgNo, $oMsg, $keyword, $page) {
 
  $urluser=urlencode($oMsg->user);
 
- $indicator=($msgNo>0)?"µÚ $msgNo ÌõÁôÑÔ":"´ı»Ø¸´ÁôÑÔ";
+ $indicator=($msgNo>0)?"ç¬¬ $msgNo æ¡ç•™è¨€":"å¾…å›å¤ç•™è¨€";
  print <<<EOT
 <table border="0" cellpadding="0" cellspacing="1" width="100%" class="msg">
 <tr><td>
  <table border="0" cellpadding="0" cellspacing="0" width="100%" class="msgCaption">
  <tr><td width="100" align="center" valign="middle">$indicator</td>
- <td valign="middle">·¢±íÓÚ $oMsg->time</td>
+ <td valign="middle">å‘è¡¨äº $oMsg->time</td>
  <td align="right" valign="middle">
 EOT;
 
  if($msgNo > 0){
-  echo "<a href=$gburl?action=find&id=$id&search=$urluser><img src=$sturl/find.gif style='border: 0px' alt='ËÑË÷{$oMsg->user}ËùĞ´¹ıµÄÁôÑÔ'></a> \n";
+  echo "<a href=$gburl?action=find&id=$id&search=$urluser><img src=$sturl/find.gif style='border: 0px' alt='æœç´¢{$oMsg->user}æ‰€å†™è¿‡çš„ç•™è¨€'></a> \n";
  }
  if($oMsg->email != ""){
   $memail=($ck_pass) ? "href=mailto:$oMsg->email" : "";
-  $malt=($ck_pass) ? $oMsg->email : "±£ÃÜ";
-  echo "<a $memail><img src=$sturl/email2.gif style='border: 0px' alt={$oMsg->user}µÄemail£º$malt></a> \n";
+  $malt=($ck_pass) ? $oMsg->email : "ä¿å¯†";
+  echo "<a $memail><img src=$sturl/email2.gif style='border: 0px' alt={$oMsg->user}çš„emailï¼š$malt></a> \n";
  }
  if($oMsg->url != ""){
-  echo "<a href=$oMsg->url target=_blank><img src=$sturl/home2.gif style='border: 0px' alt=Ö÷Ò³></a> \n";
+  echo "<a href=$oMsg->url target=_blank><img src=$sturl/home2.gif style='border: 0px' alt=ä¸»é¡µ></a> \n";
  }
- $mip=($ck_pass) ? $oMsg->ip : "±£ÃÜ";
- echo "<img src=$sturl/ip.gif alt='{$oMsg->user}µÄIPµØÖ·£º$mip'></a> \n";
+ $mip=($ck_pass) ? $oMsg->ip : "ä¿å¯†";
+ echo "<img src=$sturl/ip.gif alt='{$oMsg->user}çš„IPåœ°å€ï¼š$mip'></a> \n";
  if($msgNo > 0){
-  echo "<a href=$gburl?action=reply&id=$id&mid=$oMsg->msgid><img src=$sturl/reply.gif style='border: 0px' alt=»Ø¸´ÁôÑÔ></a> \n";
+  echo "<a href=$gburl?action=reply&id=$id&mid=$oMsg->msgid><img src=$sturl/reply.gif style='border: 0px' alt=å›å¤ç•™è¨€></a> \n";
   if($ck_pass){
-   echo "<a href=$gburl?action=delmsg&id=$id&mid=$oMsg->msgid&search=$keyword&page=$page onClick='return confirm_del();'><img src=$sturl/del.gif style='border: 0px' alt=É¾³ı´ËÁôÑÔ></a>\n";
+   echo "<a href=$gburl?action=delmsg&id=$id&mid=$oMsg->msgid&search=$keyword&page=$page onClick='return confirm_del();'><img src=$sturl/del.gif style='border: 0px' alt=åˆ é™¤æ­¤ç•™è¨€></a>\n";
   }
  }
 
-	$tmpMsg1=(($oMsg->secret != 1) || ($ck_pass)) ? $oMsg->comment : 'ÇÄÇÄ»°ÁôÑÔ...';
-	$tmpTip1=(($oMsg->secret == 1) && ($ck_pass)) ? '<font color=red>&lt;ÇÄÇÄ»°ÁôÑÔ&gt;</font><BR>' : '';
+	$tmpMsg1=(($oMsg->secret != 1) || ($ck_pass)) ? $oMsg->comment : 'æ‚„æ‚„è¯ç•™è¨€...';
+	$tmpTip1=(($oMsg->secret == 1) && ($ck_pass)) ? '<font color=red>&lt;æ‚„æ‚„è¯ç•™è¨€&gt;</font><BR>' : '';
 	if (($oMsg->replysecret != 1) || ($ck_pass)) {
 		$tmpMsg2=($oMsg->reply) ? $oMsg->reply : '';
 		if (($tmpMsg2!='') && ($oMsg->replytime!='')) {
-			$tmpMsg2="<font color=#ab00ac>°æÖ÷»Ø¸´</font> - "
+			$tmpMsg2="<font color=#ab00ac>ç‰ˆä¸»å›å¤</font> - "
 				."<i><FONT color=#777777>$oMsg->replytime</font></i><br>".$tmpMsg2;
 		}
 	} else {
-		$tmpMsg2='ÇÄÇÄ»°»Ø¸´...';
+		$tmpMsg2='æ‚„æ‚„è¯å›å¤...';
 	}
-	$tmpTip2=(($oMsg->replysecret == 1) && ($ck_pass)) ? '<font color=red>&lt;ÇÄÇÄ»°»Ø¸´&gt;</font><BR>' : '';
+	$tmpTip2=(($oMsg->replysecret == 1) && ($ck_pass)) ? '<font color=red>&lt;æ‚„æ‚„è¯å›å¤&gt;</font><BR>' : '';
 	if ($tmpMsg2) { $tmpTip2 = '<BR><BR>'.$tmpTip2; }
 
  // filter content
  if (!$ck_pass) {
-  $tmpMsg1=str_replace('³Âê¿·å', '---', $tmpMsg1);
-  $tmpMsg2=str_replace('³Âê¿·å', '---', $tmpMsg2);
+  $tmpMsg1=str_replace('é™ˆæ˜•å³°', '---', $tmpMsg1);
+  $tmpMsg2=str_replace('é™ˆæ˜•å³°', '---', $tmpMsg2);
  }
 
  // auto detect http link
@@ -477,9 +477,9 @@ EOT;
   :"<br>$oMsg->user<br><br>";
 
  if ($ck_pass) {
-  $cmdLine="<a href=$gburl?action=editform&id=$id&mid=$oMsg->msgid>[ĞŞ¸ÄÁôÑÔ]</a><BR><BR>";
+  $cmdLine="<a href=$gburl?action=editform&id=$id&mid=$oMsg->msgid>[ä¿®æ”¹ç•™è¨€]</a><BR><BR>";
  } elseif (($oMsg->ip == $userip) && (($timestamp-strtotime($oMsg->time))<(3600*12))) {
-  $cmdLine="<a href=$gburl?action=editform&id=$id&mid=$oMsg->msgid>[ĞŞ¸ÄÎÒµÄÁôÑÔ]</a><BR><BR>";
+  $cmdLine="<a href=$gburl?action=editform&id=$id&mid=$oMsg->msgid>[ä¿®æ”¹æˆ‘çš„ç•™è¨€]</a><BR><BR>";
  } else {
   $cmdLine='';
  }
@@ -545,9 +545,9 @@ function JumpTo($url)
  global $oBooks;
 
  print <<<EOT
-<html><head><title>Áô ÑÔ Íê ³É !</title>
+<html><head><title>ç•™ è¨€ å®Œ æˆ !</title>
 <META HTTP-EQUIV="REFRESH" CONTENT="2; URL=$url">
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=gb2312">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=UTF-8">
 <style><!--
 {font-size: 12px;}
 p {font-size:12px;}
@@ -560,9 +560,9 @@ td {font-size:12px;}
 <body><CENTER><br><br><br>
 <table width=335 cellspacing=1 cellpadding=5>
 <tr><td width=100% bgcolor='#ffffff' align=center>
-<span style="font-size: 10.5pt;line-height: 13pt">- Áô ÑÔ Íê ³É -</span><BR></td></tr>
-<tr><td align=center><a href=$url>[ »Ø Áô ÑÔ ²¾ ]</a>&nbsp;&nbsp;&nbsp;<a href=$oBooks->url>[ »Ø µ½ Ö÷ Ò³ ]</a></td></tr>
-</table>2ÃëÖÓºó×Ô¶¯·µ»Ø......<br><br><br>
+<span style="font-size: 10.5pt;line-height: 13pt">- ç•™ è¨€ å®Œ æˆ -</span><BR></td></tr>
+<tr><td align=center><a href=$url>[ å› ç•™ è¨€ ç°¿ ]</a>&nbsp;&nbsp;&nbsp;<a href=$oBooks->url>[ å› åˆ° ä¸» é¡µ ]</a></td></tr>
+</table>2ç§’é’Ÿåè‡ªåŠ¨è¿”å›......<br><br><br>
 </body></html>
 EOT;
 }
@@ -574,7 +574,7 @@ function JumpToEx($url,$msg,$delay)
  print <<<EOT
 <HTML><HEAD>
 <META HTTP-EQUIV="REFRESH" CONTENT="$delay; URL=$url">
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=gb2312">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=UTF-8">
 <title>$oBooks->title</title>
 <style><!--
 a { text-decoration: none; color: rgb(40,40,180) }
@@ -588,7 +588,7 @@ table {font-size:14px;}
 <table width=335 cellspacing=1 cellpadding=5>
 <tr><td align=center>
 $msg<br><br><br>
-$delay ÃëÖÓºó×Ô¶¯Ìø×ª£¬µã»÷ <a href=$url>´Ë´¦</a> Á¢¼´Ìø×ª
+$delay ç§’é’Ÿåè‡ªåŠ¨è·³è½¬ï¼Œç‚¹å‡» <a href=$url>æ­¤å¤„</a> ç«‹å³è·³è½¬
 </td></tr>
 </table>
 </body></html>

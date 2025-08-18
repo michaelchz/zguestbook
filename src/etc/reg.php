@@ -9,7 +9,7 @@ require_once "bin/class_basic_record_file.php";
 require_once "bin/class_book_list.php";
 require_once "bin/class_message_list.php";
 
-// ÒıÈëÄ£°å´¦ÀíÒıÇæ
+// å¼•å…¥æ¨¡æ¿å¤„ç†å¼•æ“
 include(BASEDIR.'/lib/xingTemplate/xingTemplate.php');
 
 // --- Main Begin ---
@@ -18,12 +18,12 @@ define('CSSDIR',BASEDIR."style/");
 define('BTNDIR',BASEDIR."img/");
 
 $oBooks=new CBookList;
-// ¼ì²é²¢½¨Á¢ÁôÑÔ±¾´æ´¢Ä¿Â¼½á¹¹
+// æ£€æŸ¥å¹¶å»ºç«‹ç•™è¨€æœ¬å­˜å‚¨ç›®å½•ç»“æ„
 $oBooks->checkSystem(); //check and create file structures
 $oBooks->open();
 
 if(($reglimit>0)&&($oBooks->getRecordCount()>=$reglimit)){
-	errorview("¶Ô²»Æğ£¬ÒÑ³¬¹ıÏµÍ³Éè¶¨µÄÁôÑÔ°å×¢²áÉÏÏŞ£¬ÎŞ·¨×¢²á£¡");
+	errorview("å¯¹ä¸èµ·ï¼Œå·²è¶…è¿‡ç³»ç»Ÿè®¾å®šçš„ç•™è¨€æ¿æ³¨å†Œä¸Šé™ï¼Œæ— æ³•æ³¨å†Œï¼");
 }
 
 if($action == "regcommit"){
@@ -40,7 +40,7 @@ function regForm()
 {
 	global $prgurl,$gburl,$copyright,$cginame,$cgiurl;
 
-	// ¼ÆËãÅäÉ«Ñ¡ÔñÁĞ±í
+	// è®¡ç®—é…è‰²é€‰æ‹©åˆ—è¡¨
 	$csslist = array();
 	
 	if ($dh = opendir(CSSDIR)) {
@@ -55,7 +55,7 @@ function regForm()
 		closedir($dh);
 	}
 	
-	// ¼ÆËã°´Å¥Ñ¡ÔñÁĞ±í
+	// è®¡ç®—æŒ‰é’®é€‰æ‹©åˆ—è¡¨
 	$btnlist = array();
 	
 	if ($dh = opendir(BTNDIR)) {
@@ -70,7 +70,7 @@ function regForm()
 		closedir($dh);
 	}
 	
-	// Êä³öÄ£°åreg_form
+	// è¾“å‡ºæ¨¡æ¿reg_form
 	global $xingTemplate;
 	$xingTemplate->assign('csslist',$csslist);
 	$xingTemplate->assign('btnlist',$btnlist);
@@ -93,14 +93,14 @@ function regCommit()
 	$f_desc  = stripslashes(str_replace("\r","",$_REQUEST['f_desc']));
 
 	if(($f_pass == "")||($f_name == "")||($f_email == "")||($f_title == "")){
-		errorview("ÏÔÊ¾±êÌâ¡¡Ãû×Ö¡¡ÃÜÂë¡¡ĞÅÏä¡¡±ØĞëÌîĞ´£¬ÇëÖØĞÂÊäÈë£¡");
+		errorview("æ˜¾ç¤ºæ ‡é¢˜ã€€åå­—ã€€å¯†ç ã€€ä¿¡ç®±ã€€å¿…é¡»å¡«å†™ï¼Œè¯·é‡æ–°è¾“å…¥ï¼");
 	}
-	if(!eregi(".*\@.*\..*",$f_email)){errorview("ÄúµÄEmailÊäÈë´íÎó£¡");}
-	if(!eregi("^[_a-zA-Z0-9-]+$",$f_name)){errorview("ÄúµÄ¹ÜÀíÔ±Ãû³Æ°üº¬·Ç·¨×Ö·û£¡");}
-	if(strlen($f_desc) > 400 ){errorview("ÄúµÄ{$cginame}¼ò½é²»ÄÜ´óÓÚ200¸öºº×Ö£¡");}
+	if(!eregi(".*\@.*\..*",$f_email)){errorview("æ‚¨çš„Emailè¾“å…¥é”™è¯¯ï¼");}
+	if(!eregi("^[_a-zA-Z0-9-]+$",$f_name)){errorview("æ‚¨çš„ç®¡ç†å‘˜åç§°åŒ…å«éæ³•å­—ç¬¦ï¼");}
+	if(strlen($f_desc) > 400 ){errorview("æ‚¨çš„{$cginame}ç®€ä»‹ä¸èƒ½å¤§äº200ä¸ªæ±‰å­—ï¼");}
 
 	if(($f_url == "")||($f_url == "http://")){
-		errorview("Ö÷Ò³URL±ØĞëÌîĞ´£¬ÇëÖØĞÂÊäÈë£¡");
+		errorview("ä¸»é¡µURLå¿…é¡»å¡«å†™ï¼Œè¯·é‡æ–°è¾“å…¥ï¼");
 	}
 	if($f_urlname == ""){
 		$f_urlname = $f_url;
@@ -108,7 +108,7 @@ function regCommit()
 
 	$oMsgs=new CMessageList;
 	if(!$oMsgs->create($f_name)){
-		errorview("¶Ô²»Æğ£¬ÓÃ»§ÃûÒÑ±»±ğÈË×¢²á! »»Ò»¸ö°É£¡");
+		errorview("å¯¹ä¸èµ·ï¼Œç”¨æˆ·åå·²è¢«åˆ«äººæ³¨å†Œ! æ¢ä¸€ä¸ªå§ï¼");
 	}
 
 	$regdate=strftime("%Y-%m-%d", time());
@@ -130,20 +130,20 @@ function regCommit()
 	$oBooks->desc    = $f_desc;
 	$oBooks->update();
 	
-	$emsg = "Ç×°®µÄ{$f_name}, ÄúºÃ!\n\n";
-	$emsg .= "¡¡¡¡¹§Ï²! ÄúÒÑ¾­³É¹¦µÄÉêÇëÁË$hostname($hosturl)µÄ{$cginame}ÏµÍ³, ·Ç³£¸ĞĞ»ÄúÊ¹ÓÃ{$hostname}µÄ·şÎñ!\n\n";
-	$emsg .= "¡¡* ÎÒÃÇÃâ·ÑÎªÄúµÄ{$cginame}Ìá¹©ÁËÒ»¸ö±È½ÏºÃ¼ÇµÄµØÖ·,ÇëÄúÊÔÊÔ\n";
+	$emsg = "äº²çˆ±çš„{$f_name}, æ‚¨å¥½!\n\n";
+	$emsg .= "ã€€ã€€æ­å–œ! æ‚¨å·²ç»æˆåŠŸçš„ç”³è¯·äº†$hostname($hosturl)çš„{$cginame}ç³»ç»Ÿ, éå¸¸æ„Ÿè°¢æ‚¨ä½¿ç”¨{$hostname}çš„æœåŠ¡!\n\n";
+	$emsg .= "ã€€* æˆ‘ä»¬å…è´¹ä¸ºæ‚¨çš„{$cginame}æä¾›äº†ä¸€ä¸ªæ¯”è¾ƒå¥½è®°çš„åœ°å€,è¯·æ‚¨è¯•è¯•\n";
 	$emsg .= "URL: $prgurl/$gburl?id=$f_name\n\n";
-	$emsg .= "¡¡* ÄúµÄÕÊºÅÊÇ:{$f_name}¡¡ÃÜÂëÊÇ:$f_pass\n\n";
-	$emsg .= "¡¡* ×îºó, ÓĞ¼¸µã×¢ÒâÊÂÏîÇëÄúÀÎ¼Ç\n";
-	$emsg .= "1¡¢²»µÃÊ¹ÓÃ±¾{$cginame}ÏµÍ³½¨Á¢ÈÎºÎ°üº¬É«Çé¡¢·Ç·¨¡¢ÒÔ¼°Î£º¦¹ú¼Ò°²È«µÄÄÚÈİµÄ{$cginame};\n";
-	$emsg .= "2¡¢²»µÃÔÚ±¾ÏµÍ³ÓÃ»§ËùÓµÓĞµÄ{$cginame}ÄÚ·¢²¼ÈÎºÎÉ«Çé¡¢·Ç·¨¡¢»òÕßÎ£º¦¹ú¼Ò°²È«µÄ{$cginame};\n";
-	$emsg .= "3¡¢ÒÔÉÏ¹æÔòÎ¥ÕßÔğÈÎ×Ô¸º£¬±¾Õ¾ÓĞÈ¨É¾³ı¸ÃÀàÓÃ»§»òÕßÄÚÈİ£¬²¢×·¾¿Æä·¨ÂÉÔğÈÎ¡£\n\n\n";
-	$emsg .= "³ÌĞòÖÆ×÷£ºzChain.com(http://www.zchain.com)\n";
-	$emsg .= "Ãâ·ÑÁôÑÔ²¾·şÎñÓÉ $hostname($hosturl) Ìá¹©\n\n";
-	@mail($f_email, "Subject: {$cginame}ÏµÍ³¿ªÍ¨Í¨Öª£¡", $emsg);
+	$emsg .= "ã€€* æ‚¨çš„å¸å·æ˜¯:{$f_name}ã€€å¯†ç æ˜¯:$f_pass\n\n";
+	$emsg .= "ã€€* æœ€å, æœ‰å‡ ç‚¹æ³¨æ„äº‹é¡¹è¯·æ‚¨ç‰¢è®°\n";
+	$emsg .= "1ã€ä¸å¾—ä½¿ç”¨æœ¬{$cginame}ç³»ç»Ÿå»ºç«‹ä»»ä½•åŒ…å«è‰²æƒ…ã€éæ³•ã€ä»¥åŠå±å®³å›½å®¶å®‰å…¨çš„å†…å®¹çš„{$cginame};\n";
+	$emsg .= "2ã€ä¸å¾—åœ¨æœ¬ç³»ç»Ÿç”¨æˆ·æ‰€æ‹¥æœ‰çš„{$cginame}å†…å‘å¸ƒä»»ä½•è‰²æƒ…ã€éæ³•ã€æˆ–è€…å±å®³å›½å®¶å®‰å…¨çš„{$cginame};\n";
+	$emsg .= "3ã€ä»¥ä¸Šè§„åˆ™è¿è€…è´£ä»»è‡ªè´Ÿï¼Œæœ¬ç«™æœ‰æƒåˆ é™¤è¯¥ç±»ç”¨æˆ·æˆ–è€…å†…å®¹ï¼Œå¹¶è¿½ç©¶å…¶æ³•å¾‹è´£ä»»ã€‚\n\n\n";
+	$emsg .= "ç¨‹åºåˆ¶ä½œï¼šzChain.com(http://www.zchain.com)\n";
+	$emsg .= "å…è´¹ç•™è¨€ç°¿æœåŠ¡ç”± $hostname($hosturl) æä¾›\n\n";
+	@mail($f_email, "Subject: {$cginame}ç³»ç»Ÿå¼€é€šé€šçŸ¥ï¼", $emsg);
 	
-	//×¼±¸Êä³öµÄÁôÑÔ±¾ĞÅÏ¢
+	//å‡†å¤‡è¾“å‡ºçš„ç•™è¨€æœ¬ä¿¡æ¯
 	$bookInfo = array(
 		'title'=>$f_title,
 		'name'=>$f_name,
@@ -153,7 +153,7 @@ function regCommit()
 		'regdate'=>$regdate
 	);
 	
-	// Êä³öÄ£°åreg_form
+	// è¾“å‡ºæ¨¡æ¿reg_form
 	global $xingTemplate;
 	$xingTemplate->assign('bookInfo',$bookInfo);
 	$xingTemplate->display('reg_completed');

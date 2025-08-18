@@ -11,7 +11,7 @@ for($i=0;$i<$rows;$i++){
  for($j=0;$j<$cols;$j++){
   $iconid=$i*$cols+$j+1;
   if($iconid<=$numicon){
-   print "<TD align=center><IMG border='0' src='$imgurl/icon{$iconid}.gif'><br><br>Í·Ïñ{$iconid}</TD>";
+   print "<TD align=center><IMG border='0' src='$imgurl/icon{$iconid}.gif'><br><br>å¤´åƒ{$iconid}</TD>";
   }
  }
  print "</TR>";

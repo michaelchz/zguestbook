@@ -3,7 +3,7 @@
 print <<<EOT
 <table class="copyright">
   <tr> 
-    <td>°æÈ¨ËùÓĞ &copy; 2003, zChain.com ±£ÁôËùÓĞÈ¨Àû</td>
+    <td>ç‰ˆæƒæ‰€æœ‰ &copy; 2003, zChain.com ä¿ç•™æ‰€æœ‰æƒåˆ©</td>
   </tr>
 </table>
 </body>
