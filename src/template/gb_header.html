@@ -1,15 +1,15 @@
 <HTML><HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="style/{$OPTS[css]}">
+<link rel="stylesheet" type="text/css" href="style/{$OPTS['css']}">
 <script language="javascript" src="bin/gb.js"></script>
-<title>{$bookInfo[title]}</title>
+<title>{$bookInfo['title']}</title>
 </HEAD>
 
 <BODY class="book">
-{$bookInfo[htmlt]}
+{$bookInfo['htmlt']}
 
 <DIV ID="passForm" align="center" class="manageForm">
-<form method=post action="{$gburl}?action=login&id={$bookInfo[id]}">
+<form method=post action="{$gburl}?action=login&id={$bookInfo['id']}">
 <table cellspacing=1 bgcolor=#000000 cellpadding=3>
 <tr><td width=100% bgcolor=#F0F0F0 align=center>
 输入管理密码：<input type=password class="plainInput" name=f_pass size=15><br><br>
@@ -23,28 +23,28 @@
 <TABLE ID="simpForm" cellPadding=0 cellSpacing=1 width=100% class="msgForm">
 <TR><TD>
  <TABLE border=0 width="100%" class="msgFormCaption">
- <TR><TD>&gt;&gt;&gt; <a href="{$bookInfo[url]}">{$bookInfo[urlname]}</a>
- &gt;&gt; <a href="$gburl?id=$id">{$bookInfo[title]}</a></TD>
+ <TR><TD>&gt;&gt;&gt; <a href="{$bookInfo['url']}">{$bookInfo['urlname']}</a>
+ &gt;&gt; <a href="$gburl?id=$id">{$bookInfo['title']}</a></TD>
  <TD align=right>
   <a onclick='showDlg(); return false;' href='#'>[管理]</a>
-  <a target="_blank" href="/?op=regedit">[修改]</a>
-  <a target=_blank href="/?op=reg">[申请]</a>
+  <a target="_blank" href="./?op=regedit">[修改]</a>
+  <a target=_blank href="./?op=reg">[申请]</a>
   <a href="#" onclick="showForm(1);return false;">&darr;[留言]</a>
  </TD></TR></TABLE>
 </TD></TR>
 </TABLE>
 
-<FORM NAME="signForm" ACTION="{$gburl}?id={$bookInfo[id]}" METHOD="post" onsubmit="validate_signForm();">
+<FORM NAME="signForm" ACTION="{$gburl}?id={$bookInfo['id']}" METHOD="post" onsubmit="validate_signForm();">
 <input type="hidden" name="action" value="addmsg">
 <TABLE ID="fullForm" cellPadding=0 cellSpacing=1 width=100% class="msgForm">
 <TR><TD>
  <TABLE border=0 width="100%" class="msgFormCaption">
- <TR><TD align=left vAlign=center>&gt;&gt;&gt; <a href="{$bookInfo[url]}">{$bookInfo[urlname]}</a>
- &gt;&gt; <a href="{$gburl}?id={$bookInfo[id]}">{$bookInfo[title]}</a></TD>
+ <TR><TD align=left vAlign=center>&gt;&gt;&gt; <a href="{$bookInfo['url']}">{$bookInfo['urlname']}</a>
+ &gt;&gt; <a href="{$gburl}?id={$bookInfo['id']}">{$bookInfo['title']}</a></TD>
  <TD align=right class=fgfont vAlign=center>
   <a onclick='showDlg(); return false;' href='#'>[管理]</a>
-  <a target="_blank" href="/?op=regedit">[修改]</a>
-  <a target=_blank href="/?op=reg">[申请]</a>
+  <a target="_blank" href="./?op=regedit">[修改]</a>
+  <a target=_blank href="./?op=reg">[申请]</a>
   <a href="#" onclick="showForm(0);return false;">&uarr;[留言]</a>
 </TD></TR></TABLE></TD></TR>
 <TR><TD vAlign=top width="50%">
@@ -53,21 +53,21 @@
   <TABLE class="msgFormBody">
   <TR><TD><IMG src="{$btnurl}/name.gif" width=16 height=16></TD>
   <TD>姓名</TD>
-  <TD colspan="2"><INPUT class=plainInput maxLength=20 name=f_user value="{$formVal[user]}" onmouseover="set_at_end(this);"> *</TD></TR>
+  <TD colspan="2"><INPUT class=plainInput maxLength=20 name=f_user value="{$formVal['user']}" onmouseover="set_at_end(this);"> *</TD></TR>
   <TR><TD><IMG border=0 src="{$btnurl}/email.gif" width=16 height=16></TD>
   <TD>Email</TD>
-  <TD colspan="2"><INPUT class=plainInput maxLength=40 name=f_email value="{$formVal[email]}"  size=28 onmouseover="set_at_end(this);"></TD></TR>
+  <TD colspan="2"><INPUT class=plainInput maxLength=40 name=f_email value="{$formVal['email']}"  size=28 onmouseover="set_at_end(this);"></TD></TR>
   <TR><TD><IMG border=0 src="{$btnurl}/home.gif" width=16 height=16></TD>
   <TD>主页</TD>
-  <TD colspan="2"><INPUT class=plainInput maxLength=40 name=f_url value="{$formVal[url]}" value="http://" size=28 onmouseover="set_at_end(this);"></TD></TR>
+  <TD colspan="2"><INPUT class=plainInput maxLength=40 name=f_url value="{$formVal['url']}" value="http://" size=28 onmouseover="set_at_end(this);"></TD></TR>
   <TR><TD><IMG border=0 src="{$btnurl}/private.gif" width=16 height=16></TD>
   <TD>悄悄话</TD>
   <TD><INPUT name=f_secret type=radio value=1>是 <INPUT CHECKED name=f_secret type=radio value=0>否</TD>
 
 <!-- icon list part -->
 {if $OPTS['useicon']}
-  {if $formVal[icon]}
-    <TD rowspan=2> <IMG id=idface src='{$imgurl}/icon{$formVal[icon]}.gif' height=48 width=48>
+  {if $formVal['icon']}
+    <TD rowspan=2> <IMG id=idface src='{$imgurl}/icon{$formVal['icon']}.gif' height=48 width=48>
   {else}
     <TD rowspan=2> <IMG id=idface src='{$imgurl}/icon1.gif' height=48 width=48>
   {/if}
@@ -78,7 +78,7 @@
   <TD>选头像</TD><TD><SELECT class=plainInput name=f_icon size=1
    onChange="document.images['idface'].src='{$imgurl}/icon'+options[selectedIndex].value+'.gif';">
   {for $i=1;$i<=$OPTS['numicon'];$i++}
-    {if $formVal[icon] == $i}
+    {if $formVal['icon'] == $i}
       <OPTION value={$i} selected>头像{$i}</OPTION>
     {else}
       <OPTION value={$i}>头像{$i}</OPTION>
@@ -100,14 +100,14 @@
     onKeyUp="count_char(this,this.form.used);"></TEXTAREA>
    <BR>
 请输入右图中的验证码：<INPUT class=plainInput size=10 name=f_authcode>
-<img src=authimg.php?authcode={$authcode} align=absbottom>
+<img src=./authimg.php?authcode={$authcode} align=absbottom>
 <input type=hidden name=f_authmd5 value={$authmd5}>
   </TD></TR></TABLE>
  </TD></TR>
  <TR><TD>
   <TABLE align=center border=0 cellPadding=0 cellSpacing=0 width="100%" class="msgFormCaption">
   <TR><TD align=center>
-{if $formVal[save]}
+{if $formVal['save']}
   <INPUT name=f_save type=checkbox value=1 CHECKED>保存我的信息
 {else}
   <INPUT name=f_save type=checkbox value=1>保存我的信息
@@ -118,5 +118,5 @@
   </TD></TR></TABLE>
 </TD></TR></TABLE></FORM>
 <script language=JavaScript>
-var disp=get_cookie("disp"); if(disp=="")disp={$OPTS[showdlg]};
+var disp=get_cookie("disp"); if(disp=="")disp={$OPTS['showdlg']};
 showForm(disp);</script>

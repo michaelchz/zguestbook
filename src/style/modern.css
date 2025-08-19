@@ -91,7 +91,7 @@ BODY.book
     FONT-SIZE: 12px;
     COLOR: #000000;
     BACKGROUND-COLOR: #ffffff;
-    TEXT-ALIGN: left
+    TEXT-ALIGN: center
 }
 .bookFrame
 {
@@ -99,7 +99,8 @@ BODY.book
     COLOR: #000000;
     POSITION: relative;
     BACKGROUND-COLOR: #ffffff;
-    TEXT-ALIGN: center
+    TEXT-ALIGN: left;
+    margin: 0 auto;
 }
 .manageForm
 {

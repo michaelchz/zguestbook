@@ -244,7 +244,7 @@ EOT;
   </TD></TR></TABLE>
 </TD></TR></TABLE></FORM>
 <script language=JavaScript>
-var disp=get_cookie("disp"); if(disp=="")disp=$OPTS['showdlg'];
+var disp=get_cookie("disp"); if(disp==="" )disp={$OPTS['showdlg']};
 showForm(disp);</script>
 EOT;
 	}

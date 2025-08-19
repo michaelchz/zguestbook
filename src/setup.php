@@ -28,7 +28,7 @@ $admpass   = "zc123456";        # 站长密码
 $hostname  = "zChain留言本服务";  # 主页名称
 $hosturl   = "http://gb.zchain.com"; # 主页地址
 
-$imgurl    = "/img";       # 图片位置(后面不要加"/")
+$imgurl    = "img";       # 图片位置(后面不要加"/")
 $prgurl    =  myurl();      # 程序文件的 URL路径(后面不要加"/") myurl()=自动探测
 $filepath  = "./.zdb_dev_path";     # 数据文件的物理路径(后面不要加"/")
 

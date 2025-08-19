@@ -38,6 +38,11 @@ timer_start();
 ob_start();
 
 require "setup.php";
+if (isset($_REQUEST['page'])) {
+    $page = $_REQUEST['page'];
+} else {
+    $page = '';
+}
 require "bin/class_basic_record_file.php";
 require "bin/class_book_list.php";
 require "bin/class_message_list.php";
@@ -56,7 +61,7 @@ if (($timestamp-$upstp) > (3600*24*7)){
 */
 $notice = '';
 
-$id = $_REQUEST['id'];
+$id = isset($_REQUEST['id']) ? $_REQUEST['id'] : '';
 $id = str_replace(".","",$id);
 if ($id == "") {errorview("未指定id！");exit;}
 
@@ -75,21 +80,40 @@ $id=htmlspecialchars($id);
 $oBooks->title=htmlspecialchars($oBooks->title);
 
 // admin authorization
-switch ($_REQUEST['action']) {
+$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
+$f_pass = isset($_REQUEST['f_pass']) ? $_REQUEST['f_pass'] : '';
+$ck_pass_cookie = isset($_COOKIE['ck_pass']) ? $_COOKIE['ck_pass'] : '';
+
+switch ($action) {
 	case 'logout':	$ck_pass = ""; break;
-	case 'login':	$ck_pass = $_REQUEST['f_pass']; break;
-	default:	$ck_pass = ($_REQUEST['f_pass']) ? $_REQUEST['f_pass'] : $_COOKIE['ck_pass']; break;
+	case 'login':	$ck_pass = $f_pass; break;
+	default:	$ck_pass = ($f_pass) ? $f_pass : $ck_pass_cookie; break;
 }
 if (!validpass($ck_pass,$oBooks->pass)){ $ck_pass = ""; }
 setcookie("ck_pass",$ck_pass);
 setcookie("ck_supported",'true');
 
+if (isset($_REQUEST['f_comment'])) {
+    $f_comment = $_REQUEST['f_comment'];
+} else {
+    $f_comment = '';
+}
 $rawcomment=stripslashes($f_comment);
 $f_comment=htmlspecialchars($f_comment);
 $f_comment=stripslashes($f_comment);
 $f_comment=str_replace("\t","--",$f_comment);
 $f_comment=str_replace("\n","<br>",$f_comment);
 $f_comment=str_replace("\r","",$f_comment);
+
+// Populate form variables for AddMessage function
+$f_user = $_REQUEST['f_user'] ?? '';
+$f_email = $_REQUEST['f_email'] ?? '';
+$f_url = $_REQUEST['f_url'] ?? '';
+$f_secret = $_REQUEST['f_secret'] ?? '';
+$f_icon = $_REQUEST['f_icon'] ?? '';
+$f_save = $_REQUEST['f_save'] ?? '';
+$f_authcode = $_REQUEST['f_authcode'] ?? '';
+$f_authmd5 = $_REQUEST['f_authmd5'] ?? '';
 
 //
 // 准备各功能需要的全局环境
@@ -105,7 +129,7 @@ $context = array(
 	'page'=>$page
 );
 
-$_SESSION['action'] = $_REQUEST['action'];
+$_SESSION['action'] = $action;
 switch ($_SESSION['action']) {
 	case 'addmsg':
 		AddMessage($id); JumpTo("$gburl?id=$id");
@@ -134,7 +158,7 @@ switch ($_SESSION['action']) {
 	case 'login':
 		if (!$ck_pass) {
 			$msg = "登录失败！"; $delay = 2; 
-		} elseif (!$_COOKIE['ck_supported']) {
+		} elseif (!isset($_COOKIE['ck_supported']) || !$_COOKIE['ck_supported']) {
 			$msg = '登录失败！（浏览器不支持Cookie，管理选项无法激活!）'; $delay = 5;
 		} else {
 			$msg = "版主登录成功，所有管理选项已激活！"; $delay = 1;
@@ -321,8 +345,8 @@ $oBooks->htmlt
  &gt;&gt; <a href="$gburl?id=$id">$oBooks->title</a></TD>
  <TD align=right>
   $mgrPrompt
-  <a target="_blank" href="/?op=regedit">[修改]</a>
-  <a target=_blank href="/?op=reg">[申请]</a>
+  <a target="_blank" href="./?op=regedit">[修改]</a>
+  <a target=_blank href="./?op=reg">[申请]</a>
   <a href="#" onclick="showForm(1);return false;">&darr;[留言]</a>
  </TD></TR></TABLE>
 </TD></TR>
@@ -337,8 +361,8 @@ $oBooks->htmlt
  &gt;&gt; <a href="$gburl?id=$id">$oBooks->title</a></TD>
  <TD align=right class=fgfont vAlign=center>
  $mgrPrompt
- <a target="_blank" href="/?op=regedit">[修改]</a>
- <a target=_blank href="/?op=reg">[申请]</a>
+ <a target="_blank" href="./?op=regedit">[修改]</a>
+ <a target=_blank href="./?op=reg">[申请]</a>
  <a href="#" onclick="showForm(0);return false;">&uarr;[留言]</a>
 </TD></TR></TABLE></TD></TR>
 <TR><TD vAlign=top width="50%">
@@ -389,7 +413,7 @@ EOT;
     onKeyUp="count_char(this,this.form.used);"></TEXTAREA>
    <BR>
 请输入右图中的验证码：<INPUT class=plainInput size=10 name=f_authcode>
-<img src=authimg.php?authcode=$authcode align=absbottom>
+<img src=./authimg.php?authcode=$authcode align=absbottom>
 <input type=hidden name=f_authmd5 value=$authmd5>
   </TD></TR></TABLE>
  </TD></TR>
@@ -608,11 +632,11 @@ function SetFormCookie($formMsg)
 
 function GetFormCookie(&$formMsg)
 {
-	$formMsg->user = $_COOKIE['zgb_user'];
-	$formMsg->email = $_COOKIE['zgb_email'];
-	$formMsg->url = $_COOKIE['zgb_url'];
-	$formMsg->icon = $_COOKIE['zgb_icon'];
-	$formMsg->save = $_COOKIE['zgb_save'];
+	$formMsg->user = isset($_COOKIE['zgb_user']) ? $_COOKIE['zgb_user'] : '';
+	$formMsg->email = isset($_COOKIE['zgb_email']) ? $_COOKIE['zgb_email'] : '';
+	$formMsg->url = isset($_COOKIE['zgb_url']) ? $_COOKIE['zgb_url'] : '';
+	$formMsg->icon = isset($_COOKIE['zgb_icon']) ? $_COOKIE['zgb_icon'] : '';
+	$formMsg->save = isset($_COOKIE['zgb_save']) ? $_COOKIE['zgb_save'] : '';
 }
 
 ?>
