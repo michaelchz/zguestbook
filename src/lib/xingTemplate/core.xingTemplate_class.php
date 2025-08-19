@@ -493,7 +493,7 @@ class xingTemplate
 		$xingTemplate_Replace[] = '<?php }else if (\\2){ ?>';
 		$xingTemplate_Replace[] = '<?php for (\\1) { ?>';
 		$xingTemplate_Replace[] = '<?php while (\\1) { ?>';
-		$xingTemplate_Replace[] = '<?php foreach ((array)\\2) { $__i++; ?>';
+		$xingTemplate_Replace[] = '<?php $__i = 0; foreach ((array)\2) { $__i++; ?>';
 		$xingTemplate_Replace[] = '<?php if (\\1){ ?>';
 		$xingTemplate_Replace[] = '<?php }else{ ?>';
 		$xingTemplate_Replace[] = '<?php \\3; ?>';
