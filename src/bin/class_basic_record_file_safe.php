@@ -22,6 +22,21 @@ class CBasicRecordFileSafe {
  private $_curId=NULLPTR, $_ptrPrev=NULLPTR, $_ptrNext=NULLPTR;
  public $recordBuffer;
 
+ // Helper function to convert to UTF-8 with encoding detection
+ private function convert_to_utf8_with_detection($str) {
+  // If mbstring is not available, or if the string is already valid UTF-8, return as is.
+  // mb_detect_encoding is not always reliable, so we'll prioritize mb_check_encoding.
+  if (function_exists('mb_check_encoding') && mb_check_encoding($str, 'UTF-8')) {
+   return $str;
+  }
+  // Otherwise, assume GBK and convert.
+  if (function_exists('mb_convert_encoding')) {
+   return mb_convert_encoding($str, 'UTF-8', 'GBK');
+  }
+  // Fallback if mbstring is not available
+  return $str;
+ }
+
  function _explodeRecord($a_line){}
  function _composeRecord(&$a_line){}
  function _compareRecord($a_key){/*return true/false*/}
@@ -123,7 +138,7 @@ class CBasicRecordFileSafe {
   if($buf[PTR_SIZE*2]=="\x07"){
    $a_ptrPrev=substr($buf,0,PTR_SIZE);
    $a_ptrNext=substr($buf,PTR_SIZE,PTR_SIZE);
-   $a_buf=substr($buf,PTR_SIZE*2+1);
+   $a_buf=$this->convert_to_utf8_with_detection(substr($buf,PTR_SIZE*2+1));
    return true;
   }else{
    return false;
@@ -164,7 +179,8 @@ class CBasicRecordFileSafe {
  function readMemo(){
   rewind($this->_fp);
   fseek($this->_fp, HEADER_SIZE);
-  return fread($this->_fp, $this->_recSize);
+  $memo_content = fread($this->_fp, $this->_recSize);
+  return $this->convert_to_utf8_with_detection($memo_content); // Convert to UTF-8
  }
 
  function writeMemo($a_buf){
