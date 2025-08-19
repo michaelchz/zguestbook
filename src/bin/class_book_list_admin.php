@@ -25,7 +25,7 @@ class CBookListAdmin extends CBookList {
 			//访问文件错误,未获取更新时间
 			$this->uptime='N/A';
 		} else {
-			$this->uptime=strftime("%Y-%m-%d", $this->uptime);
+			$this->uptime=date("Y-m-d", $this->uptime);
 		}
 	}
 

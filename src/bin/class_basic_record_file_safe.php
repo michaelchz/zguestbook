@@ -40,10 +40,10 @@ class CBasicRecordFile {
   fseek($this->_fp, 0); fwrite($this->_fp, str_pad($buf,HEADER_SIZE), HEADER_SIZE);
  }
 
- function _readPointer($a_recId, $a_offset){
+ function _readPointer($a_recId, $a_offset, &$a_ptrVal){
   rewind($this->_fp);
   fseek($this->_fp, $a_recId*$this->_recSize+HEADER_SIZE+$a_offset*PTR_SIZE);
-  return fread($this->_fp, PTR_SIZE);
+  $a_ptrVal=fread($this->_fp, PTR_SIZE);
  }
 
  function _writePointer($a_recId, $a_offset, $a_ptrVal){
@@ -55,7 +55,7 @@ class CBasicRecordFile {
  function _allocSegment(){
   if($this->_ptrFree > NULLPTR){
    $ptrNew=$this->_ptrFree;
-   $this->_ptrFree = $this->_readPointer($ptrNew, 0);
+   $this->_readPointer($ptrNew, 0, $this->_ptrFree);
   }else{
    $ptrNew=$this->_segNum+1;
    $this->_writePointer($ptrNew, 0, NULLPTR);
@@ -81,7 +81,7 @@ class CBasicRecordFile {
   $ptrSeg=$a_idx; $rest=$a_size;
   do{
    $lastSeg=$ptrSeg; $rest-=$size;
-   $ptrSeg = $this->_readPointer($lastSeg, 0);
+   $this->_readPointer($lastSeg, 0, $ptrSeg);
   }while($rest > 0 && $ptrSeg > NULLPTR);
   if($rest>0){
    $ptrSeg=$this->_allocSegmentList($rest);
@@ -97,23 +97,21 @@ class CBasicRecordFile {
   $ptrSeg=$a_idx;
   do {
    $lastSeg=$ptrSeg; $this->_segNum--;
-   $ptrSeg = $this->_readPointer($lastSeg, 0);
+   $this->_readPointer($lastSeg, 0, $ptrSeg);
   }while($ptrSeg > NULLPTR);
   $this->_writePointer($lastSeg, 0, $this->_ptrFree);
   $this->_ptrFree=$a_idx;
  }
 
- function _readRecordPointer($a_recId){
+ function _readRecordPointer($a_recId, &$a_ptrPrev, &$a_ptrNext){
   rewind($this->_fp);
   fseek($this->_fp, $a_recId * $this->_recSize + HEADER_SIZE);
   $buf=fread($this->_fp, PTRFIELD_SIZE);
-  return [
-   'ptrPrev' => substr($buf,PTR_SIZE,PTR_SIZE),
-   'ptrNext' => substr($buf,PTR_SIZE*2)
-  ];
+  $a_ptrPrev=substr($buf,PTR_SIZE,PTR_SIZE);
+  $a_ptrNext=substr($buf,PTR_SIZE*2);
  }
 
- function _readRecord($a_recId){
+ function _readRecord($a_recId, &$a_ptrPrev, &$a_ptrNext, &$a_buf){
   $buf=""; $ptrSeg=$a_recId;
   do {
    rewind($this->_fp);
@@ -123,11 +121,10 @@ class CBasicRecordFile {
    $buf.=substr($segBuf,PTR_SIZE);
   } while ($ptrSeg > NULLPTR);
   if($buf[PTR_SIZE*2]=="\x07"){
-   return [
-    'ptrPrev' => substr($buf,0,PTR_SIZE),
-    'ptrNext' => substr($buf,PTR_SIZE,PTR_SIZE),
-    'buf' => substr($buf,PTR_SIZE*2+1)
-   ];
+   $a_ptrPrev=substr($buf,0,PTR_SIZE);
+   $a_ptrNext=substr($buf,PTR_SIZE,PTR_SIZE);
+   $a_buf=substr($buf,PTR_SIZE*2+1);
+   return true;
   }else{
    return false;
   }
@@ -145,7 +142,7 @@ class CBasicRecordFile {
    rewind($this->_fp);
    fseek($this->_fp, $ptrSeg * $this->_recSize + HEADER_SIZE + PTR_SIZE);
    fwrite($this->_fp, $tmpbuf, $this->_recSize-PTR_SIZE);
-   $ptrSeg = $this->_readPointer($ptrSeg, 0);
+   $this->_readPointer($ptrSeg, 0, $ptrSeg);
   }while ($buf && $ptrSeg > NULLPTR);
  }
 
@@ -193,11 +190,7 @@ class CBasicRecordFile {
 
  function setAbsolutePosition($a_idx) {
   if(!$this->_validateRecord($a_idx)){return false;}
-  $recordData = $this->_readRecord($a_idx);
-  if($recordData){
-   $this->_ptrPrev = $recordData['ptrPrev'];
-   $this->_ptrNext = $recordData['ptrNext'];
-   $this->recordBuffer = $recordData['buf'];
+  if($this->_readRecord($a_idx, $this->_ptrPrev, $this->_ptrNext, $this->recordBuffer)){
    $this->_curId=$a_idx;
    $this->_explodeRecord($this->recordBuffer);
    return true;
@@ -210,9 +203,7 @@ class CBasicRecordFile {
   $tmpIdx=($a_forward) ? $this->_ptrHead : $this->_ptrTail;
   $count=0;
   while(($count<$a_offset)&&($tmpIdx>NULLPTR)){
-   $pointers = $this->_readRecordPointer($tmpIdx);
-   $tmpPrev = $pointers['ptrPrev'];
-   $tmpNext = $pointers['ptrNext'];
+   $this->_readRecordPointer($tmpIdx,$tmpPrev,$tmpNext);
    $tmpIdx=($a_forward) ? $tmpNext : $tmpPrev;
    $count++;
   }

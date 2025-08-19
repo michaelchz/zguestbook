@@ -31,7 +31,7 @@ function gb_edit_form($oBooks,$oMsgs,$id,$mid) {
 		exit;
 	}
 
-	$sturl="$imgurl/$OPTS[btn]";
+	$sturl="$imgurl/{$OPTS['btn']}";
 	
 	$check_1 = ($oMsgs->secret) ? 'checked' : '';
 	$check_2 = ($oMsgs->secret) ? '' : 'checked';
@@ -42,7 +42,7 @@ function gb_edit_form($oBooks,$oMsgs,$id,$mid) {
 <HEAD>
 <TITLE>$oBooks->title【编辑留言】</TITLE>
 <META content="text/html; charset=UTF-8" http-equiv=Content-Type>
-<link rel="stylesheet" type="text/css" href="style/$OPTS[css]">
+<link rel="stylesheet" type="text/css" href="style/{$OPTS['css']}">
 <script language="javascript" src="bin/gb.js"></script>
 </HEAD>
 
@@ -125,7 +125,7 @@ EOT;
 
 }
 
-function gb_edit_commit(&$oBooks, &$oMsgs){
+function gb_edit_commit($oBooks, $oMsgs){
 	global $thistime;
 
 	if($_POST['f_user'] == ""){errorview("姓名不能为空！");exit;}
@@ -134,7 +134,7 @@ function gb_edit_commit(&$oBooks, &$oMsgs){
 	if(strlen($comment) > 2000 ){errorview("留言内容不能大于1000个汉字！");exit;}
 	$email=$_POST['f_email'];
 	if($email != ""){
-		if(!eregi(".*\@.*\..*",$email)){errorview("Email格式错误！");exit;}
+		if(!preg_match("/.*\@.*\..*/i",$email)){errorview("Email格式错误！");exit;}
 	}
 
 	$comment=htmlspecialchars($comment);

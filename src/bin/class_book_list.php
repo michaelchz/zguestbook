@@ -9,10 +9,10 @@ if (!defined('SP1')){ define('SP1',"\x07"); }
 else { (SP1 == "\x07") or die('CBookList: Incompatible constant SP1'); }
 
 class CBookList extends CBasicRecordFile {
- var $name='',$pass='',$email='',$url='',$title='',$urlname='';
- var $regtime='',$htmlt='',$htmlb='',$desc='',$flags='',$_opts=array();
+ public $name='',$pass='',$email='',$url='',$title='',$urlname='';
+ public $regtime='',$htmlt='',$htmlb='',$desc='',$flags='',$_opts=array();
 
- function _explodeRecord($a_line){
+ private function _explodeRecord($a_line){
   $tmp='';
   list($this->name,$this->pass,$this->email,$this->url,$this->title,$this->urlname,
        $this->regtime,$this->htmlt,$this->htmlb,$this->desc,$this->flags,$tmp)
@@ -20,28 +20,28 @@ class CBookList extends CBasicRecordFile {
   $this->_opts=explode(SP1,$tmp);
  }
 
- function _composeRecord($a_line){
+ private function _composeRecord($a_line){
   $tmp=implode(SP1,$this->_opts);
   $a_line=$this->name.SP.$this->pass.SP.$this->email.SP.$this->url.SP.$this->title
     .SP.$this->urlname.SP.$this->regtime.SP.$this->htmlt.SP.$this->htmlb.SP
     .$this->desc.SP.$this->flags.SP.$tmp.SP;
  }
 
- function _compareRecord($a_key){
+ private function _compareRecord($a_key){
   return ($this->name==$a_key);
  }
 
- function create(){
+ public function create(){
   global $filepath;
   return parent::createFile("$filepath/book.lst",256);  
  }
 
- function open(){
+ public function open(){
   global $filepath;
   return parent::open("$filepath/book.lst");  
  }
 
- function checkSystem(){
+ public function checkSystem(){
   global $filepath;
 
   if (!file_exists($filepath)) mkdir("$filepath",0777);
@@ -50,7 +50,7 @@ class CBookList extends CBasicRecordFile {
   }
  }
 
- function getOptions(&$opts){
+ public function getOptions(&$opts){
   if ($this->_opts[0] != '') $opts['timesft'] = $this->_opts[0]; # time-zone shift, hours
   if ($this->_opts[1] != '') $opts['perpage'] = $this->_opts[1]; # msg per page
   if ($this->_opts[2] != '') $opts['notify']  = $this->_opts[2]; # email notify, 1-enable; 0-diable
@@ -61,7 +61,7 @@ class CBookList extends CBasicRecordFile {
   if ($this->_opts[7] != '') $opts['btn']   = $this->_opts[7];   # button style
  }
 
- function setOptions($opts){
+ public function setOptions($opts){
   $this->_opts[0] = $opts['timesft'];
   $this->_opts[1] = $opts['perpage'];
   $this->_opts[2] = $opts['notify'];

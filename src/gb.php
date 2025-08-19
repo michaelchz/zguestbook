@@ -459,12 +459,6 @@ EOT;
 	$tmpTip2=(($oMsg->replysecret == 1) && ($ck_pass)) ? '<font color=red>&lt;悄悄话回复&gt;</font><BR>' : '';
 	if ($tmpMsg2) { $tmpTip2 = '<BR><BR>'.$tmpTip2; }
 
- // filter content
- if (!$ck_pass) {
-  $tmpMsg1=str_replace('陈昕峰', '---', $tmpMsg1);
-  $tmpMsg2=str_replace('陈昕峰', '---', $tmpMsg2);
- }
-
  // auto detect http link
  $pattern = "(http|https|ftp):(\/\/|\\\\\\\\)[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*"
    ."((\/|\\\\)[~_a-zA-Z0-9-]+)*(\.[~_a-zA-Z0-9-]+(#[~_a-zA-Z0-9-]+){0,1}){0,1}"

@@ -10,8 +10,8 @@ class CShowBookController {
 
 	function execute($context) {
 
-		$this->xingTemplate = $context[xingTemplate];
-		$this->showBook($context[id],"",$context[page]);
+		$this->xingTemplate = $context['xingTemplate'];
+		$this->showBook($context['id'],"",$context['page']);
 
 	}
 
@@ -42,9 +42,9 @@ class CShowBookController {
 		for($i=$firstitem; $i<$lastitem; $i++) {
 			if($keyword){
 				$oMsgs->setAbsolutePosition($lines[$i]);
-				$this->printMessage($size-$i, &$oMsgs, $keyword, $page);
+				$this->printMessage($size-$i, $oMsgs, $keyword, $page);
 			}else{
-				$this->printMessage($size-$i, &$oMsgs, $keyword, $page);
+				$this->printMessage($size-$i, $oMsgs, $keyword, $page);
 				if($i<($lastitem-1)){$oMsgs->movePrev();}
 			}
 		}
@@ -83,7 +83,7 @@ EOT;
 		global $imgurl,$gburl,$OPTS,$id,$oBooks,$ck_pass;
 
 		// generate authcode, store it to session to be used by authimg.php
-		srand((double)microtime()*1000000);
+		
 		while(($authcode=rand()%10000)<1000);
 		$_SESSION['authcode'] = $authcode;
 		$authmd5 = md5($authcode);
@@ -112,7 +112,7 @@ EOT;
 		$xingTemplate = $this->xingTemplate;		
 		$xingTemplate->assign('authcode',$authcode);
 		$xingTemplate->assign('authmd5',$authmd5);
-		$xingTemplate->assign('btnurl',"$imgurl/$OPTS[btn]");
+		$xingTemplate->assign('btnurl',"$imgurl/{$OPTS['btn']}");
 		$xingTemplate->assign('OPTS',$OPTS);
 		$xingTemplate->assign('formVal',$formVal);
 		$xingTemplate->assign('bookInfo',$bookInfo);
@@ -125,12 +125,12 @@ EOT;
 		global $imgurl,$gburl,$OPTS,$id,$oBooks,$ck_pass;
 
 		// generate authcode, store it to session to be used by authimg.php
-		srand((double)microtime()*1000000);
+		
 		while(($authcode=rand()%10000)<1000);
 		$_SESSION['authcode'] = $authcode;
 		$authmd5 = md5($authcode);
 
-		$sturl="$imgurl/$OPTS[btn]";
+		$sturl="$imgurl/{$OPTS['btn']}";
 
 		$oFormMsg = new CFormMessage();
 		GetFormCookie($oFormMsg);
@@ -244,7 +244,7 @@ EOT;
   </TD></TR></TABLE>
 </TD></TR></TABLE></FORM>
 <script language=JavaScript>
-var disp=get_cookie("disp"); if(disp=="")disp=$OPTS[showdlg];
+var disp=get_cookie("disp"); if(disp=="")disp=$OPTS['showdlg'];
 showForm(disp);</script>
 EOT;
 	}
@@ -252,7 +252,7 @@ EOT;
 	function printMessage($msgNo, $oMsg, $keyword, $page) {
 		global $imgurl,$id,$gburl,$ck_pass,$OPTS,$userip,$timestamp;
 
-		$sturl="$imgurl/$OPTS[btn]";
+		$sturl="$imgurl/{$OPTS['btn']}";
 
 		$urluser=urlencode($oMsg->user);
 
@@ -301,18 +301,12 @@ EOT;
 		$tmpTip2=(($oMsg->replysecret == 1) && ($ck_pass)) ? '<font color=red>&lt;悄悄话回复&gt;</font><BR>' : '';
 		if ($tmpMsg2) { $tmpTip2 = '<BR><BR>'.$tmpTip2; }
 
-		// filter content
-		if (!$ck_pass) {
-			$tmpMsg1=str_replace('陈昕峰', '---', $tmpMsg1);
-			$tmpMsg2=str_replace('陈昕峰', '---', $tmpMsg2);
-		}
-
 		// auto detect http link
-		$pattern = "(http|https|ftp):(\/\/|\\\\\\\\)[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*"
+		$pattern = "/(http|https|ftp):(\/\/|\\\\\\\\)[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*"
 		."((\/|\\\\)[~_a-zA-Z0-9-]+)*(\.[~_a-zA-Z0-9-]+(#[~_a-zA-Z0-9-]+){0,1}){0,1}"
-		."((\/|\\\\)|(\?[~_a-zA-Z0-9-]+=[~_a-zA-Z0-9-]+(\&amp;[~_a-zA-Z0-9-]+=[~_a-zA-Z0-9-]+)*)){0,1}";
-		$tmpMsg1 = eregi_replace($pattern, " <a href='\\0' target=_blank>\\0</a> ", $tmpMsg1);
-		$tmpMsg2 = eregi_replace($pattern, " <a href='\\0' target=_blank>\\0</a> ", $tmpMsg2);
+		."((\/|\\\\)|(\?[~_a-zA-Z0-9-]+=[~_a-zA-Z0-9-]+(\&amp;[~_a-zA-Z0-9-]+=[~_a-zA-Z0-9-]+)*)){0,1}/i";
+		$tmpMsg1 = preg_replace($pattern, " <a href='\\0' target=_blank>\\0</a> ", $tmpMsg1);
+		$tmpMsg2 = preg_replace($pattern, " <a href='\\0' target=_blank>\\0</a> ", $tmpMsg2);
 
 		$userMsg=($OPTS['useicon']==1)?
   "$oMsg->user<br><img border=0 src='$imgurl/icon{$oMsg->icon}.gif'>"

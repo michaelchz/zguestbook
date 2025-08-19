@@ -30,20 +30,20 @@ function gb_reply_form($oBooks,$oMsgs,$id,$mid) {
 		'urlname'=>$oBooks->urlname,
 		'title'=>$oBooks->title,
 		'id'=>$id,
-		'btnurl'=>"$imgurl/$OPTS[btn]"
+		'btnurl'=>"$imgurl/{$OPTS['btn']}"
 	);
 	
 	// 准备待回复留言信息
 
 	// auto detect http link
-	$pattern = "(http|https|ftp):(\/\/|\\\\\\\\)[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*"
+	$pattern = "/(http|https|ftp):(\/\/|\\\\\\\\)[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*"
    		."((\/|\\\\)[~_a-zA-Z0-9-]+)*(\.[~_a-zA-Z0-9-]+(#[~_a-zA-Z0-9-]+){0,1}){0,1}"
-   		."((\/|\\\\)|(\?[~_a-zA-Z0-9-]+=[~_a-zA-Z0-9-]+(\&amp;[~_a-zA-Z0-9-]+=[~_a-zA-Z0-9-]+)*)){0,1}";
+   		."((\/|\\\\)|(\?[~_a-zA-Z0-9-]+=[~_a-zA-Z0-9-]+(\&amp;[~_a-zA-Z0-9-]+=[~_a-zA-Z0-9-]+)*)){0,1}/i";
  	
    	$comment = $oMsgs->comment;
-   	$comment = eregi_replace($pattern, " <a href='\\0' target=_blank>\\0</a> ", $comment);
+   	$comment = preg_replace($pattern, " <a href='\\0' target=_blank>\\0</a> ", $comment);
    	$reply = $oMsgs->reply;
-	$reply = eregi_replace($pattern, " <a href='\\0' target=_blank>\\0</a> ", $reply);
+	$reply = preg_replace($pattern, " <a href='\\0' target=_blank>\\0</a> ", $reply);
 	
 	$msg = array(
 		'mid'=>$mid,
@@ -71,7 +71,7 @@ function gb_reply_form($oBooks,$oMsgs,$id,$mid) {
 	
 }
 
-function gb_reply_commit(&$oBooks, &$oMsgs, $id, $mid) {
+function gb_reply_commit($oBooks, $oMsgs, $id, $mid) {
 	global $copyright,$prgurl,$gburl,$hosturl,$hostname;
 	global $thistime;
 
