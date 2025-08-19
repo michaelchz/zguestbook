@@ -91,16 +91,13 @@ class xingTemplate
 	/* 取得变量值 */
 	private function & get_Value($key)
 	{
-		if (isset($this->arrayConfig['GLOBALS'][$key]))
+		if (!isset($this->arrayConfig['GLOBALS'][$key]))
 		{
-			return $this->arrayConfig['GLOBALS'][$key];
-		}else{
-			global $$key;
-				if ($$key)
-				{
-					$this->assign($key,$$key);
-				}
-				return $$key;
+			$val = isset($GLOBALS[$key]) ? $GLOBALS[$key] : null;
+			$this->assign($key, $val);
+		}
+			
+		return $this->arrayConfig['GLOBALS'][$key];
 		}
 	}
 	
@@ -330,7 +327,7 @@ class xingTemplate
 		
 		if (isset($tmp_key)) $this->arrayConfig['template_Name'] = $tmp_key;
 
-		if ($this->arrayConfig['gzip_off'] && ereg('gzip',$_SERVER['HTTP_ACCEPT_ENCODING']))
+		if ($this->arrayConfig['gzip_off'] && str_contains($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip'))
 		{
 			ob_start('ob_gzhandler');
 		}

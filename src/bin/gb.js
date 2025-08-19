@@ -38,7 +38,7 @@ function count_char(message,used) {
 
 function confirm_del()
 {
-  return confirm("É¾³ıÁôÑÔÎŞ·¨»Ö¸´£¬È·ÈÏÉ¾³ı?");
+  return confirm("åˆ é™¤ç•™è¨€æ— æ³•æ¢å¤ï¼Œç¡®è®¤åˆ é™¤?");
 }
 
 function showDlg() {
@@ -84,15 +84,15 @@ function showForm(disp) {
 
 function validate_signForm() {
  if(is_empty(signForm.f_user.value) || is_empty(signForm.f_comment.value)){
-  alert('ÄúµÄĞÕÃû£¯ÁôÑÔÄÚÈİÃ»ÓĞÌîĞ´£¡');
+  alert('æ‚¨çš„å§“åï¼ç•™è¨€å†…å®¹æ²¡æœ‰å¡«å†™ï¼');
   event.returnValue=false;
   return;
  }
  if(signForm.f_comment.value.length > 2000) {
-  alert('ÄúµÄÁôÑÔÄÚÈİ³¬¹ıÁË×ÖÊıÏŞÖÆ£¡');
+  alert('æ‚¨çš„ç•™è¨€å†…å®¹è¶…è¿‡äº†å­—æ•°é™åˆ¶ï¼');
   event.returnValue=false;
  }
  if(signForm.f_secret[0].checked && is_empty(signForm.f_email.value)){
-  event.returnValue=confirm("ÄúÃ»ÓĞÁôemailµØÖ·£¬½«ÎŞ·¨½ÓÊÕ°æÖ÷»Ø¸´£¬È·ÈÏ·¢ËÍÁôÑÔ?");
+  event.returnValue=confirm("æ‚¨æ²¡æœ‰ç•™emailåœ°å€ï¼Œå°†æ— æ³•æ¥æ”¶ç‰ˆä¸»å›å¤ï¼Œç¡®è®¤å‘é€ç•™è¨€?");
  }
 }
