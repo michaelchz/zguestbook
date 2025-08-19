@@ -26,6 +26,7 @@ if(($reglimit>0)&&($oBooks->getRecordCount()>=$reglimit)){
 	errorview("对不起，已超过系统设定的留言板注册上限，无法注册！");
 }
 
+$action = $_REQUEST['action'] ?? '';
 if($action == "regcommit"){
 	regCommit();
 } else {
@@ -82,21 +83,21 @@ function regCommit()
 {
 	global $OPTS,$copyright,$hostname,$hosturl,$cginame,$prgurl,$gburl,$thisdate,$oBooks;
 
-	$f_title = trim($_REQUEST['f_title']);
-	$f_name  = trim($_REQUEST['f_name']);
-	$f_pass  = $_REQUEST['f_pass'];
-	$f_email = trim($_REQUEST['f_email']);
-	$f_url   = trim($_REQUEST['f_url']);
-	$f_urlname = trim($_REQUEST['f_urlname']);
-	$f_htmlt = stripslashes(str_replace("\r","",$_REQUEST['f_htmlt']));
-	$f_htmlb = stripslashes(str_replace("\r","",$_REQUEST['f_htmlb']));
-	$f_desc  = stripslashes(str_replace("\r","",$_REQUEST['f_desc']));
+	$f_title = trim($_REQUEST['f_title'] ?? '');
+	$f_name  = trim($_REQUEST['f_name'] ?? '');
+	$f_pass  = $_REQUEST['f_pass'] ?? '';
+	$f_email = trim($_REQUEST['f_email'] ?? '');
+	$f_url   = trim($_REQUEST['f_url'] ?? '');
+	$f_urlname = trim($_REQUEST['f_urlname'] ?? '');
+	$f_htmlt = stripslashes(str_replace("\r","",$_REQUEST['f_htmlt'] ?? ''));
+	$f_htmlb = stripslashes(str_replace("\r","",$_REQUEST['f_htmlb'] ?? ''));
+	$f_desc  = stripslashes(str_replace("\r","",$_REQUEST['f_desc'] ?? ''));
 
 	if(($f_pass == "")||($f_name == "")||($f_email == "")||($f_title == "")){
 		errorview("显示标题　名字　密码　信箱　必须填写，请重新输入！");
 	}
-	if(!eregi(".*\@.*\..*",$f_email)){errorview("您的Email输入错误！");}
-	if(!eregi("^[_a-zA-Z0-9-]+$",$f_name)){errorview("您的管理员名称包含非法字符！");}
+	if(!preg_match("/.*\@.*\..*/i",$f_email)){errorview("您的Email输入错误！");}
+	if(!preg_match("/^[_a-zA-Z0-9-]+$/i",$f_name)){errorview("您的管理员名称包含非法字符！");}
 	if(strlen($f_desc) > 400 ){errorview("您的{$cginame}简介不能大于200个汉字！");}
 
 	if(($f_url == "")||($f_url == "http://")){
@@ -111,10 +112,10 @@ function regCommit()
 		errorview("对不起，用户名已被别人注册! 换一个吧！");
 	}
 
-	$regdate=strftime("%Y-%m-%d", time());
+	$regdate=date("Y-m-d", time());
 
-	$OPTS['css'] = $_REQUEST['f_css'];
-	$OPTS['btn'] = $_REQUEST['f_btn'];
+	$OPTS['css'] = $_REQUEST['f_css'] ?? '';
+	$OPTS['btn'] = $_REQUEST['f_btn'] ?? '';
 
 	$bid=$oBooks->appendNew();
 	$oBooks->setOptions($OPTS);

@@ -16,6 +16,10 @@ include(BASEDIR.'/lib/xingTemplate/xingTemplate.php');
 define('CSSDIR',BASEDIR."style/");
 define('BTNDIR',BASEDIR."img/");
 
+$action = $_REQUEST['action'] ?? '';
+$f_name = $_REQUEST['f_name'] ?? '';
+$f_pass = $_REQUEST['f_pass'] ?? '';
+
 if($action == "editcommit"){editCommit();}
 elseif($f_name == ""){editStart();}
 else{editForm();}
@@ -88,13 +92,29 @@ function editForm() {
 function editCommit()
 {
 	global $OPTS,$copyright,$cginame,$prgurl,$gburl;
-	global $f_title,$f_name,$f_pass,$f_newpass,$f_email,$f_url,$f_urlname,$f_htmlt,$f_htmlb,$f_desc;
-	global $f_css,$f_btn,$f_timesft,$f_perpage,$f_notify,$f_showdlg,$f_useicon;
+
+	$f_title = $_REQUEST['f_title'] ?? '';
+	$f_name = $_REQUEST['f_name'] ?? '';
+	$f_pass = $_REQUEST['f_pass'] ?? '';
+	$f_newpass = $_REQUEST['f_newpass'] ?? '';
+	$f_email = $_REQUEST['f_email'] ?? '';
+	$f_url = $_REQUEST['f_url'] ?? '';
+	$f_urlname = $_REQUEST['f_urlname'] ?? '';
+	$f_htmlt = stripslashes(str_replace("","",$_REQUEST['f_htmlt'] ?? ''));
+	$f_htmlb = stripslashes(str_replace("","",$_REQUEST['f_htmlb'] ?? ''));
+	$f_desc = stripslashes(str_replace("","",$_REQUEST['f_desc'] ?? ''));
+	$f_css = $_REQUEST['f_css'] ?? '';
+	$f_btn = $_REQUEST['f_btn'] ?? '';
+	$f_timesft = $_REQUEST['f_timesft'] ?? '';
+	$f_perpage = $_REQUEST['f_perpage'] ?? '';
+	$f_notify = $_REQUEST['f_notify'] ?? '';
+	$f_showdlg = $_REQUEST['f_showdlg'] ?? '';
+	$f_useicon = $_REQUEST['f_useicon'] ?? '';
 
 	if(($f_pass == "")||($f_name == "")||($f_email == "")||($f_title == "")){
 		errorview("显示标题　名字　密码　信箱　必顺要填写的，请重新输入！");
 	}
-	if(!eregi(".*\@.*\..*",$f_email)){errorview("您的Email输入错误！");}
+	if(!preg_match("/.*\@.*\..*/i",$f_email)){errorview("您的Email输入错误！");}
 	if(strlen($f_desc) > 400 ){errorview("您的{$cginame}简介不能大于200个汉字！");}
 
 	$oBooks=new CBookList;
@@ -118,6 +138,8 @@ function editCommit()
 	$oBooks->desc=stripslashes(str_replace("\r","",$f_desc));
 	$oBooks->update();
 	$oBooks->close();
+
+	$regdate = date("Y-m-d", time()); // Define regdate
 
 	//准备输出的留言本信息
 	$bookInfo = array(

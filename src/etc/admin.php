@@ -17,8 +17,15 @@ include(BASEDIR.'/lib/xingTemplate/xingTemplate.php');
 
 $perpage=10;
 
-$adm_user = $_COOKIE['adm_user'];
-$adm_pass = $_COOKIE['adm_pass'];
+$adm_user = $_COOKIE['adm_user'] ?? '';
+$adm_pass = $_COOKIE['adm_pass'] ?? '';
+
+$f_user = $_REQUEST['f_user'] ?? '';
+$f_pass = $_REQUEST['f_pass'] ?? '';
+$action = $_REQUEST['action'] ?? '';
+$page = $_REQUEST['page'] ?? '';
+$f_bookname = $_REQUEST['f_bookname'] ?? '';
+
 if($f_user != ""){$adm_user=$f_user; setcookie("adm_user",$adm_user);}
 if($f_pass != ""){$adm_pass=$f_pass; setcookie("adm_pass",$adm_pass);}
 

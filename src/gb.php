@@ -19,8 +19,7 @@ class CFormMessage {
 header("Cache-Control: private, must-revalidate");
 
 function getmicrotime(){ 
-    list($usec, $sec) = explode(" ",microtime()); 
-    return ((float)$usec + (float)$sec); 
+    return microtime(true); 
 } 
 
 $__start=0;
@@ -229,9 +228,9 @@ function ShowBook($id,$keyword,$page) {
  for($i=$firstitem; $i<$lastitem; $i++) {
   if($keyword){
    $oMsgs->setAbsolutePosition($lines[$i]);
-   PrintMessage($size-$i, &$oMsgs, $keyword, $page);
+   PrintMessage($size-$i, $oMsgs, $keyword, $page);
   }else{
-   PrintMessage($size-$i, &$oMsgs, $keyword, $page);
+   PrintMessage($size-$i, $oMsgs, $keyword, $page);
    if($i<($lastitem-1)){$oMsgs->movePrev();}
   }
  }
@@ -279,7 +278,7 @@ function PrintHeader()
  global $imgurl,$gburl,$OPTS,$id,$oBooks,$ck_pass;
 
  // generate authcode, store it to session to be used by authimg.php 
- srand((double)microtime()*1000000);
+ 
  while(($authcode=rand()%10000)<1000);
  $_SESSION['authcode'] = $authcode;
  $authmd5 = md5($authcode);
@@ -460,11 +459,11 @@ EOT;
 	if ($tmpMsg2) { $tmpTip2 = '<BR><BR>'.$tmpTip2; }
 
  // auto detect http link
- $pattern = "(http|https|ftp):(\/\/|\\\\\\\\)[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*"
+ $pattern = "/(http|https|ftp):(\/\/|\\\\\\\\)[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*"
    ."((\/|\\\\)[~_a-zA-Z0-9-]+)*(\.[~_a-zA-Z0-9-]+(#[~_a-zA-Z0-9-]+){0,1}){0,1}"
-   ."((\/|\\\\)|(\?[~_a-zA-Z0-9-]+=[~_a-zA-Z0-9-]+(\&amp;[~_a-zA-Z0-9-]+=[~_a-zA-Z0-9-]+)*)){0,1}";
- $tmpMsg1 = eregi_replace($pattern, " <a href='\\0' target=_blank>\\0</a> ", $tmpMsg1);
- $tmpMsg2 = eregi_replace($pattern, " <a href='\\0' target=_blank>\\0</a> ", $tmpMsg2);
+   ."((\/|\\\\)|(\?[~_a-zA-Z0-9-]+=[~_a-zA-Z0-9-]+(\&amp;[~_a-zA-Z0-9-]+=[~_a-zA-Z0-9-]+)*)){0,1}/i";
+ $tmpMsg1 = preg_replace($pattern, " <a href='\\0' target=_blank>\\0</a> ", $tmpMsg1);
+ $tmpMsg2 = preg_replace($pattern, " <a href='\\0' target=_blank>\\0</a> ", $tmpMsg2);
 
  $userMsg=($OPTS['useicon']==1)?
   "$oMsg->user<br><img border=0 src='$imgurl/icon{$oMsg->icon}.gif'>"
@@ -509,10 +508,10 @@ function CheckFlood($a_id, $a_ip, $a_comment){
 	global $filepath;
 
 	// check messge content to avoid ad message
-	$pattern = "(http|https|ftp):(\/\/|\\\\\\\\)[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*"
+	$pattern = "/(http|https|ftp):(\/\/|\\\\\\\\)[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*"
 		."((\/|\\\\)[~_a-zA-Z0-9-]+)*(\.[~_a-zA-Z0-9-]+(#[~_a-zA-Z0-9-]+){0,1}){0,1}"
-		."((\/|\\\\)|(\?[~_a-zA-Z0-9-]+=[~_a-zA-Z0-9-]+(\&amp;[~_a-zA-Z0-9-]+=[~_a-zA-Z0-9-]+)*)){0,1}";
-	$tmpMsg = eregi_replace($pattern, " <<URL>> ", $a_comment);
+		."((\/|\\\\)|(\?[~_a-zA-Z0-9-]+=[~_a-zA-Z0-9-]+(\&amp;[~_a-zA-Z0-9-]+=[~_a-zA-Z0-9-]+)*)){0,1}/i";
+	$tmpMsg = preg_replace($pattern, " <<URL>> ", $a_comment);
 	$urlcount = substr_count($tmpMsg, " <<URL>> ");
 	if ($urlcount > 5) {
 		// too much url in the message, consider it as flood

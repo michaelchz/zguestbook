@@ -373,8 +373,10 @@ class xingTemplate
 		
 		if (!$Clean)
 		{
+			$_fromt = 0;
 			if (file_exists($_PATH['From']))
 				$_fromt = filemtime($_PATH['From']);
+			$_savet = 0;
 			if (file_exists($_PATH['Save']))
 				$_savet = filemtime($_PATH['Save']);
 
