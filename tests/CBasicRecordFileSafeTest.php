@@ -31,7 +31,7 @@ class CBasicRecordFileSafeTest extends TestCase
 
     public function testCreateFile()
     {
-        $file = new CBasicRecordFile();
+        $file = new CBasicRecordFileSafe();
         $this->assertTrue($file->createFile($this->testFilePath, $this->recordSize));
         $this->assertFileExists($this->testFilePath);
 
@@ -49,7 +49,7 @@ class CBasicRecordFileSafeTest extends TestCase
 
     public function testOpenAndClose()
     {
-        $file = new CBasicRecordFile();
+        $file = new CBasicRecordFileSafe();
         $file->createFile($this->testFilePath, $this->recordSize);
 
         $this->assertTrue($file->open($this->testFilePath));
@@ -58,7 +58,7 @@ class CBasicRecordFileSafeTest extends TestCase
 
     public function testAppendNewRecord()
     {
-        $file = new CBasicRecordFile();
+        $file = new CBasicRecordFileSafe();
         $this->assertTrue($file->createFile($this->testFilePath, $this->recordSize));
         $this->assertFileExists($this->testFilePath);
 
@@ -88,7 +88,7 @@ class CBasicRecordFileSafeTest extends TestCase
 
     public function testSetAndGetAbsolutePosition()
     {
-        $file = new CBasicRecordFile();
+        $file = new CBasicRecordFileSafe();
         $file->createFile($this->testFilePath, $this->recordSize);
         $file->open($this->testFilePath);
 
@@ -111,7 +111,7 @@ class CBasicRecordFileSafeTest extends TestCase
 
     public function testUpdateRecord()
     {
-        $file = new CBasicRecordFile();
+        $file = new CBasicRecordFileSafe();
         $file->createFile($this->testFilePath, $this->recordSize);
         $file->open($this->testFilePath);
 
@@ -136,7 +136,7 @@ class CBasicRecordFileSafeTest extends TestCase
 
     public function testDeleteRecord()
     {
-        $file = new CBasicRecordFile();
+        $file = new CBasicRecordFileSafe();
         $file->createFile($this->testFilePath, $this->recordSize);
         $file->open($this->testFilePath);
 
@@ -163,7 +163,7 @@ class CBasicRecordFileSafeTest extends TestCase
 
     public function testReadAndWriteMemo()
     {
-        $file = new CBasicRecordFile();
+        $file = new CBasicRecordFileSafe();
         $file->createFile($this->testFilePath, $this->recordSize);
         $file->open($this->testFilePath);
 
@@ -178,7 +178,7 @@ class CBasicRecordFileSafeTest extends TestCase
 
     public function testMemoPersistenceAndOverwrite()
     {
-        $file = new CBasicRecordFile();
+        $file = new CBasicRecordFileSafe();
         $file->createFile($this->testFilePath, $this->recordSize);
         $file->open($this->testFilePath);
 
@@ -187,21 +187,21 @@ class CBasicRecordFileSafeTest extends TestCase
         $file->close();
 
         // Re-open and verify persistence
-        $file = new CBasicRecordFile();
+        $file = new CBasicRecordFileSafe();
         $this->assertTrue($file->open($this->testFilePath));
         $readMemo = $file->readMemo();
         $this->assertStringStartsWith($initialMemo, $readMemo);
         $file->close();
 
         // Re-open, overwrite, and verify
-        $file = new CBasicRecordFile();
+        $file = new CBasicRecordFileSafe();
         $this->assertTrue($file->open($this->testFilePath));
         $newMemo = 'This is the new memo content, overwriting the old one.';
         $this->assertGreaterThan(0, $file->writeMemo($newMemo));
         $file->close();
 
         // Re-open and verify the new memo persists
-        $file = new CBasicRecordFile();
+        $file = new CBasicRecordFileSafe();
         $this->assertTrue($file->open($this->testFilePath));
         $readNewMemo = $file->readMemo();
         $this->assertStringStartsWith($newMemo, $readNewMemo);
@@ -210,7 +210,7 @@ class CBasicRecordFileSafeTest extends TestCase
 
     public function testDestroyFile()
     {
-        $file = new CBasicRecordFile();
+        $file = new CBasicRecordFileSafe();
         $file->createFile($this->testFilePath, $this->recordSize);
         $this->assertFileExists($this->testFilePath);
 
@@ -220,7 +220,7 @@ class CBasicRecordFileSafeTest extends TestCase
 
     public function testWriteAndReadMultipleRecords()
     {
-        $file = new CBasicRecordFile();
+        $file = new CBasicRecordFileSafe();
         $this->assertTrue($file->createFile($this->testFilePath, $this->recordSize));
         $this->assertTrue($file->open($this->testFilePath));
 
@@ -249,7 +249,7 @@ class CBasicRecordFileSafeTest extends TestCase
         $file->close();
 
         // Re-open the file to read records
-        $file = new CBasicRecordFile();
+        $file = new CBasicRecordFileSafe();
         $this->assertTrue($file->open($this->testFilePath));
 
         $readRecords = [];
@@ -265,7 +265,7 @@ class CBasicRecordFileSafeTest extends TestCase
 
     public function testRandomReadRecords()
     {
-        $file = new CBasicRecordFile();
+        $file = new CBasicRecordFileSafe();
         $this->assertTrue($file->createFile($this->testFilePath, $this->recordSize));
         $this->assertTrue($file->open($this->testFilePath));
 
@@ -289,7 +289,7 @@ class CBasicRecordFileSafeTest extends TestCase
         $file->close();
 
         // Re-open the file to read records randomly
-        $file = new CBasicRecordFile();
+        $file = new CBasicRecordFileSafe();
         $this->assertTrue($file->open($this->testFilePath));
 
         // Create a map from recordId to its original content

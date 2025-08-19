@@ -18,7 +18,7 @@ class CMessageList extends CBasicRecordFile {
   $this->msgid=$this->getAbsolutePosition();
  }
 
- function _composeRecord($a_line){
+ function _composeRecord(&$a_line){
   $a_line=$this->user.SP.$this->email.SP.$this->url.SP.$this->comment.SP.$this->ip
     .SP.$this->time.SP.$this->secret.SP.$this->reply.SP.$this->replysecret.SP.$this->icon
 	.SP.$this->replytime.SP;

@@ -17,13 +17,13 @@ define('HEADER_SIZE',PTR_SIZE*8);
 // PtrSeg: ptrNextSeg(8),[ptrPrev(8),ptrNext(8)]
 // Header: magic(4),recSize(8),recNum(8),segNum(8),ptrHead(8),ptrTail(8),ptrFree(8),resv(12)
 
-class CBasicRecordFile {
+class CBasicRecordFileSafe {
  private $_fp=NULLPTR, $_magic, $_recSize, $_recNum, $_segNum, $_ptrHead, $_ptrTail, $_ptrFree;
  private $_curId=NULLPTR, $_ptrPrev=NULLPTR, $_ptrNext=NULLPTR;
  public $recordBuffer;
 
  function _explodeRecord($a_line){}
- function _composeRecord($a_line){}
+ function _composeRecord(&$a_line){}
  function _compareRecord($a_key){/*return true/false*/}
 
  function _readHeader(){
@@ -181,7 +181,7 @@ class CBasicRecordFile {
  }
 
  function close(){
-  fclose($this->_fp);
+  return fclose($this->_fp);
  }
 
  function getRecordCount() {return (integer)$this->_recNum;}

@@ -23,7 +23,7 @@ class CBasicRecordFile {
  public $recordBuffer;
 
  function _explodeRecord($a_line){}
- function _composeRecord($a_line){}
+ function _composeRecord(&$a_line){}
  function _compareRecord($a_key){/*return true/false*/}
 
  function _readHeader(){
@@ -170,7 +170,7 @@ class CBasicRecordFile {
  }
 
  function close(){
-  fclose($this->_fp);
+  return fclose($this->_fp);
  }
 
  function getRecordCount() {return (integer)$this->_recNum;}

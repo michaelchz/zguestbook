@@ -20,7 +20,7 @@ class CBookList extends CBasicRecordFile {
   $this->_opts=explode(SP1,$tmp);
  }
 
- function _composeRecord($a_line){
+ function _composeRecord(&$a_line){
   $tmp=implode(SP1,$this->_opts);
   $a_line=$this->name.SP.$this->pass.SP.$this->email.SP.$this->url.SP.$this->title
     .SP.$this->urlname.SP.$this->regtime.SP.$this->htmlt.SP.$this->htmlb.SP
@@ -31,14 +31,20 @@ class CBookList extends CBasicRecordFile {
   return ($this->name==$a_key);
  }
 
- public function create(){
-  global $filepath;
-  return parent::createFile("$filepath/book.lst",256);  
+ public function create($a_filename = ''){
+  if ($a_filename == '') {
+    global $filepath;
+    $a_filename = "$filepath/book.lst";
+  }
+  return parent::createFile($a_filename,256);
  }
 
  public function open($a_filename = ''){
-  global $filepath;
-  return parent::open("$filepath/book.lst");  
+  if ($a_filename == '') {
+    global $filepath;
+    $a_filename = "$filepath/book.lst";
+  }
+  return parent::open($a_filename);
  }
 
  public function checkSystem(){
