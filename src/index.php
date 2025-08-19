@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 define('BASEDIR', './');
 
 define('LIBPATH', './bin/');
@@ -26,7 +28,7 @@ if (isset($_GET['lang'])){
 
 $lang = $_SESSION['lang'];
 
-switch ($_GET['op']) {
+switch ($_GET['op'] ?? '') {
 case 'list':
 	include(ETCPATH.'list.php');
 	break;

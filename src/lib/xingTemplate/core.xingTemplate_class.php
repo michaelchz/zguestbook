@@ -29,7 +29,7 @@ class xingTemplate
 	{		
 		/* 获取当前类所在目录  */  
 		$this->arrayConfig['classDir'] = dirname(str_replace('\\','/',__FILE__));
-		
+
 		/* 载入配置 */
 		$this->arrayConfig += $arrayConfig;
 		
@@ -89,7 +89,7 @@ class xingTemplate
 	}
 	
 	/* 取得变量值 */
-	private function & get_Value($key)
+	function &get_Value($key)
 	{
 		if (!isset($this->arrayConfig['GLOBALS'][$key]))
 		{
@@ -98,7 +98,6 @@ class xingTemplate
 		}
 			
 		return $this->arrayConfig['GLOBALS'][$key];
-		}
 	}
 	
 	/* 取得模板路径 */
@@ -107,7 +106,7 @@ class xingTemplate
 		if (is_string($this->arrayConfig['templateDir'])) $this->arrayConfig['templateDir'] = array('default'=>$this->arrayConfig['templateDir']);
 		
 		$path = $this->arrayConfig['templateDir'][(empty($this->arrayConfig['template_Name']) ? 'default' : $this->arrayConfig['template_Name'])].'/'.$templateName.$this->arrayConfig['templateExt'];
-		
+
 		if (file_exists($path))
 		{
 			return $path;

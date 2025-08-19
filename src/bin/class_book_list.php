@@ -12,7 +12,7 @@ class CBookList extends CBasicRecordFile {
  public $name='',$pass='',$email='',$url='',$title='',$urlname='';
  public $regtime='',$htmlt='',$htmlb='',$desc='',$flags='',$_opts=array();
 
- private function _explodeRecord($a_line){
+ function _explodeRecord($a_line){
   $tmp='';
   list($this->name,$this->pass,$this->email,$this->url,$this->title,$this->urlname,
        $this->regtime,$this->htmlt,$this->htmlb,$this->desc,$this->flags,$tmp)
@@ -20,14 +20,14 @@ class CBookList extends CBasicRecordFile {
   $this->_opts=explode(SP1,$tmp);
  }
 
- private function _composeRecord($a_line){
+ function _composeRecord($a_line){
   $tmp=implode(SP1,$this->_opts);
   $a_line=$this->name.SP.$this->pass.SP.$this->email.SP.$this->url.SP.$this->title
     .SP.$this->urlname.SP.$this->regtime.SP.$this->htmlt.SP.$this->htmlb.SP
     .$this->desc.SP.$this->flags.SP.$tmp.SP;
  }
 
- private function _compareRecord($a_key){
+ function _compareRecord($a_key){
   return ($this->name==$a_key);
  }
 
@@ -36,7 +36,7 @@ class CBookList extends CBasicRecordFile {
   return parent::createFile("$filepath/book.lst",256);  
  }
 
- public function open(){
+ public function open($a_filename = ''){
   global $filepath;
   return parent::open("$filepath/book.lst");  
  }

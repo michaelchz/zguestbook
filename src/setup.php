@@ -21,16 +21,16 @@
  修改、使用与散播本程序，但必须保留作者与网站的链接。
 \*--------------------------------------------------------*/
 ######################## 设定部分 ########################
-error_reporting(0);
+error_reporting(E_ALL);
 
 $admname   = "admin";        # 站长名字
-$admpass   = "prcanada";        # 站长密码
+$admpass   = "zc123456";        # 站长密码
 $hostname  = "zChain留言本服务";  # 主页名称
 $hosturl   = "http://gb.zchain.com"; # 主页地址
 
 $imgurl    = "/img";       # 图片位置(后面不要加"/")
 $prgurl    =  myurl();      # 程序文件的 URL路径(后面不要加"/") myurl()=自动探测
-$filepath  = "./ZDB_c3416034cf9f7cc8";     # 数据文件的物理路径(后面不要加"/")
+$filepath  = "./.zdb_dev_path";     # 数据文件的物理路径(后面不要加"/")
 
 $reglimit  = "100";           # 允许注册的留言板数量，0 = 无限制
 
@@ -53,27 +53,22 @@ $OPTS['btn']   = "modern.btn";      # 按钮风格名称
 $gburl="gb.php";
 $cginame="留言簿";
 $copyright = 
-"<script type='text/JavaScript'>alimama_pid='mm_11098526_1049344_2302436'; alimama_titlecolor='0000FF';"
- ."alimama_descolor ='000000'; alimama_bgcolor='FFFFFF'; alimama_bordercolor='E6E6E6'; alimama_linkcolor='008000';"
- ."alimama_bottomcolor='FFFFFF'; alimama_anglesize='0'; alimama_bgpic='0'; alimama_icon='0'; alimama_sizecode='16'; "
- ."alimama_width=658; alimama_height=60; alimama_type=2; </script> "
- ."<script src='http://a.alimama.cn/inf.js' type=text/javascript> </script>"
- . "<br><br>免费{$cginame}服务由 <b><a href=$hosturl target='_blank'>$hostname</a></b> 提供　"
+"<br><br>免费{$cginame}服务由 <b><a href=$hosturl target='_blank'>$hostname</a></b> 提供　"
  ."程序制作：<b><a href='http://www.zchain.com' target='_blank'>zChain.com</a></b><br>"
  ."Powered by zChain GuestBook v4.00a";
 
-$cgiurl=$PHP_SELF;
+$cgiurl=$_SERVER['PHP_SELF'];
 
-$userip=$GLOBALS['REMOTE_ADDR'];
+$userip=$_SERVER['REMOTE_ADDR'];
 
 function getlocaltime($timesft)
 {
  global $timestamp, $thistime, $thisdate, $ftime;
 
  $timestamp=time()+(3600*$timesft);
- $thistime=gmstrftime("%Y-%m-%d %H:%M:%S", $timestamp);
- $thisdate=gmstrftime("%Y-%m-%d", $timestamp);
- $ftime=gmstrftime("%Y%m%d%H%M%S", $timestamp);
+ $thistime=gmdate("Y-m-d H:i:s", $timestamp);
+ $thisdate=gmdate("Y-m-d", $timestamp);
+  $ftime=gmdate("YmdHis", $timestamp);
 }
 
 function errorview($msg)
@@ -84,9 +79,9 @@ function errorview($msg)
 
 function myurl()
 {
-  $server_port = ":".$GLOBALS['SERVER_PORT'];
-  $server_name = $GLOBALS['SERVER_NAME'];
-  $script_name = $GLOBALS['PHP_SELF'];
+  $server_port = ":".$_SERVER['SERVER_PORT'];
+  $server_name = $_SERVER['SERVER_NAME'];
+  $script_name = $_SERVER['PHP_SELF'];
   if ($server_port == ":80") { $server_port="";}
   $fullcgiurl = "http://$server_name$server_port$script_name";
   return substr($fullcgiurl,0,strrpos($fullcgiurl,"/"));

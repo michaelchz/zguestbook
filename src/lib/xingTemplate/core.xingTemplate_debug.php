@@ -31,7 +31,11 @@ class xingTemplate_debug
     /* 错误信息格式化 */
     if ($_xingTemplate_error['type'])
     {
-    	$_xingTemplate_error['body'] = file($_xingTemplate_error_['file']);
+    	if (!empty($_xingTemplate_error_['file'])) {
+    		$_xingTemplate_error['body'] = file($_xingTemplate_error_['file']);
+    	} else {
+    		$_xingTemplate_error['body'] = [];
+    	}
     	
     	$_xingTemplate_error['err_'] = "<meta http-equiv=Content-Type content=\"text/html;charset=utf-8\"><font size=2 color=#333333>\r\n";
     	$_xingTemplate_error['err_'] .= "[xingTemplate] <br /><br />\r\n";

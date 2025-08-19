@@ -51,7 +51,7 @@ class CBasicRecordFile {
  function _allocSegment(){
   if($this->_ptrFree > NULLPTR){
    $ptrNew=$this->_ptrFree;
-   $this->_readPointer($ptrNew, 0, &$this->_ptrFree);
+   $this->_readPointer($ptrNew, 0, $this->_ptrFree);
   }else{
    $ptrNew=$this->_segNum+1;
    $this->_writePointer($ptrNew, 0, NULLPTR);
@@ -77,7 +77,7 @@ class CBasicRecordFile {
   $ptrSeg=$a_idx; $rest=$a_size;
   do{
    $lastSeg=$ptrSeg; $rest-=$size;
-   $this->_readPointer($lastSeg, 0, &$ptrSeg);
+   $this->_readPointer($lastSeg, 0, $ptrSeg);
   }while($rest > 0 && $ptrSeg > NULLPTR);
   if($rest>0){
    $ptrSeg=$this->_allocSegmentList($rest);
@@ -93,7 +93,7 @@ class CBasicRecordFile {
   $ptrSeg=$a_idx;
   do {
    $lastSeg=$ptrSeg; $this->_segNum--;
-   $this->_readPointer($lastSeg, 0, &$ptrSeg);
+   $this->_readPointer($lastSeg, 0, $ptrSeg);
   }while($ptrSeg > NULLPTR);
   $this->_writePointer($lastSeg, 0, $this->_ptrFree);
   $this->_ptrFree=$a_idx;

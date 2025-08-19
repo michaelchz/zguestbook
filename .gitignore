@@ -1,2 +1,4 @@
 vendor/
 .phpunit.cache/
+src/tmp/
+src/.zdb_dev_path/

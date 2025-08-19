@@ -17,12 +17,15 @@ include(BASEDIR.'/lib/xingTemplate/xingTemplate.php');
 
 ##########
 $oBooks=new CBookList;
+$oBooks->checkSystem();
 $oBooks->open();
 $size=$oBooks->getRecordCount();
 $pages=ceil($size/$perpage);
+$pages=($pages<=0)?1:$pages;
 
 $oMsgs=new CMessageList;
 
+$page = $_GET['page'] ?? '';
 if ($page == "") {$page=$pages;}
 $firstitem=($page-1)*$perpage;
 $lastitem=$firstitem+$perpage;
