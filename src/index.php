@@ -27,7 +27,7 @@ if (isset($_GET['lang'])){
 	$_SESSION['lang'] = $_COOKIE['lang'];
 }
 
-$lang = $_SESSION['lang'];
+$lang = $_SESSION['lang'] ?? 'cn';
 
 switch ($_GET['op'] ?? '') {
 case 'list':

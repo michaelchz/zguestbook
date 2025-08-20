@@ -12,9 +12,11 @@ class CMessageList extends CBasicRecordFile {
 
  function _explodeRecord($a_line){
   if($this->searchmode){return;}
+  $fields = explode(SP,rtrim($a_line));
+  $fields = array_pad($fields, 11, null);
   list($this->user,$this->email,$this->url,$this->comment,$this->ip,
        $this->time,$this->secret,$this->reply,$this->replysecret,$this->icon,$this->replytime)
-       = explode(SP,rtrim($a_line));
+       = $fields;
   $this->msgid=$this->getAbsolutePosition();
  }
 
