@@ -2,12 +2,11 @@
 /*--------------------------------------------------------*\
  零点留言簿多用户版 zChain GuestBook v4.00
  
- 作者：zChain (http://www.zchain.net)
- 版权所有(c) 2001-2003
+ 作者：zChain (http://www.zchain.com)
+ 版权所有(c) 2001-20025
 
  本程序为自由软件，您可以在 GNU通用公共授权条款规定下自由
- 修改、使用与散播本程序，但必须保留作者与网站的链接。详情
- 请参见 readme.txt 。
+ 修改、使用与散播本程序，但必须保留作者与网站的链接。
 \*--------------------------------------------------------*/
 
 class CFormMessage {
@@ -28,7 +27,7 @@ function timer_start(){
  $__start = $__mark = getmicrotime();
 } 
 
-function timer_stop($name=''){ 
+function timer_stop($name=''){
  global $filepath, $__start;
  $time = getmicrotime() - $__start;
  echo "<BR><FONT style='font-size:10px; color:white;'>$name Page execution time: $time second.</FONT>";
@@ -53,7 +52,7 @@ list($upstp,$notice)=split("\t",$notices[0]);
 if (($timestamp-$upstp) > (3600*24*7)){
  $notices=@file("http://www.zchain.net/zgb/orgnote");
  $notice=$notices[0];
- if($TMP=fopen("$filepath/notice","w")) {
+ if($TMP=fopen("$filepath/notice","w")) { 
   fwrite($TMP,"$timestamp\t$notice");
   fclose($TMP);
  }
@@ -63,6 +62,8 @@ $notice = '';
 
 $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : '';
 $id = str_replace(".","",$id);
+$mid = $_REQUEST['mid'] ?? '';
+$search = $_REQUEST['search'] ?? '';
 if ($id == "") {errorview("未指定id！");exit;}
 
 $oBooks=new CBookList;
@@ -307,7 +308,7 @@ function PrintHeader()
  $_SESSION['authcode'] = $authcode;
  $authmd5 = md5($authcode);
 
- $sturl="$imgurl/$OPTS[btn]";
+ $sturl="$imgurl/{$OPTS['btn']}";
 
  $oFormMsg = new CFormMessage();
  GetFormCookie($oFormMsg);
@@ -319,7 +320,7 @@ function PrintHeader()
  print <<<EOT
 <HTML><HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="style/$OPTS[css]">
+<link rel="stylesheet" type="text/css" href="style/{$OPTS['css']}">
 <script language="javascript" src="bin/gb.js"></script>
 <title>$oBooks->title</title>
 </HEAD>
@@ -426,7 +427,7 @@ EOT;
   </TD></TR></TABLE>
 </TD></TR></TABLE></FORM>
 <script language=JavaScript>
-var disp=get_cookie("disp"); if(disp=="")disp=$OPTS[showdlg];
+var disp=get_cookie("disp"); if(disp=="")disp={$OPTS['showdlg']};
 showForm(disp);</script>
 EOT;
 }
@@ -434,7 +435,7 @@ EOT;
 function PrintMessage($msgNo, $oMsg, $keyword, $page) {
  global $imgurl,$id,$gburl,$ck_pass,$OPTS,$userip,$timestamp;
 
- $sturl="$imgurl/$OPTS[btn]";
+ $sturl="$imgurl/{$OPTS['btn']}";
 
  $urluser=urlencode($oMsg->user);
 

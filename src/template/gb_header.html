@@ -71,7 +71,7 @@
   {else}
     <TD rowspan=2> <IMG id=idface src='{$imgurl}/icon1.gif' height=48 width=48>
   {/if}
-  <A target=_blank href='?action=iconlist&id=$id'>头像列表</A></TD>
+  <A target=_blank href='?action=iconlist&id={$id}'>头像列表</A></TD>
   </TR>
 
   <TR><TD align=left><IMG src='{$btnurl}/face.gif' height=16 width=16></TD>
@@ -118,5 +118,5 @@
   </TD></TR></TABLE>
 </TD></TR></TABLE></FORM>
 <script language=JavaScript>
-var disp=get_cookie("disp"); if(disp=="")disp={$OPTS['showdlg']};
+var disp=get_cookie("disp"); if(disp=="")disp=$OPTS['showdlg'];
 showForm(disp);</script>

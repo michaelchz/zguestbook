@@ -100,9 +100,12 @@ function editCommit()
 	$f_email = $_REQUEST['f_email'] ?? '';
 	$f_url = $_REQUEST['f_url'] ?? '';
 	$f_urlname = $_REQUEST['f_urlname'] ?? '';
-	$f_htmlt = stripslashes(str_replace("","",$_REQUEST['f_htmlt'] ?? ''));
-	$f_htmlb = stripslashes(str_replace("","",$_REQUEST['f_htmlb'] ?? ''));
-	$f_desc = stripslashes(str_replace("","",$_REQUEST['f_desc'] ?? ''));
+	$f_htmlt = stripslashes(str_replace("
+","",$_REQUEST['f_htmlt'] ?? ''));
+	$f_htmlb = stripslashes(str_replace("
+","",$_REQUEST['f_htmlb'] ?? ''));
+	$f_desc = stripslashes(str_replace("
+","",$_REQUEST['f_desc'] ?? ''));
 	$f_css = $_REQUEST['f_css'] ?? '';
 	$f_btn = $_REQUEST['f_btn'] ?? '';
 	$f_timesft = $_REQUEST['f_timesft'] ?? '';
@@ -131,7 +134,7 @@ function editCommit()
 	$OPTS['btn'] = $f_btn;
 	$oBooks->setOptions($OPTS);
 	if($f_newpass != ""){$oBooks->pass=md5($f_newpass);}
-	$oBOoks->name=$f_name; $oBooks->title=$f_title; $oBooks->email=$f_email;
+	$oBooks->name=$f_name; $oBooks->title=$f_title; $oBooks->email=$f_email;
 	$oBooks->url=$f_url;   $oBooks->urlname=$f_urlname;
 	$oBooks->htmlt=stripslashes(str_replace("\r","",$f_htmlt));
 	$oBooks->htmlb=stripslashes(str_replace("\r","",$f_htmlb));

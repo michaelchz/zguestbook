@@ -2,10 +2,6 @@
 // global $OPTS,$copyright,$gburl,$ck_pass;
 // global $oBooks,$oMsgs;
 
-// 引入模板处理引擎
-define('BASEDIR', './');
-include(BASEDIR.'/lib/xingTemplate/xingTemplate.php');
-
 if (!$oMsgs->setAbsolutePosition($_REQUEST['mid'])) {
 	errorview('留言不存在或已被删除!');
 	exit;
@@ -92,7 +88,7 @@ function gb_reply_commit($oBooks, $oMsgs, $id, $mid) {
 	}
 
 	$oMsgs->reply=$comment;
-	$oMsgs->replysecret=$_POST['f_secret'];
+	$oMsgs->replysecret=$_POST['f_secret'] ?? 0;
 	$oMsgs->update();
  
 	if ($oMsgs->email != "") {

@@ -5,7 +5,7 @@
  Created: zChain, 2003.09.03
  \*--------------------------------------------------------*/
 
-$perpage=20;
+$perpage=15;
 
 require "setup.php";
 require "bin/class_basic_record_file.php";

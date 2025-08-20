@@ -2,8 +2,8 @@
 /*--------------------------------------------------------*\
  零点留言簿多用户版 zChain GuestBook v4.00
  
- 作者：zChain (http://www.zchain.net)
- 版权所有(c) 2001-2003
+ 作者：zChain (http://www.zchain.com)
+ 版权所有(c) 2001-2025
 
  本程序为自由软件；您可依据自由软件基金会所发表的GNU通用
  公共授权条款规定，就本程序再为散播与/或修改；无论您依据
@@ -55,7 +55,7 @@ $cginame="留言簿";
 $copyright = 
 "<br><br>免费{$cginame}服务由 <b><a href=$hosturl target='_blank'>$hostname</a></b> 提供　"
  ."程序制作：<b><a href='http://www.zchain.com' target='_blank'>zChain.com</a></b><br>"
- ."Powered by zChain GuestBook v4.00a";
+ ."Powered by zChain GuestBook v4.00";
 
 $cgiurl=$_SERVER['PHP_SELF'];
 

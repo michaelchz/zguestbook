@@ -33,6 +33,7 @@ class CMessageList extends CBasicRecordFile {
   if(file_exists("$filepath/$a_bname.bok")){
    return false;
   } elseif (file_exists("$filepath/$a_bname.bak")){
+   return false;
   } else {
    return parent::createFile("$filepath/$a_bname.bok",512);
   }
